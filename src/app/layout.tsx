@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({ src: "../font/IRANSansXMedium.ttf" });
 
 export const metadata: Metadata = {
   title: "news app",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <body className={inter.className}>{children}</body>
+      <body className={myFont.className}>{children}</body>
     </html>
   );
 }
