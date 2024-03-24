@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/header/header";
 
 const myFont = localFont({ src: "../font/IRANSansXMedium.ttf" });
 
@@ -15,8 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa">
-      <body className={myFont.className}>{children}</body>
+    <html className="h-full w-full bg-moon" lang="fa">
+      <body className={myFont.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
