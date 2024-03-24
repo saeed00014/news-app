@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+
+}
+
 *, *::after, *::before {
   direction: rtl;
+}
+
+body {
+
 }
