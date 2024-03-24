@@ -1,13 +1,13 @@
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
 type Props = {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  showNaveBar: Function;
 };
 
-const HamburgerIcon = ({ setIsOpen }: Props) => {
+const HamburgerIcon = ({ showNaveBar }: Props) => {
   return (
     <div
-      onClick={() => setIsOpen(true)}
+      onClick={() => showNaveBar(true)}
       className="lg:hidden flex flex-col items-center justify-center gap-[.4rem] min-h-max cursor-pointer"
     >
       <HiOutlineMenuAlt4 className="md:text-5xl text-4xl" />

@@ -7,10 +7,14 @@ import HamburgerIcon from './hamburgerIcon'
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const showNaveBar = (value: boolean) => {
+    setIsOpen(value)
+  }
+
   return (
     <>
-      <HamburgerIcon setIsOpen={setIsOpen} />
-      <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <HamburgerIcon showNaveBar={showNaveBar} />
+      <SideBar showNaveBar={showNaveBar} isOpen={isOpen} />
     </>
   )
 }

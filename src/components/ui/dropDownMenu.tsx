@@ -3,12 +3,18 @@ import { IoIosArrowDown } from "react-icons/io";
 
 type DropDownBtn = {
   text: string;
-  classNames?: string
+  classNames?: string;
 };
 
 const DropDownBtn = ({ text, classNames }: DropDownBtn) => {
   return (
-    <button className={merge("group flex items-center px-[.80rem] py-[.50rem] gap-2", classNames)}>
+    <button
+      
+      className={merge(
+        "group flex items-center px-[.80rem] py-[.50rem] gap-2",
+        classNames
+      )}
+    >
       <span className="group group-focus:rotate-180">
         <IoIosArrowDown />
       </span>
@@ -18,11 +24,9 @@ const DropDownBtn = ({ text, classNames }: DropDownBtn) => {
 };
 
 type DropDownItem = {
-  text: string
-}
+  text: string;
+};
 
-const DropDownItem = ({text}: DropDownItem) => {
+const DropDownItem = ({ text }: DropDownItem) => {};
 
-}
-
-export { DropDownBtn }
+export { DropDownBtn };

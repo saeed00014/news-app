@@ -20,15 +20,17 @@ const TextLink = ({ text, path, classNames }: TextLink) => {
 };
 
 type IconLink = {
+  text: string;
   icon: ReactNode;
   path: string;
   classNames?: string;
 };
 
-const IconLink = ({ icon, path, classNames }: IconLink) => {
+const IconLink = ({ text, icon, path, classNames }: IconLink) => {
   return (
     <Link
       href={path}
+      aria-label={text}
       className={merge(
         "flex flex-col items-center justify-center h-[65px] w-[65px] min-w-max",
         classNames
