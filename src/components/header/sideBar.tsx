@@ -5,7 +5,6 @@ import React from "react";
 import Logo from "../ui/logo";
 import CloseBtn from "../closeBtn";
 import CloseBg from "../closeBg";
-import DropDown from "./dropDown";
 
 type Props = {
   showNaveBar: Function;
