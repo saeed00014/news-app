@@ -1,10 +1,10 @@
 import React from "react";
 import persian from "@/assets/data";
 import Logo from "../ui/logo";
-import { DropDownBtn } from "../ui/dropDownMenu";
 import { TextLink } from "../ui/link";
 import HamburgerMenu from "./hamburgerMenu";
 import BottomBar from "./bottomBar";
+import { DropDownBtn, DropDownMenu } from "../ui/dropDownMenu";
 
 const Header = () => {
   return (
@@ -14,7 +14,10 @@ const Header = () => {
         <div className="lg:flex hidden lg:gap-8 gap-2 w-full">
           <TextLink path="/" text={persian.firstPage} classNames="text-blood" />
           <TextLink path="/messenger" text={persian.messenger} />
-          <DropDownBtn text={persian.news} />
+          <div className="group relative">
+            <DropDownBtn text={persian.news} />
+            <DropDownMenu />
+          </div>
         </div>
         <TextLink
           path="/login"
