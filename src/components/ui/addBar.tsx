@@ -8,6 +8,7 @@ const AddBar = () => {
       <Image 
         alt={persian.adds}
         layout="fill"
+        unoptimized
         src={addImage}
       />
     </div>
