@@ -1,6 +1,6 @@
 import persian from "@/assets/data";
 import { TextLink } from "../ui/link";
-import { DropDownBtn } from "../ui/dropDownMenu";
+import { DropDownBtn, DropDownMenu } from "../ui/dropDownMenu";
 import React from "react";
 import Logo from "../ui/logo";
 import CloseBtn from "../closeBtn";
@@ -35,10 +35,10 @@ const SideBar = ({ showNaveBar, isOpen }: Props) => {
             text={persian.messenger}
             classNames="flex items-center h-[65px] pr-6"
           />
-          <DropDownBtn
-            text={persian.news}
-            classNames="flex items-center h-[65px] w-full pr-6"
-          />
+          <div className="group relative">
+            <DropDownBtn text={persian.news} classNames="w-full px-6" />
+            <DropDownMenu />
+          </div>
         </div>
         <div className="flex justify-center ">
           <TextLink
