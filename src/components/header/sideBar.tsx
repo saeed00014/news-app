@@ -36,7 +36,10 @@ const SideBar = ({ showNaveBar, isOpen }: Props) => {
             classNames="flex items-center h-[65px] pr-6"
           />
           <div className="group relative">
-            <DropDownBtn text={persian.news} classNames="w-full px-6" />
+            <DropDownBtn
+              text={persian.news}
+              classNames="flex items-center h-[65px] w-full pr-6 "
+            />
             <DropDownMenu />
           </div>
         </div>

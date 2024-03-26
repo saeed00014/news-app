@@ -21,8 +21,8 @@ const config: Config = {
         'ashImage': "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))",
       },
       boxShadow: {
-        'dark': '0px 0px 10px .1px rgba(0, 0, 0, .1)',
-      }
+        'dark': '0px 0px 10px 10px',
+      },
     },
     screens: {
       sm: "320px",
