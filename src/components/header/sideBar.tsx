@@ -1,6 +1,6 @@
 import persian from "@/assets/data";
 import { TextLink } from "../ui/link";
-import { DropDownBtn, DropDownMenu } from "../ui/dropDownMenu";
+import { DropDownBtn, DropDownMenu } from "../ui/dropDown";
 import React from "react";
 import Logo from "../ui/logo";
 import CloseBtn from "../closeBtn";

@@ -1,4 +1,4 @@
-import NewsBar from "@/components/newsCard/newsBar";
+import { NewsBar } from "@/components/ui/news";
 import SectionSpliter from "@/components/ui/sectionSpliter";
 import ViewAll from "@/components/ui/viewAll";
 
@@ -8,7 +8,7 @@ const CategoryNews = () => {
     category: "",
     title: "",
     descriptoin: "",
-  }
+  };
   return (
     <div className="flex flex-col gap-2">
       <SectionSpliter text={""} />

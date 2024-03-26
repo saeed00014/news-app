@@ -14,7 +14,9 @@ const persian = {
   dolargold: "دلار و طلا",
   shitcoin: "ارز دیجیتال",
   society: "جامعه",
-  worldeconemy: "اقتصاد کلان"
+  worldeconemy: "اقتصاد کلان",
+  readmore: "مطالعه بیشتر",
+  relatedNews: "اخبار مرتبط"
 };
 
 export default persian;

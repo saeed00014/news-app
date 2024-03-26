@@ -4,7 +4,7 @@ import Logo from "../ui/logo";
 import { TextLink } from "../ui/link";
 import HamburgerMenu from "./hamburgerMenu";
 import BottomBar from "./bottomBar";
-import { DropDownBtn, DropDownMenu } from "../ui/dropDownMenu";
+import { DropDownBtn, DropDownMenu } from "../ui/dropDown";
 
 const Header = () => {
   return (
