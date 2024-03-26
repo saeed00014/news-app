@@ -41,16 +41,18 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
       <div className="md:flex md:flex-row flex-col items-center">
         <Image
           alt="dolar news"
-          className="md:w-[50%] object-cover"
+          className="md:w-[50%] object-cover md:max-w-[300px]"
           src={testNews}
         />
         <div className="flex flex-col justify-end w-full h-full md:px-3 px-2 md:pb-0 pb-1 md:gap-1">
+          <Category text={persian.economy} />
           <h2 className="text-dark md:text-[1rem] text-[.8rem]">
             {persian.newsH2Tag}
           </h2>
           <p className="text-dark md:text-[1rem] text-[.9rem] font-semibold">
             {persian.newsPTag}
           </p>
+          <p className="line-clamp-1">بازار مسکن در سال ۱۴۰۲ با استفاده از سیاست‌های انقباضی دولت، ثبات و کاهش قیمتی نسبی را تجربه کرده است. اتفاقی که برخی…</p>
         </div>
       </div>
     </article>
