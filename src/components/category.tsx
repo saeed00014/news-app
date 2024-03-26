@@ -1,3 +1,4 @@
+import persian from "@/assets/data";
 import useColorPicker from "@/hooks/useColorPicker";
 import { merge } from "@/lib/utils";
 import React from "react";
@@ -12,7 +13,7 @@ const Category = ({ text }: { text: string }) => {
         classNames
       )}
     >
-      {text}
+      {persian.economy}
     </span>
   );
 };

@@ -1,6 +1,6 @@
 import TopNews from "./(routes)/home/topNews";
 import CategoryNews from "./(routes)/home/categoryNews";
-import AddBar from "@/components/ui/addBar";
+import { AddBar } from "@/components/ui/adds";
 
 const Home = () => {
   return (

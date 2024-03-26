@@ -1,7 +1,6 @@
 
 function useColorPicker(text: string) {
   let classNames = "";
-  
   switch (text) {
     case "اقتصاد":
       classNames = "bg-sun";
@@ -22,7 +21,6 @@ function useColorPicker(text: string) {
       classNames = "bg-water";
       break;
   }
-
   return classNames
 }
 
