@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import persian from "@/assets/data";
 import Input from "@/components/ui/input";
-import ErrorText from "@/components/ui/errorText";
+import { ErrorText } from "@/components/ui/error";
 import { TextLink } from "@/components/ui/link";
 
 type Props = {
@@ -18,7 +18,7 @@ const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
 
   return (
     <form
-      className="flex flex-col gap-3 w-fit h-fit bg-ship shadow-xl p-4 pt-2 rounded-[.5rem]"
+      className="flex flex-col gap-3 w-fit h-fit bg-ship shadow-2xl p-4 pt-2 rounded-[.5rem]"
       onSubmit={handleSubmit(() =>
         onSubmit({
           username: getValues("username"),
@@ -34,7 +34,7 @@ const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
         id="username"
         placeholder={persian.username}
         isIconError={false}
-        classNames="h-12 w-[20rem] bg-moon dark:bg-gray-700"
+        classNames="h-12 w-[20rem] bg-moon"
       />
       <Input
         register={register}
@@ -43,7 +43,7 @@ const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
         id="password"
         placeholder={persian.pass}
         isIconError={false}
-        classNames="h-12 bg-moon dark:bg-gray-700"
+        classNames="h-12 bg-moon"
       />
       {loginError && <ErrorText text={persian.errorMessage} />}
       {networkError && <ErrorText text={persian.networkErrorMessage} />}
@@ -52,7 +52,11 @@ const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
         value={persian.submit}
         className="flex justify-center py-2 w-full text-ship rounded-[.2rem] bg-darkwater hover:brightness-110 cursor-pointer"
       />
-      <TextLink path="/register" text={persian.register} classNames="flex justify-center py-2 bg-grass rounded-[.2rem] text-ship hover:brightness-110" />
+      <TextLink
+        path="/register"
+        text={persian.register}
+        classNames="flex justify-center py-2 bg-grass rounded-[.2rem] text-ship hover:brightness-110"
+      />
     </form>
   );
 };

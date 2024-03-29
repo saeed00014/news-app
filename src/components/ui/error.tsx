@@ -2,12 +2,12 @@ import { merge } from "@/lib/utils";
 import React from "react";
 import { BiSolidErrorAlt } from "react-icons/bi";
 
-type Props = {
+type ErrorIcon = {
   text: string;
   classNames?: string;
 };
 
-const ErrorIcon = ({ text, classNames }: Props) => {
+const ErrorIcon = ({ text, classNames }: ErrorIcon) => {
   return (
     <div
       className={merge(
@@ -23,4 +23,16 @@ const ErrorIcon = ({ text, classNames }: Props) => {
   );
 };
 
-export default ErrorIcon;
+type ErrorText = {
+  text: string
+}
+
+const ErrorText = ({ text }: ErrorText) => {
+  return (
+    <span className="flex justify-start w-full text-[.95rem] text-red-600">
+      {text}
+    </span>
+  )
+}
+
+export { ErrorText, ErrorIcon }

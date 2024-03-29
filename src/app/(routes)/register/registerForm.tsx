@@ -1,5 +1,4 @@
 import React from "react";
-// import CloseHeader from "@/components/closeHeader";
 import {
   selectOptionsDays,
   selectOptionsMounths,
@@ -10,11 +9,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "@/lib/zodSchema";
 import Input from "@/components/ui/input";
-import ErrorIcon from "@/components/ui/errorIcon";
+import { ErrorIcon } from "@/components/ui/error";
 import Label from "@/components/ui/label";
 import Radio from "@/components/ui/radio";
 import Select from "@/components/ui/select";
-import ErrorText from "@/components/ui/errorText";
+import { ErrorText } from "@/components/ui/error";
 import FormItem from "@/components/ui/formItem";
 
 type Props = {
@@ -57,11 +56,6 @@ const RegisterForm = ({
       onSubmit={handleSubmit(() => onSubmit({ getValues }))}
       className="flex flex-col items-center bg-ship md:gap-4 gap-2 shadow-xl p-4 pt-4 w-[400px] h-fit rounded-[.5rem]"
     >
-      {/* <CloseHeader
-        setEvent={setRegister}
-        title={persian.register}
-        classNames="bg-gray-900"
-      /> */}
       <div className="flex justify-start w-full text-2xl">تبت نام</div>
       <div className="flex gap-3">
         <FormItem>
@@ -145,7 +139,7 @@ const RegisterForm = ({
           )}
         </FormItem>
         <FormItem classNames="flex-row">
-          <FormItem classNames="flex-row px-4 h-10 border border-bg-theme-darker bg-white dark:bg-gray-950">
+          <FormItem classNames="flex-row px-4 h-10 border border-dark bg-ship">
             <Label id="male" text={persian.male} classNames="h-full" />
             <Radio
               register={register}
@@ -155,7 +149,7 @@ const RegisterForm = ({
               value="male"
             />
           </FormItem>
-          <FormItem classNames="flex-row px-4 h-10 border border-bg-theme-darker bg-white dark:bg-gray-950">
+          <FormItem classNames="flex-row px-4 h-10 border border-dark bg-ship">
             <Label id="female" text={persian.female} classNames="h-full" />
             <Radio
               register={register}
@@ -194,7 +188,7 @@ const RegisterForm = ({
       <input
         type="submit"
         value={persian.register}
-        className="flex justify-center py-2 w-full rounded-[.2rem] bg-grass hover:brightness-110 text-ship  cursor-pointer"
+        className="flex justify-center py-2 w-full rounded-[.2rem] bg-grass hover:brightness-110 text-ship cursor-pointer"
       />
     </form>
   );

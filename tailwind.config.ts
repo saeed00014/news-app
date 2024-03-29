@@ -18,7 +18,7 @@ const config: Config = {
         darkwater: "#0e7490"
       },
       backgroundImage: {
-        'ashImage': "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))",
+        'ashImage': "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))"
       },
       boxShadow: {
         'dark': '0px 0px 10px 10px',

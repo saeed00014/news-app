@@ -13,7 +13,7 @@ const Select = ({ register, id, name, options }: Props) => {
       {...register(name)}
       id={id}
       name={name}
-      className="h-10 w-full px-2 border bg-white dark:bg-gray-950 appearance-none bg-arrow bg-no-repeat bg-[length:12px_12px] bg-[center_left_.5rem]"
+      className="h-10 w-full px-2 border border-dark bg-ship appearance-none"
     >
       {options.map((option, e) => {
         return (

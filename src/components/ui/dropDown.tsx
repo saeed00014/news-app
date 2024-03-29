@@ -1,3 +1,4 @@
+"use client"
 import persian from "@/assets/data";
 import { merge } from "@/lib/utils";
 import { IoIosArrowDown } from "react-icons/io";
@@ -26,7 +27,7 @@ const DropDownBtn = ({ text, classNames }: DropDownBtnType) => {
 
 const DropDownMenu = () => {
   return (
-    <div className="group flex flex-col absolute lg:w-[13rem] w-full h-0 group-hover:h-[16rem] duration-100 bg-ship lg:shadow-dark border-dark lg:rounded-[1rem] lg:[&>*:nth-child(6)]:border-none lg:[&>*:nth-child(1)]:border-t-none [&>*:nth-child(1)]:border-t overflow-hidden">
+    <div className="group flex flex-col absolute lg:w-[13rem] w-full h-0 group-hover:h-[16rem] duration-100 bg-ship border-dark lg:rounded-[1rem] lg:[&>*:nth-child(6)]:border-none lg:[&>*:nth-child(1)]:border-t-none [&>*:nth-child(1)]:border-t overflow-hidden">
       <DropDownItem text={persian.economy} />
       <DropDownItem text={persian.dolargold} />
       <DropDownItem text={persian.stockmarket} />

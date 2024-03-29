@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import SideBar from "./sideBar";
+import Room from "./room";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <section className="relative flex h-full w-full lg:p-0 p-2 lg:pb-10 pb-[4.4rem] overflow-hidden">
+      <SideBar />
+      <Room />
+    </section>
+  );
+};
 
-export default page
+export default Page;

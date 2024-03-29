@@ -47,6 +47,21 @@ const persian = {
   passRepeatedErorr: "رمز تکرار شده صحیح نیست",
   genderErorr: "باید انتخاب شود",
   birthErorr: "تاریخ تولد قابل قبول نیست",
+  chooseChat: "یک چت را انتخاب کنید",
+  viewProfile: "مشاهده پروفایل",
+  newChat: "چت جدید",
+  editChat: "تغییر چتها",
+  notFound: "هیچ نتیجه ای یافت نشد",
+  goHome: "بازگشت به خانه",
+  seachBar: "جستجوی چت",
+  findChat: "پیدا کردن گفت و گوی جدید",
+  searchBar: "جستجوی کاربر",
+  papularUsers: "پیشنهاد ها",
+  follow: "دنبال کردن",
+  messages: "پیام ها",
+  enterMessage: "پیام خود را وارد کنید",
+  search: "جستجوی",
+  sendBar: "ارسال پیام"
 };
 
 export const selectOptionsMounths = [
