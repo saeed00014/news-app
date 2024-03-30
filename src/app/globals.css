@@ -3,13 +3,33 @@
 @tailwind utilities;
 
 :root {
-
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   direction: rtl;
 }
 
 body {
   overflow-x: hidden;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
 }

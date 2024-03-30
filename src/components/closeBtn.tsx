@@ -2,7 +2,7 @@ import { merge } from "@/lib/utils";
 import { AiOutlineClose } from "react-icons/ai";
 
 type Props = {
-  setEvent: Function;
+  setEvent: any;
   classNames?: string;
 };
 
@@ -11,7 +11,7 @@ const CloseBtn = ({ setEvent, classNames }: Props) => {
     <div
       onClick={() => setEvent(false)}
       className={merge(
-        "px-[.8rem] py-[.8rem] hover:bg-ash rounded-full cursor-pointer",
+        "px-[.8rem] py-[.8rem] w-fit hover:bg-ash rounded-full cursor-pointer",
         classNames
       )}
     >

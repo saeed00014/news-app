@@ -1,7 +1,7 @@
 import { merge } from "@/lib/utils";
 
 type Props = {
-  setEvent: Function;
+  setEvent: any;
   classNames?: string;
 };
 
