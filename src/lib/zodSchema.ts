@@ -10,7 +10,7 @@ export const registerFormSchema = z.object({
   firstname: z.string().regex(/^.{1,25}$/),
   lastname: z.string().regex(/^.{1,25}$/),
   username: z.string().regex(/^[A-Za-z0-9]{3,12}$/),
-  email: z.string().regex(/^(?=.*[@])(?=.*[.])[a-zA-Z0-9!@#$%^&*.]{8,40}$/),
+  email: z.string().regex(/^(?=.*[@])(?=.*[.])[a-zA-Z0-9!@#$%^&*.]{6,320}$/),
   // year: z.string().transform(val => Number(val) - 18).positive()
   gender: z.string().min(3),
   password: z

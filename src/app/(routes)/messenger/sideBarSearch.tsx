@@ -2,7 +2,7 @@ import BackBtn from "@/components/backBtn";
 import CloseBtn from "@/components/closeBtn";
 import SearchBar from "@/components/searchBar";
 import { ResultUser, ResultUserList } from "@/components/ui/resultUser";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 
 type Props = {
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;

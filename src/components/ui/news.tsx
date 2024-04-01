@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import testNews from "@/assets/testNews.webp";
 import persian from "@/assets/data";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import Category from "../category";
 import { NewsInfo } from "@/types/types";
 
@@ -52,7 +52,10 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
           <p className="text-dark md:text-[1rem] text-[.9rem] font-semibold">
             {persian.newsPTag}
           </p>
-          <p className="line-clamp-1">بازار مسکن در سال ۱۴۰۲ با استفاده از سیاست‌های انقباضی دولت، ثبات و کاهش قیمتی نسبی را تجربه کرده است. اتفاقی که برخی…</p>
+          <p className="line-clamp-1">
+            بازار مسکن در سال ۱۴۰۲ با استفاده از سیاست‌های انقباضی دولت، ثبات و
+            کاهش قیمتی نسبی را تجربه کرده است. اتفاقی که برخی…
+          </p>
         </div>
       </div>
     </article>
@@ -67,20 +70,20 @@ type NewsCard = {
 const NewsCard = ({ newsInfo, classNames }: NewsCard) => {
   return (
     <article
-      className={merge("group relative flex flex-col md:min-w-[13rem] max-w-[13rem] bg-ship gap-2 rounded-[.4rem] cursor-pointer", classNames)}
+      className={merge(
+        "group relative flex flex-col md:min-w-[13rem] max-w-[13rem] bg-ship gap-2 rounded-[.4rem] cursor-pointer",
+        classNames
+      )}
     >
-      <Image 
-        alt={persian.adds}
-        className="object-contain"
-        src={testNews}
-      />
+      <Image alt={persian.adds} className="object-contain" src={testNews} />
       <span className="group group-hover:text-blood line-clamp-2 md:text-[1rem] text-[.8rem]">
-      6 هزار و 400 تومان شد. قیمت اسکناس یورو در مرکز مبادله هم با کاهش نسبت به روز یکشنبه، له یورو نیز با کاهش نسبت به روز 
+        6 هزار و 400 تومان شد. قیمت اسکناس یورو در مرکز مبادله هم با کاهش نسبت
+        به روز یکشنبه، له یورو نیز با کاهش نسبت به روز
       </span>
       <span className="absolute right-0 left-0 bottom-0 top-0"></span>
     </article>
   );
-}
+};
 
 type SuggestedNews = {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import { TbArrowForward } from "react-icons/tb";
 import { RiPencilFill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa";

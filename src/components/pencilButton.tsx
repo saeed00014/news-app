@@ -1,5 +1,5 @@
 "use client";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import { RiPencilFill } from "react-icons/ri";
 
 type Props = {

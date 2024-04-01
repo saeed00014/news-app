@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import React from "react";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   value?: string;
   placeholder?: string;
   isIconError?: any;
-  classNames?: string
+  classNames?: string;
 };
 
 const Input = ({
@@ -20,7 +20,7 @@ const Input = ({
   value,
   placeholder,
   isIconError,
-  classNames
+  classNames,
 }: Props) => {
   return (
     <input
@@ -30,7 +30,12 @@ const Input = ({
       name={name}
       value={value}
       placeholder={placeholder}
-      className={merge(`h-10 w-full px-2 pb-1 bg-moon ${isIconError && "border-[1px] border-text-error"}`, classNames)}
+      className={merge(
+        `h-10 w-full px-2 pb-1 bg-moon ${
+          isIconError && "border-[1px] border-text-error"
+        }`,
+        classNames
+      )}
     />
   );
 };

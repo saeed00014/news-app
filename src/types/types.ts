@@ -11,3 +11,11 @@ export type UserInfoType = {
   username: string;
   image: string | null;
 };
+
+export type SqlErrorType = {
+  code: string,
+  errno: number,
+  sql: string,
+  sqlState: string,
+  sqlMessage: string
+}

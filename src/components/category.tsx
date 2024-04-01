@@ -1,10 +1,10 @@
 import persian from "@/assets/data";
 import useColorPicker from "@/hooks/useColorPicker";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import React from "react";
 
 const Category = ({ text }: { text: string }) => {
-  const classNames = useColorPicker(text)
+  const classNames = useColorPicker(text);
 
   return (
     <span

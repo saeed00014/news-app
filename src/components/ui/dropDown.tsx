@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import persian from "@/assets/data";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import { IoIosArrowDown } from "react-icons/io";
 
 type DropDownBtnType = {
@@ -11,7 +11,6 @@ type DropDownBtnType = {
 const DropDownBtn = ({ text, classNames }: DropDownBtnType) => {
   return (
     <button
-      
       className={merge(
         "group flex items-center px-[.80rem] py-[.50rem] gap-2",
         classNames
@@ -35,8 +34,8 @@ const DropDownMenu = () => {
       <DropDownItem text={persian.worldeconemy} />
       <DropDownItem text={persian.shitcoin} />
     </div>
-  )
-}
+  );
+};
 
 type DropDownItem = {
   text: string;
@@ -47,7 +46,7 @@ const DropDownItem = ({ text }: DropDownItem) => {
     <div className="py-2 h-full px-5 hover:bg-moon border-b border-dark cursor-pointer">
       {text}
     </div>
-  )
+  );
 };
 
 export { DropDownBtn, DropDownMenu };

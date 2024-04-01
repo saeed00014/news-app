@@ -1,6 +1,6 @@
 import persian from "@/assets/data";
 import useColorPicker from "@/hooks/useColorPicker";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 
 const SectionSpliter = ({ text }: { text: string }) => {
   const classNames = useColorPicker(text);

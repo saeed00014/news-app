@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import Link from "next/link";
 import { ReactNode } from "react";
 
