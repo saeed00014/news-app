@@ -10,6 +10,7 @@ import {
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
+    console.log("fgd")
     const params = req.nextUrl.searchParams;
     const chat_id = params.get("chat_id");
     const group = Number(params.get("group"));
