@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import React from "react";
 
 type Props = {
@@ -8,7 +8,12 @@ type Props = {
 
 const FormItem = ({ children, classNames }: Props) => {
   return (
-    <div className={merge("relative flex flex-col items-center justify-center w-full gap-2", classNames)}>
+    <div
+      className={merge(
+        "relative flex flex-col items-center justify-center w-full gap-2",
+        classNames
+      )}
+    >
       {children}
     </div>
   );

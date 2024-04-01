@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 
 type Props = {
   setEvent: any;

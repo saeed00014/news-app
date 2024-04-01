@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import React from "react";
 import { BiSolidErrorAlt } from "react-icons/bi";
 
@@ -24,15 +24,15 @@ const ErrorIcon = ({ text, classNames }: ErrorIcon) => {
 };
 
 type ErrorText = {
-  text: string
-}
+  text: string;
+};
 
 const ErrorText = ({ text }: ErrorText) => {
   return (
     <span className="flex justify-start w-full text-[.95rem] text-red-600">
       {text}
     </span>
-  )
-}
+  );
+};
 
-export { ErrorText, ErrorIcon }
+export { ErrorText, ErrorIcon };

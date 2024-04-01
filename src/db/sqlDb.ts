@@ -10,15 +10,14 @@ export async function query({ query, values }: Props) {
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASS,
-    database: process.env.MYSQL_NAME,
+    database: process.env.MYSQL_DATABASE_NAME,
   });
 
   try {
-    const result = await dbconnection.execute(query, values);
+    const [result] = await dbconnection.execute(query, values);
     dbconnection.end();
     return result;
   } catch (error) {
-    dbconnection.end();
     return error;
   }
 }

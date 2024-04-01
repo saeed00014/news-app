@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Image from "next/image";
 import defaultImage from "@/assets/default.jpg";
 import { UserInfoType } from "@/types/types";
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import persian from "@/assets/data";
 
 type ResultUser = {

@@ -1,4 +1,4 @@
-import { merge } from "@/lib/utils";
+import { merge } from "@/lib/utils/merge";
 import { AiOutlineClose } from "react-icons/ai";
 
 type Props = {
