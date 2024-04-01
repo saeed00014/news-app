@@ -13,9 +13,36 @@ export type UserInfoType = {
 };
 
 export type SqlErrorType = {
-  code: string,
-  errno: number,
-  sql: string,
-  sqlState: string,
-  sqlMessage: string
-}
+  code: string;
+  errno: number;
+  sql: string;
+  sqlState: string;
+  sqlMessage: string;
+};
+
+export type SqlSuccessType = {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  info: string;
+  serverStatus: number;
+  warningStatus: number;
+  changedRows: number;
+};
+
+export type MessageSqlType = {
+  id: number;
+  user_id: number;
+  text: string | null;
+  news: string | null;
+  image: string | null;
+  created_at: string;
+};
+
+export type MessageClientType = {
+  chat_id: number;
+  user_id: number;
+  text: string | null;
+  news: string | null;
+  image: string | null;
+};
