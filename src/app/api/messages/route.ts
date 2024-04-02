@@ -7,10 +7,14 @@ import {
   MessageClientType,
   SqlSuccessType,
 } from "@/types/types";
+import {
+  CLIENT_REQ_ERROR,
+  DATABASE_ERROR,
+  UNEXPECTED_ERROR,
+} from "@/lib/utils/errorCodes";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
-    console.log("fgd")
     const params = req.nextUrl.searchParams;
     const chat_id = params.get("chat_id");
     const group = Number(params.get("group"));
@@ -19,7 +23,7 @@ export function GET(req: NextRequest) {
         {
           response: "your request is not valid",
         },
-        { status: 500 }
+        { status: CLIENT_REQ_ERROR.code }
       );
     }
     const result = <[] | MessageSqlType[] | SqlErrorType>await query({
@@ -28,7 +32,7 @@ export function GET(req: NextRequest) {
       values: [chat_id, 1, group - 1],
     });
     if (Array.isArray(result)) {
-      if (!result[0]) {
+      if (!result.length) {
         return NextResponse.json(
           {
             response: "there is no more result for this request",
@@ -44,19 +48,19 @@ export function GET(req: NextRequest) {
         { status: 200 }
       );
     }
-    if (result.sqlState) {
+    if ("sqlState" in result && result.sqlState) {
       return NextResponse.json(
         {
           response: "your request is not valid",
         },
-        { status: 500 }
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
       },
-      { status: 500 }
+      { status: UNEXPECTED_ERROR.code }
     );
   });
 }
@@ -85,14 +89,14 @@ export async function POST(req: Request) {
         {
           response: "your message data is not valid ",
         },
-        { status: 500 }
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
       },
-      { status: 500 }
+      { status: UNEXPECTED_ERROR.code }
     );
   });
 }
@@ -120,14 +124,14 @@ export function PUT(req: NextRequest) {
         {
           response: "your new message data is not valid ",
         },
-        { status: 500 }
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
       },
-      { status: 500 }
+      { status: UNEXPECTED_ERROR.code }
     );
   });
 }
@@ -154,14 +158,14 @@ export async function DELETE(req: NextRequest) {
         {
           response: "your new message data is not valid ",
         },
-        { status: 500 }
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
       },
-      { status: 500 }
+      { status: UNEXPECTED_ERROR.code }
     );
   });
 }
