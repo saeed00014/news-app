@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 
 type Props = {
   query: string;
-  values: string[];
+  values: (string | number | null)[];
 };
 
 export async function query({ query, values }: Props) {
