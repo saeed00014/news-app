@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import { PUT } from "@/app/api/messages/route";
+import { DELETE } from "@/app/api/messages/route";
 import { query } from "@/db/sqlDb";
 import {
   CLIENT_REQ_ERROR,
@@ -9,10 +9,12 @@ import {
   UNEXPECTED_ERROR,
 } from "@/lib/utils/errorCodes";
 
+const queryMock = jest.fn(() => {});
+jest.mock("../src/db/sqlDb", () => ({
+  query: () => queryMock(),
+}));
+
 const req = {
-  json: () => {
-    return { text: "text" };
-  },
   nextUrl: {
     searchParams: {
       get: () => {
@@ -22,13 +24,8 @@ const req = {
   },
 };
 
-const queryMock = jest.fn(() => {});
-jest.mock("../src/db/sqlDb", () => ({
-  query: () => queryMock(),
-}));
-
-describe("check if the messages put method works", () => {
-  test("put was successful", async () => {
+describe("messages delete method works", () => {
+  test("delete was successful", async () => {
     queryMock.mockReturnValue({
       fieldCount: 0,
       affectedRows: 1,
@@ -38,7 +35,7 @@ describe("check if the messages put method works", () => {
       warningStatus: 0,
       changedRows: 1,
     });
-    expect((await PUT(req)).status).toBe(200);
+    expect((await DELETE(req)).status).toBe(200);
   });
   test("result is a sql error", async () => {
     queryMock.mockReturnValue({
@@ -48,13 +45,13 @@ describe("check if the messages put method works", () => {
       sqlState: "string",
       sqlMessage: "string",
     });
-    expect((await PUT(req)).status).toBe(DATABASE_ERROR.code);
+    expect((await DELETE(req)).status).toBe(DATABASE_ERROR.code);
   });
   test("result is an unexpected error", async () => {
     queryMock.mockReturnValue(undefined);
-    expect((await PUT(req)).status).toBe(UNEXPECTED_ERROR.code);
+    expect((await DELETE(req)).status).toBe(UNEXPECTED_ERROR.code);
     queryMock.mockReturnValue(new Error());
-    expect((await PUT(req)).status).toBe(UNEXPECTED_ERROR.code);
+    expect((await DELETE(req)).status).toBe(UNEXPECTED_ERROR.code);
     queryMock.mockReturnValue({
       fieldCount: 0,
       affectedRows: 0,
@@ -64,6 +61,6 @@ describe("check if the messages put method works", () => {
       warningStatus: 0,
       changedRows: 1,
     });
-    expect((await PUT(req)).status).toBe(UNEXPECTED_ERROR.code);
+    expect((await DELETE(req)).status).toBe(UNEXPECTED_ERROR.code);
   });
-});
+})

@@ -4,7 +4,11 @@
 import { GET } from "@/app/api/messages/route";
 import { NextRequest } from "next/server";
 import { query } from "@/db/sqlDb";
-import { CLIENT_REQ_ERROR, DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import {
+  CLIENT_REQ_ERROR,
+  DATABASE_ERROR,
+  UNEXPECTED_ERROR,
+} from "@/lib/utils/errorCodes";
 
 const queryMock = jest.fn(() => {});
 jest.mock("../src/db/sqlDb", () => ({
@@ -26,7 +30,7 @@ describe("the get method for messages works fine", () => {
     const reqGruopNotValid = {
       nextUrl: {
         searchParams: {
-          get: (p) => { 
+          get: (p) => {
             return p === "group" ? 0 : 1;
           },
         },
@@ -72,7 +76,7 @@ describe("the get method for messages works fine", () => {
     expect((await GET(req)).status).toBe(DATABASE_ERROR.code);
   });
   test("an unexpected error occured", async () => {
-    queryMock.mockReturnValue(new Error)
+    queryMock.mockReturnValue(new Error());
     expect((await GET(req)).status).toBe(UNEXPECTED_ERROR.code);
   });
 });
