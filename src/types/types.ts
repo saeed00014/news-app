@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export type NewsInfo = {
   image: string;
   category: string;
@@ -62,3 +64,14 @@ export type MongoNewsType = {
   description: string;
   content: string[];
 };
+
+export type MongoPostSuccessType = {
+  acknowledged: boolean,
+  insertedId: ObjectId
+}
+
+export type MongoDeleteSuccessType = {
+  acknowledged: boolean,
+  deletedCount: number
+  
+}

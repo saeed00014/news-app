@@ -5,7 +5,7 @@ async function dbCollection() {
     if (!process.env.MONGODB_URI) {
       throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
     }
-  
+
     const uri = process.env.MONGODB_URI;
     const options = {
       serverApi: {
@@ -14,13 +14,13 @@ async function dbCollection() {
         deprecationErrors: true,
       },
     };
-  
+
     let client;
     var collection: any;
     global.mongodbClient = {
       conn: null,
     };
-    
+
     if (global.mongodbClient.conn) {
       collection = global.mongodbClient.conn;
       return collection;
@@ -32,8 +32,8 @@ async function dbCollection() {
       global.mongodbClient.conn = collection;
       return collection;
     }
-  } catch(error) {
-    throw error
+  } catch (error) {
+    throw error;
   }
 }
 

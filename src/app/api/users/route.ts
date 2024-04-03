@@ -50,7 +50,7 @@ export function POST(req: NextRequest) {
         "INSERT INTO `users`(`username`, `email`, `name`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?)",
       values: [username, email, name, birthdate, gender, hashedPassword],
     });
-    if ("insertId" in result && result.insertId) {
+    if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {
           response: "your acount is made successfully",
@@ -79,7 +79,7 @@ export function PUT(req: NextRequest) {
         "UPDATE `users` SET `username` = ?, `email` = ?, `name` = ?, `birthdate` = ?, `gender` = ?, `image` = ? WHERE id = ? ",
       values: [username, email, name, birthdate, gender, image, user_id],
     });
-    if ("affectedRows" in result && result.affectedRows) {
+    if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
           response: "profile edited successfully",
@@ -105,7 +105,7 @@ export function DELETE(req: NextRequest) {
       query: "DELETE FROM `users` WHERE username = ?",
       values: [username],
     });
-    if ("affectedRows" in result && result.affectedRows) {
+    if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
           response: "acount deleted successfully",

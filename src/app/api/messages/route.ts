@@ -15,9 +15,7 @@ export function GET(req: NextRequest) {
     const group = Number(params.get("group"));
     if (!chat_id || !group) {
       return NextResponse.json(
-        {
-          response: "your request is not valid",
-        },
+        { response: "your request is not valid" },
         { status: CLIENT_REQ_ERROR.code }
       );
     }
@@ -62,7 +60,7 @@ export async function POST(req: Request) {
         "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`) VALUES (?, ?, ?, ?, ?)",
       values: [chat_id, user_id, text, news, image],
     });
-    if ("insertId" in result && result.insertId) {
+    if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {
           response: "your message is sent successfully",
@@ -89,7 +87,7 @@ export function PUT(req: NextRequest) {
       query: "UPDATE `messages` SET `text` = ?, `edited` = true WHERE `id` = ?",
       values: [text, message_id],
     });
-    if ("affectedRows" in result && result.affectedRows) {
+    if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
           response: "message edited successfully",
@@ -115,7 +113,7 @@ export async function DELETE(req: NextRequest) {
       query: "DELETE FROM `messages` WHERE `id` = ?",
       values: [message_id],
     });
-    if ("affectedRows" in result && result.affectedRows) {
+    if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
           response: "message deleted successfully",

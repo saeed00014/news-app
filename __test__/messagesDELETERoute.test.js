@@ -38,13 +38,7 @@ describe("messages delete method works", () => {
     expect((await DELETE(req)).status).toBe(200);
   });
   test("result is a sql error", async () => {
-    queryMock.mockReturnValue({
-      code: "string",
-      errno: 1,
-      sql: "string",
-      sqlState: "string",
-      sqlMessage: "string",
-    });
+    queryMock.mockReturnValue(Error);
     expect((await DELETE(req)).status).toBe(DATABASE_ERROR.code);
   });
   test("result is an unexpected error", async () => {

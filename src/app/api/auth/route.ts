@@ -2,6 +2,7 @@ import { query } from "@/db/sqlDb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { tryCatch } from "@/lib/utils/tryCatch";
+import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 
 export function POST(req: Request) {
   return tryCatch(async () => {
@@ -46,7 +47,7 @@ export function POST(req: Request) {
       {
         response: "there is a problem please try again later",
       },
-      { status: 500 }
+      { status: UNEXPECTED_ERROR.code }
     );
   });
 }
