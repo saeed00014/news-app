@@ -1,28 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
-import { tryCatch } from "@/lib/utils/tryCatch";
 import { query } from "@/db/sqlDb";
-import {
-  MessageSqlType,
-  MessageClientType,
-  SqlSuccessType,
-} from "@/types/types";
-import { CLIENT_REQ_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import { tryCatch } from "@/lib/utils/tryCatch";
+import { SqlSuccessType, UserSqlType } from "@/types/types";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
-    const chat_id = params.get("chat_id");
-    const group = Number(params.get("group"));
-    if (!chat_id || !group) {
-      return NextResponse.json(
-        { response: "your request is not valid" },
-        { status: CLIENT_REQ_ERROR.code }
-      );
-    }
-    const result = <[] | MessageSqlType[]>await query({
-      query:
-        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id  ? LIMIT ? OFFSET ?",
-      values: [chat_id, 1, group - 1],
+    const username = params.get("username");
+    const result = <[] | UserSqlType[]>await query({
+      query: `SELECT id, username, image FROM users WHERE username LIKE '%${username}%'`,
+      values: [username],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -35,7 +24,7 @@ export function GET(req: NextRequest) {
       }
       return NextResponse.json(
         {
-          response: "chat is loaded successfully",
+          response: "user is loaded successfully",
           sqlMessages: result,
         },
         { status: 200 }
@@ -50,20 +39,21 @@ export function GET(req: NextRequest) {
   });
 }
 
-export async function POST(req: Request) {
+export function POST(req: NextRequest) {
   return tryCatch(async () => {
-    const { chat_id, user_id, text, news, image } = <MessageClientType>(
-      await req.json()
-    );
+    const { username, email, name, birthdate, gender, password } =
+      await req.json();
+    const salt = await bcrypt.genSalt(14);
+    const hashedPassword = await bcrypt.hash(password, salt);
     const result = <SqlSuccessType>await query({
       query:
-        "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`) VALUES (?, ?, ?, ?, ?)",
-      values: [chat_id, user_id, text, news, image],
+        "INSERT INTO `users`(`username`, `email`, `name`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?)",
+      values: [username, email, name, birthdate, gender, hashedPassword],
     });
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {
-          response: "your message is sent successfully",
+          response: "your acount is made successfully",
           insertId: result.insertId,
         },
         { status: 200 }
@@ -81,16 +71,18 @@ export async function POST(req: Request) {
 export function PUT(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
-    const message_id = params.get("message_id");
-    const { text } = <{ text: string }>await req.json();
+    const user_id = params.get("user_id");
+    const { username, email, name, birthdate, gender, image } =
+      await req.json();
     const result = <SqlSuccessType>await query({
-      query: "UPDATE `messages` SET `text` = ?, `edited` = true WHERE `id` = ?",
-      values: [text, message_id],
+      query:
+        "UPDATE `users` SET `username` = ?, `email` = ?, `name` = ?, `birthdate` = ?, `gender` = ?, `image` = ? WHERE id = ? ",
+      values: [username, email, name, birthdate, gender, image, user_id],
     });
     if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
-          response: "message edited successfully",
+          response: "profile edited successfully",
           edited: true,
         },
         { status: 200 }
@@ -105,18 +97,18 @@ export function PUT(req: NextRequest) {
   });
 }
 
-export async function DELETE(req: NextRequest) {
+export function DELETE(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
-    const message_id = params.get("message_id");
+    const username = params.get("username");
     const result = <SqlSuccessType>await query({
-      query: "DELETE FROM `messages` WHERE `id` = ?",
-      values: [message_id],
+      query: "DELETE FROM `users` WHERE username = ?",
+      values: [username],
     });
     if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(
         {
-          response: "message deleted successfully",
+          response: "acount deleted successfully",
           deleted: true,
         },
         { status: 200 }
