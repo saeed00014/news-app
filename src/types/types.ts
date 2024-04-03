@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export type NewsInfo = {
   image: string;
   category: string;
@@ -46,3 +48,30 @@ export type MessageClientType = {
   news: string | null;
   image: string | null;
 };
+
+export type UserSqlType = {
+  id: number;
+  username: string;
+  image: string;
+};
+
+export type UserClientType = {};
+
+export type MongoNewsType = {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  content: string[];
+};
+
+export type MongoPostSuccessType = {
+  acknowledged: boolean,
+  insertedId: ObjectId
+}
+
+export type MongoDeleteSuccessType = {
+  acknowledged: boolean,
+  deletedCount: number
+  
+}

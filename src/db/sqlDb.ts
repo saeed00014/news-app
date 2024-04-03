@@ -18,6 +18,6 @@ export async function query({ query, values }: Props) {
     dbconnection.end();
     return result;
   } catch (error) {
-    return error;
+    throw error;
   }
 }
