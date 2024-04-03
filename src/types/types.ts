@@ -46,3 +46,13 @@ export type MessageClientType = {
   news: string | null;
   image: string | null;
 };
+
+export type UserSqlType = {
+  id: number,
+  username: string,
+  image: string
+}
+
+export type UserClientType = {
+
+}
