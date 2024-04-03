@@ -1,9 +1,24 @@
+import dbCollection from "@/db/noSqlDb";
 import clientPromise from "@/db/noSqlDb";
-import { NextResponse } from "next/server";
+import { tryCatch } from "@/lib/utils/tryCatch";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const client = await clientPromise
-  const db = client.db("donyanews")
-  console.log(await db.collection("news").findOne())
-  return new NextResponse("yes")
+export function GET() {
+  return tryCatch(async () => {
+    const collection = await dbCollection()
+    console.log(await collection.findOne())
+    return new NextResponse("yes")
+  })
+}
+
+export function POST(req: NextRequest) {
+  return tryCatch(async () => {})
+}
+
+export function PUT(req: NextRequest) {
+  return tryCatch(async () => {})
+}
+
+export function DELETE(req: NextRequest) {
+  return tryCatch(async () => {})
 }

@@ -14,17 +14,23 @@ const options = {
 };
 
 let client;
-var clientPromise: Promise<MongoClient>;
+var collection: any
 global.mongodbClient = {
   conn: null
 }
 
-if(global.mongodbClient.conn) {
-  clientPromise = global.mongodbClient.conn
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-  global.mongodbClient.conn = clientPromise
+async function dbCollection() {
+  if(global.mongodbClient.conn) {
+    collection = global.mongodbClient.conn
+    return collection
+  } else {
+    client = new MongoClient(uri, options);
+    const clientConnection = await client.connect();
+    const db = clientConnection.db("donyanews")
+    const collection = db.collection("news")
+    global.mongodbClient.conn = collection
+    return collection
+  }
 }
 
-export default clientPromise;
+export default dbCollection;
