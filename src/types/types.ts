@@ -48,11 +48,17 @@ export type MessageClientType = {
 };
 
 export type UserSqlType = {
-  id: number,
-  username: string,
-  image: string
-}
+  id: number;
+  username: string;
+  image: string;
+};
 
-export type UserClientType = {
+export type UserClientType = {};
 
-}
+export type MongoNewsType = {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  content: string[];
+};

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { UNEXPECTED_ERROR } from "./errorCodes";
+import { DATABASE_ERROR, UNEXPECTED_ERROR } from "./errorCodes";
 
 export const tryCatch = async (controller: Function) => {
   try {
@@ -9,6 +9,14 @@ export const tryCatch = async (controller: Function) => {
       return NextResponse.json(
         { response: "there is a network problem please try again later" },
         { status: 500 }
+      );
+    }
+    if ("sqlState" in error && error.sqlState) {
+      return NextResponse.json(
+        {
+          response: "your request is not valid",
+        },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(

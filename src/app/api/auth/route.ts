@@ -1,14 +1,13 @@
 import { query } from "@/db/sqlDb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { SqlErrorType } from "@/types/types";
 import { tryCatch } from "@/lib/utils/tryCatch";
 
 export function POST(req: Request) {
   return tryCatch(async () => {
     const { username, password }: { username: string; password: string } =
       await req.json();
-    const result = <{ password: string }[] | SqlErrorType>await query({
+    const result = <{ password: string }[]>await query({
       query: "SELECT `password` FROM `users` WHERE username = ?",
       values: [username],
     });
@@ -41,15 +40,6 @@ export function POST(req: Request) {
           login: false,
         },
         { status: 200 }
-      );
-    }
-    if (result.sqlState) {
-      return NextResponse.json(
-        {
-          response:
-            "your username or password does not meat the requirements please enter valid english words and numbers",
-        },
-        { status: 500 }
       );
     }
     return NextResponse.json(

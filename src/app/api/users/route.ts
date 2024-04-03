@@ -1,15 +1,15 @@
 import { query } from "@/db/sqlDb";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { SqlErrorType, SqlSuccessType, UserSqlType } from "@/types/types";
+import { SqlSuccessType, UserSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const username = params.get("username");
-    const result = <[] | UserSqlType[] | SqlErrorType>await query({
+    const result = <[] | UserSqlType[]>await query({
       query: `SELECT id, username, image FROM users WHERE username LIKE '%${username}%'`,
       values: [username],
     });
@@ -30,14 +30,6 @@ export function GET(req: NextRequest) {
         { status: 200 }
       );
     }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your request is not valid",
-        },
-        { status: DATABASE_ERROR.code }
-      );
-    }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
@@ -53,7 +45,7 @@ export function POST(req: NextRequest) {
       await req.json();
     const salt = await bcrypt.genSalt(14);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query:
         "INSERT INTO `users`(`username`, `email`, `name`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?)",
       values: [username, email, name, birthdate, gender, hashedPassword],
@@ -65,14 +57,6 @@ export function POST(req: NextRequest) {
           insertId: result.insertId,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your acount data is not valid ",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -90,7 +74,7 @@ export function PUT(req: NextRequest) {
     const user_id = params.get("user_id");
     const { username, email, name, birthdate, gender, image } =
       await req.json();
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query:
         "UPDATE `users` SET `username` = ?, `email` = ?, `name` = ?, `birthdate` = ?, `gender` = ?, `image` = ? WHERE id = ? ",
       values: [username, email, name, birthdate, gender, image, user_id],
@@ -102,14 +86,6 @@ export function PUT(req: NextRequest) {
           edited: true,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your new message data is not valid ",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -125,7 +101,7 @@ export function DELETE(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const username = params.get("username");
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query: "DELETE FROM `users` WHERE username = ?",
       values: [username],
     });
@@ -136,14 +112,6 @@ export function DELETE(req: NextRequest) {
           deleted: true,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "cant delete acount now please try again later",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(

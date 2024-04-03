@@ -2,16 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { tryCatch } from "@/lib/utils/tryCatch";
 import { query } from "@/db/sqlDb";
 import {
-  SqlErrorType,
   MessageSqlType,
   MessageClientType,
   SqlSuccessType,
 } from "@/types/types";
-import {
-  CLIENT_REQ_ERROR,
-  DATABASE_ERROR,
-  UNEXPECTED_ERROR,
-} from "@/lib/utils/errorCodes";
+import { CLIENT_REQ_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
@@ -26,9 +21,9 @@ export function GET(req: NextRequest) {
         { status: CLIENT_REQ_ERROR.code }
       );
     }
-    const result = <[] | MessageSqlType[] | SqlErrorType>await query({
+    const result = <[] | MessageSqlType[]>await query({
       query:
-        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id = ? LIMIT ? OFFSET ?",
+        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id  ? LIMIT ? OFFSET ?",
       values: [chat_id, 1, group - 1],
     });
     if (Array.isArray(result)) {
@@ -48,14 +43,6 @@ export function GET(req: NextRequest) {
         { status: 200 }
       );
     }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your request is not valid",
-        },
-        { status: DATABASE_ERROR.code }
-      );
-    }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
@@ -70,7 +57,7 @@ export async function POST(req: Request) {
     const { chat_id, user_id, text, news, image } = <MessageClientType>(
       await req.json()
     );
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query:
         "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`) VALUES (?, ?, ?, ?, ?)",
       values: [chat_id, user_id, text, news, image],
@@ -82,14 +69,6 @@ export async function POST(req: Request) {
           insertId: result.insertId,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your message data is not valid ",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -106,7 +85,7 @@ export function PUT(req: NextRequest) {
     const params = req.nextUrl.searchParams;
     const message_id = params.get("message_id");
     const { text } = <{ text: string }>await req.json();
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query: "UPDATE `messages` SET `text` = ?, `edited` = true WHERE `id` = ?",
       values: [text, message_id],
     });
@@ -117,14 +96,6 @@ export function PUT(req: NextRequest) {
           edited: true,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your new message data is not valid ",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -140,7 +111,7 @@ export async function DELETE(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const message_id = params.get("message_id");
-    const result = <SqlSuccessType | SqlErrorType>await query({
+    const result = <SqlSuccessType>await query({
       query: "DELETE FROM `messages` WHERE `id` = ?",
       values: [message_id],
     });
@@ -151,14 +122,6 @@ export async function DELETE(req: NextRequest) {
           deleted: true,
         },
         { status: 200 }
-      );
-    }
-    if ("sqlState" in result && result.sqlState) {
-      return NextResponse.json(
-        {
-          response: "your new message data is not valid ",
-        },
-        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
