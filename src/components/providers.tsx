@@ -2,11 +2,14 @@
 import React from "react";
 import ThemeSwitcher from "@/providers/themeSwitcher";
 import ErrorBoundaries from "@/providers/errorBoundaries";
+import ReactQuery from "@/providers/reactQuery";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ErrorBoundaries>
-      {children}
+      <ReactQuery>
+        {children}
+      </ReactQuery>
     </ErrorBoundaries>
   );
 };
