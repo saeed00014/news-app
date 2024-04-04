@@ -8,9 +8,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ErrorBoundaries>
       <ReactQuery>
-        <ThemeMode>
-          {children}
-        </ThemeMode>
+        <ThemeMode>{children}</ThemeMode>
       </ReactQuery>
     </ErrorBoundaries>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import persian from "@/assets/data";
-import Input from "@/components/ui/input";
-import { ErrorText } from "@/components/ui/error";
+import { Input } from "@/components/ui/inputs";
+import { ErrorText } from "@/components/ui/errors";
 import { TextLink } from "@/components/ui/link";
 
 type Props = {
