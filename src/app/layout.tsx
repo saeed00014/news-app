@@ -20,7 +20,7 @@ export default function RootLayout({
     <html className="h-full w-full bg-moon" lang="fa">
       <body className={myFont.className}>
         <div className="flex flex-col justify-center items-center w-full h-full">
-          <div className="w-full h-full max-w-[1400px] lg:px-8 pb-[70px]">
+          <div className="dark text-dark w-full h-full max-w-[1400px] lg:px-8 pb-[70px]">
             <Providers>
               <Header />
               {children}

@@ -12,7 +12,7 @@ const TextLink = ({ text, path, classNames }: TextLink) => {
   return (
     <Link
       href={path}
-      className={merge("px-[.80rem] py-[.50rem] min-w-max", classNames)}
+      className={merge("text-dark px-[.80rem] py-[.50rem] min-w-max", classNames)}
     >
       {text}
     </Link>

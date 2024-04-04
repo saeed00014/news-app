@@ -18,7 +18,7 @@ const Checkbox = ({ register, id, name, value, classNames }: Props) => {
       name={name}
       value={value}
       className={merge(
-        "h-5 w-full px-2 pb-1 bg-gray-200 dark:bg-gray-800",
+        "h-5 w-full px-2 pb-1 bg-gray-200",
         classNames
       )}
     />
