@@ -12,7 +12,7 @@ const persian = {
   economy: "اقتصاد",
   stockmarket: "بورس",
   dolargold: "دلار و طلا",
-  shitcoin: "ارز دیجیتال",
+  coin: "ارز دیجیتال",
   society: "جامعه",
   worldeconemy: "اقتصاد کلان",
   readmore: "مطالعه بیشتر",

@@ -4,12 +4,13 @@ import RelatedNews from "./relatedNews";
 
 const page = () => {
   return (
-    <section className="flex justify-center lg:p-0 p-2 lg:mt-0 mt-2 lg:mx-0 mx-2 bg-ship">
-      <div className="flex flex-col w-full h-fit md:p-4 p-2 gap-[4rem] max-w-[800px]">
+    <section className="flex w-full max-w-[1400px] p-4 bg-ship">
+      <div className="flex flex-col w-full max-w-[1000px]">
         <News />
         <RelatedNews />
         <Adds />
       </div>
+      <div className="lg:flex hidden w-full max-w-[400px]"></div>
     </section>
   );
 };

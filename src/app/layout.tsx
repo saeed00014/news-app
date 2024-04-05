@@ -17,15 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="h-full w-full bg-moon" lang="fa">
+    <html lang="fa">
       <body className={myFont.className}>
-        <div className="flex flex-col justify-center items-center w-full h-full">
-          <div className="dark text-dark w-full h-full max-w-[1400px] lg:px-8 pb-[70px]">
-            <Providers>
-              <Header />
-              {children}
-            </Providers>
-          </div>
+        <div style={{scrollbarWidth: "none"}} className="dark flex flex-col items-center h-screen w-screen bg-moon text-dark overflow-y-auto lg:pb-0 lg:pt-[81px] py-[70px] lg:px-4 px-2">
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
         </div>
       </body>
     </html>

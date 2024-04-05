@@ -17,7 +17,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className={`md:relative absolute md:top-[initial] top-[72px] md:bottom-[initial] bottom-[70px] md:right-0 ${isSideBarOpen ? "right-2" : "-right-[250px]"} duration-100 flex flex-col min-w-[250px] py-3 gap-3 md:border-t-transparent border-t border-l bg-ship z-20`}>
+    <div className={`md:relative absolute md:top-[initial] top-[59px] md:bottom-0 bottom-[4px] md:right-0 ${isSideBarOpen ? "right-[4px]" : "-right-[250px]"} duration-100 flex flex-col min-w-[250px] py-3 gap-3 md:border-t-transparent border-t border-l bg-ship z-20`}>
       <div className="px-2">
         <SearchBar />
       </div>
