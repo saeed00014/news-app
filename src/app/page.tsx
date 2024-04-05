@@ -4,7 +4,7 @@ import { AddBar } from "@/components/ui/adds";
 
 const Home = () => {
   return (
-    <section className="flex flex-col md:gap-4 gap-2 lg:px-0 md:px-4 px-2 lg:pt-0 pt-2 ">
+    <section className="flex flex-col w-full max-w-[1400px] bg-ship md:gap-4 gap-2">
       <TopNews />
       <div className="flex gap-2">
         <div className="w-full">

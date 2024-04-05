@@ -8,12 +8,12 @@ import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "@/lib/zodSchema";
-import Input from "@/components/ui/input";
-import { ErrorIcon } from "@/components/ui/error";
-import Label from "@/components/ui/label";
-import Radio from "@/components/ui/radio";
-import Select from "@/components/ui/select";
-import { ErrorText } from "@/components/ui/error";
+import { Input } from "@/components/ui/inputs";
+import { ErrorIcon } from "@/components/ui/errors";
+import { Label } from "@/components/ui/inputs";
+import { Radio } from "@/components/ui/inputs";
+import { Select } from "@/components/ui/inputs";
+import { ErrorText } from "@/components/ui/errors";
 import FormItem from "@/components/ui/formItem";
 
 type Props = {
@@ -150,7 +150,7 @@ const RegisterForm = ({
             />
           </FormItem>
           <FormItem classNames="flex-row px-4 h-10 border border-dark bg-ship">
-            <Label id="female" text={persian.female} classNames="h-full" />
+            <Label id="female" text={persian.female} classNames="h-full " />
             <Radio
               register={register}
               type="radio"

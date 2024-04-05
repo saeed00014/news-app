@@ -2,7 +2,7 @@
 import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { IoIosSearch } from "react-icons/io";
-import Input from "./ui/input";
+import { Input } from "./ui/inputs";
 
 const SearchBar = () => {
   const { register, watch } = useForm({

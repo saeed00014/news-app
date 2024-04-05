@@ -1,6 +1,7 @@
 "use client";
 import persian from "@/assets/data";
 import { merge } from "@/lib/utils/merge";
+import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 
 type DropDownBtnType = {
@@ -16,7 +17,7 @@ const DropDownBtn = ({ text, classNames }: DropDownBtnType) => {
         classNames
       )}
     >
-      <span className="group group-hover:rotate-180 duration-100">
+      <span className="group lg:group-hover:rotate-180 duration-100">
         <IoIosArrowDown />
       </span>
       <span>{text}</span>
@@ -24,27 +25,31 @@ const DropDownBtn = ({ text, classNames }: DropDownBtnType) => {
   );
 };
 
-const DropDownMenu = () => {
+type DropDownItem = {
+  text: string;
+  path: string;
+};
+
+const DropDownItem = ({ text, path }: DropDownItem) => {
   return (
-    <div className="group flex flex-col absolute lg:w-[13rem] w-full h-0 group-hover:h-[16rem] duration-100 bg-ship border-dark lg:rounded-[1rem] lg:[&>*:nth-child(6)]:border-none lg:[&>*:nth-child(1)]:border-t-none [&>*:nth-child(1)]:border-t overflow-hidden">
-      <DropDownItem text={persian.economy} />
-      <DropDownItem text={persian.dolargold} />
-      <DropDownItem text={persian.stockmarket} />
-      <DropDownItem text={persian.society} />
-      <DropDownItem text={persian.worldeconemy} />
-      <DropDownItem text={persian.shitcoin} />
-    </div>
+    <Link
+      href={`/category/${path}`}
+      className="py-2 h-full px-5 hover:bg-moon border-t border-t-dark cursor-pointer"
+    >
+      {text}
+    </Link>
   );
 };
 
-type DropDownItem = {
-  text: string;
-};
-
-const DropDownItem = ({ text }: DropDownItem) => {
+const DropDownMenu = () => {
   return (
-    <div className="py-2 h-full px-5 hover:bg-moon border-b border-dark cursor-pointer">
-      {text}
+    <div className="flex flex-col absolute lg:w-[13rem] w-full lg:h-0 h-[16rem] group-hover:h-[16rem] duration-150 bg-ship overflow-hidden">
+      <DropDownItem text={persian.economy} path="economy" />
+      <DropDownItem text={persian.dolargold} path="dolargold" />
+      <DropDownItem text={persian.stockmarket} path="stockmarket" />
+      <DropDownItem text={persian.society} path="society" />
+      <DropDownItem text={persian.worldeconemy} path="worldeconemy" />
+      <DropDownItem text={persian.coin} path="coin" />
     </div>
   );
 };

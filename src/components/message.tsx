@@ -18,7 +18,6 @@ const Message = ({ clickEvent, classNames }: Props) => {
     // clickEvent()
     setIsChooseMessage((prev) => !prev);
   };
-
   return (
     <li className={merge("relative flex w-full gap-2", classNames)}>
       <div onMouseDown={handleClick} className="flex w-fit gap-1 text-ship">

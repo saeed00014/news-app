@@ -6,7 +6,7 @@ import persian from "@/assets/data";
 
 const RoomTop = () => {
   return (
-    <div className="sticky top-0 flex items-center justify-between px-2 h-[65px] min-h-[65px] max-h-[65px] gap-2 border-b border-l bg-ship z-20">
+    <div className="sticky top-0 flex items-center justify-between px-2 md:h-[65px] md:min-h-[65px] h-[55px] min-h-[55px] gap-2 border-b border-l bg-ship z-20">
       <div className="flex items-center gap-2">
         <Image
           alt=""

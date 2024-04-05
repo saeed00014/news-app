@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header/header";
+import Providers from "@/components/providers";
 
 const myFont = localFont({ src: "../font/IRANSansXMedium.ttf" });
 
@@ -12,17 +13,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html className="h-full w-full bg-moon" lang="fa">
+    <html lang="fa">
       <body className={myFont.className}>
-        <div className="flex flex-col justify-center items-center w-full h-full">
-          <div className="w-full h-full max-w-[1400px] lg:px-8 pb-[70px]">
+        <div style={{scrollbarWidth: "none"}} className="dark flex flex-col items-center h-screen w-screen bg-moon text-dark overflow-y-auto lg:pb-0 lg:pt-[81px] py-[70px] lg:px-4 px-2">
+          <Providers>
             <Header />
             {children}
-          </div>
+          </Providers>
         </div>
       </body>
     </html>

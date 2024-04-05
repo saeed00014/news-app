@@ -2,11 +2,11 @@ import persian from "@/assets/data";
 
 const ErrorPage = () => {
   return (
-    <div className="flex items-center justify-center flex-col w-screen h-screen gap-2 ">
+    <div className="fixed top-0 left-0 flex items-center justify-center flex-col w-screen h-screen gap-2 bg-moon">
       <span>{persian.networkErrorMessage}</span>
       <span
         onClick={() => location.reload()}
-        className="px-5 py-2 mt-2 rounded-[.5rem] bg-white dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-700 cursor-pointer"
+        className="px-5 py-2 mt-2 rounded-[.5rem] text-ship bg-ash hover:brightness-110 cursor-pointer"
       >
         {persian.tryAgain}
       </span>

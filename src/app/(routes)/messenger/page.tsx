@@ -4,7 +4,7 @@ import Room from "./room";
 
 const Page = () => {
   return (
-    <section className="relative flex h-full w-full lg:p-0 p-2 lg:pb-10 pb-[4.4rem] overflow-hidden">
+    <section className="relative flex h-full w-full max-w-[1400px] overflow-x-hidden z-10">
       <SideBar />
       <Room />
     </section>

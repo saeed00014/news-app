@@ -21,7 +21,7 @@ const BottomBar = () => {
       <IconLink
         text={persian.signInsignUp}
         icon={<FaRegUser className="text-2xl" />}
-        path=""
+        path="/profile"
       />
     </div>
   );

@@ -43,8 +43,10 @@ export function POST(req: NextRequest) {
   return tryCatch(async () => {
     const { username, email, name, birthdate, gender, password } =
       await req.json();
+    //will be crypted on frontend the sent here this just test
     const salt = await bcrypt.genSalt(14);
     const hashedPassword = await bcrypt.hash(password, salt);
+    //cryption on frontend
     const result = <SqlSuccessType>await query({
       query:
         "INSERT INTO `users`(`username`, `email`, `name`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?)",

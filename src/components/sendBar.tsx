@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Input from "./ui/input";
+import { Input } from "./ui/inputs";
 import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { AiOutlineSend } from "react-icons/ai";
-import Submit from "./ui/submit";
+import { Submit } from "./ui/inputs";
 
 const SendBar = () => {
   const { register, getValues } = useForm({});
@@ -21,7 +21,10 @@ const SendBar = () => {
           placeholder={persian.sendBar}
           classNames="bg-ship rounded-full pr-[3.5rem] pt-[.3rem]"
         />
-        <label htmlFor="submit" className="absolute right-0 top-0 flex items-center justify-center h-full w-[3rem] text-2xl cursor-pointer">
+        <label
+          htmlFor="submit"
+          className="absolute right-0 top-0 flex items-center justify-center h-full w-[3rem] text-2xl cursor-pointer"
+        >
           <AiOutlineSend />
           <Submit classNames="w-0 h-0" />
         </label>
