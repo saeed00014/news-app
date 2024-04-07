@@ -9,6 +9,7 @@ export declare global {
       MYSQL_DATABASE_NAME: string
       MYSQL_PASS: string
       MONGODB_URI: string
+      JWT_SECTER: string
     }
   }
 }

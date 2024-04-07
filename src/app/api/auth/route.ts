@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { tryCatch } from "@/lib/utils/tryCatch";
 import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import jwt from "jsonwebtoken";
+import GetCookieExpire from "@/hooks/getCookieExpire";
+import { cookies } from "next/headers";
 
 export function POST(req: Request) {
   return tryCatch(async () => {
@@ -22,15 +25,23 @@ export function POST(req: Request) {
           { status: 404 }
         );
       }
-      const comparePasswords = await bcrypt.compare(
-        password,
-        result[0].password
-      );
+      const hashedPassword = result[0].password;
+      const comparePasswords = await bcrypt.compare(password, hashedPassword);
       if (comparePasswords) {
+        const expireDate = GetCookieExpire();
+        const token = jwt.sign({username, iat: expireDate}, process.env.JWT_SECTER);
+        cookies().set({
+          name: "user",
+          value: token,
+          httpOnly: true,
+          expires: expireDate,
+          path: "/",
+        });
         return NextResponse.json(
           {
             response: "login successfull enjoy!",
             login: true,
+            user: { username },
           },
           { status: 200 }
         );

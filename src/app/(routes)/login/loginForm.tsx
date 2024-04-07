@@ -4,21 +4,24 @@ import persian from "@/assets/data";
 import { Input } from "@/components/ui/inputs";
 import { ErrorText } from "@/components/ui/errors";
 import { TextLink } from "@/components/ui/link";
+import LoadingSpin from "@/components/loadingSpin";
 
 type Props = {
   onSubmit: Function;
   networkError: boolean;
   loginError: boolean;
+  loading: boolean;
 };
 
-const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
+const LoginForm = ({ onSubmit, networkError, loginError, loading }: Props) => {
   const { register, handleSubmit, getValues } = useForm({
     mode: "onSubmit",
   });
 
   return (
     <form
-      className="flex flex-col gap-3 w-fit h-fit bg-ship shadow-2xl p-4 pt-2 rounded-[.5rem]"
+      method="post"
+      className="flex flex-col gap-3 w-fit h-fit bg-ship shadow-2xl p-4 pt-2 rounded-[.5rem] max-w-[355px]"
       onSubmit={handleSubmit(() =>
         onSubmit({
           username: getValues("username"),
@@ -47,11 +50,16 @@ const LoginForm = ({ onSubmit, networkError, loginError }: Props) => {
       />
       {loginError && <ErrorText text={persian.errorMessage} />}
       {networkError && <ErrorText text={persian.networkErrorMessage} />}
-      <input
-        type="submit"
-        value={persian.submit}
-        className="flex justify-center py-2 w-full text-ship rounded-[.2rem] bg-darkwater hover:brightness-110 cursor-pointer"
-      />
+      <div className="relative items-center w-full ">
+        <input
+          type="submit"
+          value={persian.submit}
+          className="flex justify-center py-2 w-full text-ship rounded-[.2rem] bg-darkwater hover:brightness-110 cursor-pointer"
+        />
+        {loading && (
+          <LoadingSpin classNames="absolute top-2 right-2 min-w-[1.5rem] w-[1.5rem] h-[1.5rem] border-ship border-l-transparent" />
+        )}
+      </div>
       <TextLink
         path="/register"
         text={persian.register}

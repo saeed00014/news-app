@@ -4,6 +4,9 @@ import { SqlErrorType, SqlSuccessType, UserSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import jwt from "jsonwebtoken";
+import GetCookieExpire from "@/hooks/getCookieExpire";
+import { cookies } from "next/headers";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
@@ -51,11 +54,17 @@ export function POST(req: NextRequest) {
       values: [username, email, name, birthdate, gender, hashedPassword],
     });
     if (result && "insertId" in result && result.insertId) {
+      const expireDate = GetCookieExpire();
+      const token = jwt.sign({username, iat: expireDate}, process.env.JWT_SECTER);
+      cookies().set({
+        name: "user",
+        value: token,
+        httpOnly: true,
+        expires: expireDate,
+        path: "/",
+      });
       return NextResponse.json(
-        {
-          response: "your account is made successfully",
-          user: {username, hashedPassword},
-        },
+        { response: "your account is made successfully" },
         { status: 200 }
       );
     }

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import RegisterForm from "./registerForm";
-import Cookies from "universal-cookie";
 import { useMutation } from "@tanstack/react-query";
 import { NewUserType } from "@/types/types";
 import { AxiosResponse } from "axios";
@@ -14,7 +13,7 @@ export const useSubmitRegister = () => {
   const [usernameRepeatedError, setUsernameRepeatedError] = useState(false);
   const [networkError, setNetworkError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const postNewUser = useMutation({
     mutationFn: async (newUser: NewUserType) => {
@@ -37,14 +36,10 @@ export const useSubmitRegister = () => {
 
         setEmailRepeatedError(false);
         setUsernameRepeatedError(false);
-
-        const cookies = new Cookies();
-        cookies.set("user", response.data.user, { path: "/" });
-        setLoading(false);
         router.push("/")
-        
+
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         setNetworkError(true);
       }
     },
@@ -73,7 +68,7 @@ export const useSubmitRegister = () => {
     emailRepeatedError,
     usernameRepeatedError,
     networkError,
-    loading
+    loading,
   };
 };
 
@@ -84,7 +79,7 @@ const Register = () => {
     emailRepeatedError,
     usernameRepeatedError,
     networkError,
-    loading
+    loading,
   } = useSubmitRegister();
   return (
     <RegisterForm

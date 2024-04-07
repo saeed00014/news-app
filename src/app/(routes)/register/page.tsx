@@ -2,7 +2,7 @@ import Register from "./register"
 
 const Page = () => {
   return (
-    <section className="flex justify-center items-center w-full h-fit m-6">
+    <section className="flex justify-center items-center w-full h-fit mt-6">
       <Register />
     </section>
   )

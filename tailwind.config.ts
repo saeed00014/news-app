@@ -15,13 +15,20 @@ const config: Config = {
         lightblood: "#f87171",
         sun: "#fbbf24",
         water: "#22d3ee",
-        darkwater: "#0e7490"
+        darkwater: "#0e7490",
       },
       backgroundImage: {
-        'ashImage': "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))"
+        ashImage:
+          "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))",
       },
       boxShadow: {
-        'dark': '0px 0px 10px 10px',
+        dark: "0px 0px 10px 10px",
+      },
+      keyframes: {
+        move: {
+          "0%": {left: "100%"},
+          "100%": {left: "0"}
+        },
       },
     },
     screens: {
@@ -29,7 +36,7 @@ const config: Config = {
       md: "640px",
       lg: "960px",
       xl: "1280px",
-      xxl: "1780px"
+      xxl: "1780px",
     },
   },
 };
