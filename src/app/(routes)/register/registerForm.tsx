@@ -15,6 +15,7 @@ import { Radio } from "@/components/ui/inputs";
 import { Select } from "@/components/ui/inputs";
 import { ErrorText } from "@/components/ui/errors";
 import FormItem from "@/components/ui/formItem";
+import LoadingSpin from "@/components/loadingSpin";
 
 type Props = {
   onSubmit: Function;
@@ -22,6 +23,7 @@ type Props = {
   emailRepeatedError: boolean;
   usernameRepeatedError: boolean;
   networkError: boolean;
+  loading: boolean
 };
 
 const RegisterForm = ({
@@ -30,6 +32,7 @@ const RegisterForm = ({
   emailRepeatedError,
   usernameRepeatedError,
   networkError,
+  loading
 }: Props) => {
   const {
     register,
@@ -185,11 +188,14 @@ const RegisterForm = ({
       </FormItem>
       {confPassError && <ErrorText text={persian.passRepeatedErorr} />}
       {networkError && <ErrorText text={persian.networkErrorMessage} />}
-      <input
-        type="submit"
-        value={persian.register}
-        className="flex justify-center py-2 w-full rounded-[.2rem] bg-grass hover:brightness-110 text-ship cursor-pointer"
-      />
+      <div className="relative flex items-center w-full">
+        <input
+          type="submit"
+          value={persian.register}
+          className="flex justify-center py-2 w-full rounded-[.2rem] bg-grass hover:brightness-110 text-ship cursor-pointer"
+        />
+        {loading && <LoadingSpin classNames="absolute right-2 w-[1.5rem] min-w-[1.5rem] h-[1.5rem] border-ship border-l-transparent" />}
+      </div>
     </form>
   );
 };

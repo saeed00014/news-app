@@ -55,6 +55,15 @@ export type UserSqlType = {
   image: string;
 };
 
+export type NewUserType = {
+  username: string;
+  email: string;
+  name: string;
+  gender: string;
+  birthdate: string;
+  password: string;
+};
+
 export type UserClientType = {};
 
 export type MongoNewsType = {

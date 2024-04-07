@@ -17,7 +17,10 @@ export async function query({ query, values }: Props) {
     const [result] = await dbconnection.execute(query, values);
     dbconnection.end();
     return result;
-  } catch (error) {
+  } catch (error: any) {
+    if(error.code === 'ER_DUP_ENTRY') {
+      return error
+    }
     throw error;
   }
 }
