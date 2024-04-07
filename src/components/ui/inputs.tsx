@@ -31,9 +31,7 @@ const Input = ({
       value={value}
       placeholder={placeholder}
       className={merge(
-        `h-10 w-full px-2 pb-1 bg-moon ${
-          isIconError && "border-[1px] border-text-error"
-        }`,
+        `h-10 w-full px-2 bg-moon ${isIconError && "border border-blood"}`,
         classNames
       )}
     />
@@ -87,7 +85,7 @@ type Select = {
   register?: any;
   id: string;
   name: string;
-  options: string[] | number[];
+  options: number[];
 };
 
 const Select = ({ register, id, name, options }: Select) => {

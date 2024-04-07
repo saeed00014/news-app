@@ -1,6 +1,6 @@
 import { query } from "@/db/sqlDb";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { SqlSuccessType, UserSqlType } from "@/types/types";
+import { SqlErrorType, SqlSuccessType, UserSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
@@ -43,11 +43,9 @@ export function POST(req: NextRequest) {
   return tryCatch(async () => {
     const { username, email, name, birthdate, gender, password } =
       await req.json();
-    //will be crypted on frontend the sent here this just test
     const salt = await bcrypt.genSalt(14);
     const hashedPassword = await bcrypt.hash(password, salt);
-    //cryption on frontend
-    const result = <SqlSuccessType>await query({
+    const result = <SqlSuccessType | SqlErrorType>await query({
       query:
         "INSERT INTO `users`(`username`, `email`, `name`, `birthdate`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?)",
       values: [username, email, name, birthdate, gender, hashedPassword],
@@ -55,16 +53,25 @@ export function POST(req: NextRequest) {
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {
-          response: "your acount is made successfully",
-          insertId: result.insertId,
+          response: "your account is made successfully",
+          user: {username, hashedPassword},
         },
         { status: 200 }
       );
     }
+    if (
+      "sqlState" in result &&
+      result.sqlState &&
+      result.code === "ER_DUP_ENTRY"
+    ) {
+      const repeated = result.sqlMessage.split("key")[1];
+      return NextResponse.json(
+        { message: `repeated ${repeated}`, repeated: repeated },
+        { status: 200 }
+      );
+    }
     return NextResponse.json(
-      {
-        response: "there is a problem please try again later",
-      },
+      { response: "there is a problem please try again later" },
       { status: UNEXPECTED_ERROR.code }
     );
   });
