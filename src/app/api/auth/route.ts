@@ -7,6 +7,41 @@ import jwt from "jsonwebtoken";
 import GetCookieExpire from "@/hooks/getCookieExpire";
 import { cookies } from "next/headers";
 
+export function GET() {
+  return tryCatch(async () => {
+    const userCookie = cookies().get("user");
+    if (userCookie) {
+      const token = userCookie.value;
+      return jwt.verify(token, process.env.JWT_SECTER, function (error, decode) {
+          if (decode) {
+            return NextResponse.json(
+              {
+                response: "login successfull enjoy!",
+                login: true,
+              },
+              { status: 200 }
+            );
+          }
+          return NextResponse.json(
+            {
+              response: "login failed username or password is wrong",
+              login: false,
+            },
+            { status: 200 }
+          );
+        }
+      );
+    }
+    return NextResponse.json(
+      {
+        response: "login failed username or password is wrong",
+        login: false,
+      },
+      { status: 200 }
+    );
+  });
+}
+
 export function POST(req: Request) {
   return tryCatch(async () => {
     const { username, password }: { username: string; password: string } =
@@ -29,7 +64,9 @@ export function POST(req: Request) {
       const comparePasswords = await bcrypt.compare(password, hashedPassword);
       if (comparePasswords) {
         const expireDate = GetCookieExpire();
-        const token = jwt.sign({username, iat: expireDate}, process.env.JWT_SECTER);
+        const token = jwt.sign({ username: username }, process.env.JWT_SECTER, {
+          expiresIn: "1d",
+        });
         cookies().set({
           name: "user",
           value: token,
@@ -41,7 +78,6 @@ export function POST(req: Request) {
           {
             response: "login successfull enjoy!",
             login: true,
-            user: { username },
           },
           { status: 200 }
         );
