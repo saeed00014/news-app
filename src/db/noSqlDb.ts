@@ -33,7 +33,7 @@ async function dbCollection() {
       return collection;
     }
   } catch (error) {
-    throw error;
+    return error;
   }
 }
 

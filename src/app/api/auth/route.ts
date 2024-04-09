@@ -2,10 +2,11 @@ import { query } from "@/db/sqlDb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import jwt from "jsonwebtoken";
 import GetCookieExpire from "@/hooks/getCookieExpire";
 import { cookies } from "next/headers";
+import { SqlErrorType } from "@/types/types";
 
 export function GET() {
   return tryCatch(async () => {
@@ -46,7 +47,7 @@ export function POST(req: Request) {
   return tryCatch(async () => {
     const { username, password }: { username: string; password: string } =
       await req.json();
-    const result = <{ password: string }[]>await query({
+    const result = <{ password: string }[] | SqlErrorType>await query({
       query: "SELECT `password` FROM `users` WHERE username = ?",
       values: [username],
     });
@@ -88,6 +89,12 @@ export function POST(req: Request) {
           login: false,
         },
         { status: 200 }
+      );
+    }
+    if ("sqlState" in result && result.sqlState) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(

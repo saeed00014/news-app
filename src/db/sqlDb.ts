@@ -18,9 +18,6 @@ export async function query({ query, values }: Props) {
     dbconnection.end();
     return result;
   } catch (error: any) {
-    if(error.code === 'ER_DUP_ENTRY') {
-      return error
-    }
-    throw error;
+    return error;
   }
 }
