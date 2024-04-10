@@ -20,14 +20,24 @@ const config: Config = {
       backgroundImage: {
         ashImage:
           "linear-gradient(to top, rgba(0, 0, 0, .5), rgba(255, 255, 255, 0))",
+        shipImage: "linear-gradient(to left, rgba(225, 225, 255, .1), rgba(255, 255, 255, .6), rgba(225, 225, 255, .1))",
       },
       boxShadow: {
         dark: "0px 0px 10px 10px",
       },
       keyframes: {
         move: {
-          "0%": {left: "100%"},
-          "100%": {left: "0"}
+          "0%": { left: "100%" },
+          "100%": { left: "0" },
+        },
+        movePreRender: {
+          "0%": { left: "100%" },
+          "100%": { left: "-30%" },
+        },
+        fade: {
+          "0%": { opacity: "1" },
+          "50%": { opacity: ".7" },
+          "100%": { opacity: "1" },
         },
       },
     },

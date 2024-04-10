@@ -13,7 +13,10 @@ export function GET() {
     const userCookie = cookies().get("user");
     if (userCookie) {
       const token = userCookie.value;
-      return jwt.verify(token, process.env.JWT_SECTER, function (error, decode) {
+      return jwt.verify(
+        token,
+        process.env.JWT_SECTER,
+        function (error, decode) {
           if (decode) {
             return NextResponse.json(
               {
@@ -47,10 +50,12 @@ export function POST(req: Request) {
   return tryCatch(async () => {
     const { username, password }: { username: string; password: string } =
       await req.json();
-    const result = <{ password: string }[] | SqlErrorType>await query({
-      query: "SELECT `password` FROM `users` WHERE username = ?",
-      values: [username],
-    });
+    const result = <{ id: number; password: string }[] | SqlErrorType>(
+      await query({
+        query: "SELECT `id`, `password` FROM `users` WHERE username = ?",
+        values: [username],
+      })
+    );
     if (Array.isArray(result)) {
       if (!result[0]) {
         return NextResponse.json(
@@ -65,9 +70,13 @@ export function POST(req: Request) {
       const comparePasswords = await bcrypt.compare(password, hashedPassword);
       if (comparePasswords) {
         const expireDate = GetCookieExpire();
-        const token = jwt.sign({ username: username }, process.env.JWT_SECTER, {
-          expiresIn: "1d",
-        });
+        const token = jwt.sign(
+          { id: result[0].id, username: username },
+          process.env.JWT_SECTER,
+          {
+            expiresIn: "1d",
+          }
+        );
         cookies().set({
           name: "user",
           value: token,

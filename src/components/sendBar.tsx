@@ -1,17 +1,19 @@
 "use client";
-
-import React from "react";
 import { Input } from "./ui/inputs";
 import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { AiOutlineSend } from "react-icons/ai";
 import { Submit } from "./ui/inputs";
 
-const SendBar = () => {
-  const { register, getValues } = useForm({});
+const SendBar = ({ onSubmit }: { onSubmit: Function }) => {
+  const { register, getValues, handleSubmit } = useForm({});
 
   return (
-    <form className="sticky bottom-0 flex w-full lg:px-4 px-2 md:pb-4 pb-2">
+    <form
+      method="post"
+      onSubmit={handleSubmit(() => onSubmit(getValues))}
+      className="sticky bottom-0 flex w-full lg:px-4 px-2 md:pb-4 pb-2"
+    >
       <div className="relative w-full">
         <Input
           register={register}

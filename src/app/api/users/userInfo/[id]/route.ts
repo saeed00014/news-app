@@ -1,18 +1,15 @@
 import { query } from "@/db/sqlDb";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { ChatSqlType, SqlErrorType } from "@/types/types";
+import { SqlErrorType, UserSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
-import checkCookie from "@/lib/utils/checkCookie";
 
-export function GET(req: NextRequest) {
+export function GET(req: NextRequest, route: any) {
   return tryCatch(async () => {
-    const userInof = checkCookie();
-    const params = req.nextUrl.searchParams;
-    const targetUsername = params.get("targetUsername");
-    const result = <[] | ChatSqlType[] | SqlErrorType>await query({
-      query: `SELECT id, user_id, targetUser_id FROM chats WHERE username Like '%${targetUsername}%' OR targetUsername Like '%${targetUsername}%'`,
-      values: [targetUsername, targetUsername],
+    const targetUser_id = route.params.id
+    const result = <[] | UserSqlType[] | SqlErrorType>await query({
+      query: "SELECT `username`, `name`, `image` FROM `users` WHERE id = ? ",
+      values: [targetUser_id],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -25,8 +22,15 @@ export function GET(req: NextRequest) {
       }
       return NextResponse.json(
         {
-          response: "chat is loaded successfully",
-          result: [{result: result, user_id: userInof.id}],
+          response: "user is loaded successfully",
+          result: [
+            {
+              id: targetUser_id,
+              username: result[0].username,
+              name: result[0].name,
+              image: result[0].image,
+            },
+          ],
         },
         { status: 200 }
       );

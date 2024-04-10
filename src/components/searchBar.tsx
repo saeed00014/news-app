@@ -3,15 +3,24 @@ import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { IoIosSearch } from "react-icons/io";
 import { Input } from "./ui/inputs";
+import { merge } from "@/lib/utils/merge";
 
-const SearchBar = () => {
+type Props = {
+  onChange: Function;
+  classNames?: string;
+};
+
+const SearchBar = ({ onChange, classNames }: Props) => {
   const { register, watch } = useForm({
     mode: "all",
   });
-  // console.log(watch("search"));
+
   return (
-    <div className="relative flex items-center">
-      <label htmlFor="search" className="absolute right-2 text-[1.4rem]">
+    <div
+      onChange={(e) => onChange(e)}
+      className={merge("relative flex items-center", classNames)}
+    >
+      <label htmlFor="search" className="absolute right-5 text-[1.4rem]">
         <IoIosSearch className="text-ash" />
       </label>
       <Input
@@ -20,7 +29,7 @@ const SearchBar = () => {
         name="search"
         id="search"
         placeholder={persian.search}
-        classNames="rounded-full pr-8 pt-[.4rem] border border-ash"
+        classNames="rounded-full pr-10 border border-ash"
       />
     </div>
   );

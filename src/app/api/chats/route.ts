@@ -3,25 +3,20 @@ import { tryCatch } from "@/lib/utils/tryCatch";
 import { query } from "@/db/sqlDb";
 import {
   MessageSqlType,
-  MessageClientType,
   SqlSuccessType,
-  ChatType,
+  ChatSqlType,
   SqlErrorType,
 } from "@/types/types";
-import {
-  CLIENT_REQ_ERROR,
-  DATABASE_ERROR,
-  UNEXPECTED_ERROR,
-} from "@/lib/utils/errorCodes";
+import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import checkCookie from "@/lib/utils/checkCookie";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
-    const params = req.nextUrl.searchParams;
-    const user_id = params.get("user_id");
+    const userInfo = checkCookie();
     const result = <[] | MessageSqlType[] | SqlErrorType>await query({
       query:
         "SELECT `id`, `user_id`, `targetUser_id` FROM `chats` WHERE user_id = ? OR targetUser_id = ?",
-      values: [user_id, user_id],
+      values: [userInfo.id, userInfo.id],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -35,7 +30,8 @@ export function GET(req: NextRequest) {
       return NextResponse.json(
         {
           response: "chat is loaded successfully",
-          sqlMessages: result,
+          result: result,
+          user: userInfo
         },
         { status: 200 }
       );
@@ -57,7 +53,7 @@ export function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
   return tryCatch(async () => {
-    const { user_id, targetUser_id } = <ChatType>await req.json();
+    const { user_id, targetUser_id } = <ChatSqlType>await req.json();
     const result = <SqlSuccessType | SqlErrorType>await query({
       query: "INSERT INTO `chats`(`user_id`, `targetUser_id`) VALUES (?, ?)",
       values: [user_id, targetUser_id],

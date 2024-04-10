@@ -36,7 +36,7 @@ const SideBar = ({ setIsOpen, isOpen }: Props) => {
           </span>
           <span onClick={() => setIsOpen(false)}>
             <TextLink
-              path="/messenger"
+              path="/messenger/inbox"
               text={persian.messenger}
               classNames="flex items-center h-[65px] pr-6"
             />

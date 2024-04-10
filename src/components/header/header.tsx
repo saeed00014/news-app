@@ -13,7 +13,7 @@ const Header = () => {
         <Logo />
         <div className="lg:flex hidden lg:gap-8 gap-2 w-full">
           <TextLink path="/" text={persian.firstPage} classNames="text-blood" />
-          <TextLink path="/messenger" text={persian.messenger} />
+          <TextLink path="/messenger/inbox" text={persian.messenger} />
           <div className="group relative">
             <DropDownBtn text={persian.news} />
             <DropDownMenu />

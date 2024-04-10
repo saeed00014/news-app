@@ -12,9 +12,11 @@ import {
   DATABASE_ERROR,
   UNEXPECTED_ERROR,
 } from "@/lib/utils/errorCodes";
+import checkCookie from "@/lib/utils/checkCookie";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
+    const userInfo = checkCookie();
     const params = req.nextUrl.searchParams;
     const chat_id = params.get("chat_id");
     const group = Number(params.get("group"));
@@ -24,10 +26,11 @@ export function GET(req: NextRequest) {
         { status: CLIENT_REQ_ERROR.code }
       );
     }
+    console.log(chat_id, userInfo.id)
     const result = <[] | MessageSqlType[] | SqlErrorType>await query({
       query:
-        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id  ? LIMIT ? OFFSET ?",
-      values: [chat_id, 1, group - 1],
+        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id = ? LIMIT ? OFFSET ?",
+      values: [chat_id, group * 12, group * 12 - 12],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -40,8 +43,9 @@ export function GET(req: NextRequest) {
       }
       return NextResponse.json(
         {
-          response: "chat is loaded successfully",
-          sqlMessages: result,
+          response: "messages is loaded successfully",
+          result: result, 
+          user_id: userInfo.id
         },
         { status: 200 }
       );
@@ -61,16 +65,18 @@ export function GET(req: NextRequest) {
   });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   return tryCatch(async () => {
-    const { chat_id, user_id, text, news, image } = <MessageClientType>(
-      await req.json()
-    );
+    const userInfo = checkCookie();
+    const params = req.nextUrl.searchParams;
+    const chat_id = params.get("chat_id");
+    const { text, news, image } = <MessageClientType>await req.json();
     const result = <SqlSuccessType | SqlErrorType>await query({
       query:
         "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`) VALUES (?, ?, ?, ?, ?)",
-      values: [chat_id, user_id, text, news, image],
+      values: [chat_id, userInfo.id, text, news, image],
     });
+    console.log(result);
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {

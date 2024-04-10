@@ -1,8 +1,11 @@
 import BackBtn from "@/components/backBtn";
-import CloseBtn from "@/components/closeBtn";
+import LoadingSpin from "@/components/loadingSpin";
 import SearchBar from "@/components/searchBar";
+import NoResult from "@/components/ui/noResult";
 import { ResultUser, ResultUserList } from "@/components/ui/resultUser";
+import UseSearch from "@/hooks/useSearch";
 import { merge } from "@/lib/utils/merge";
+import UserList from "./userList";
 
 type Props = {
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,17 +13,14 @@ type Props = {
   classNames?: string;
 };
 
-const SideBarSearch = ({
+const UserSearch = ({
   setIsSearchActive,
   isSearchActive,
   classNames,
 }: Props) => {
-  const user = {
-    id: 2,
-    firstname: "string",
-    username: "string",
-    image: null,
-  };
+  const { getsearchValue, searchResult, searchValue } = UseSearch(
+    "/users/search?username"
+  );
   return (
     <div
       className={merge(
@@ -31,17 +31,12 @@ const SideBarSearch = ({
       )}
     >
       <div className="flex">
-        <BackBtn setEvent={setIsSearchActive} />
-        <SearchBar />
+        <BackBtn setEvent={setIsSearchActive} classNames="scale-110 pr-1" />
+        <SearchBar onChange={getsearchValue} classNames="px-2" />
       </div>
-      <ResultUserList>
-        <ResultUser user={user} />
-        <ResultUser user={user} />
-        <ResultUser user={user} />
-        <ResultUser user={user} />
-      </ResultUserList>
+      <UserList searchResult={searchResult} searchValue={searchValue} />
     </div>
   );
 };
 
-export default SideBarSearch;
+export default UserSearch;

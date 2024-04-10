@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { DATABASE_ERROR, UNEXPECTED_ERROR } from "./errorCodes";
+import { UNEXPECTED_ERROR } from "./errorCodes";
 import { MongoServerSelectionError } from "mongodb";
 
 export const tryCatch = async (controller: Function) => {

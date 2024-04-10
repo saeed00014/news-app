@@ -9,7 +9,7 @@ export type NewsInfo = {
 
 export type UserInfoType = {
   id: number;
-  firstname: string;
+  name: string;
   username: string;
   image: string | null;
 };
@@ -51,6 +51,7 @@ export type MessageClientType = {
 
 export type UserSqlType = {
   id: number;
+  name: string;
   username: string;
   image: string;
 };
@@ -75,12 +76,18 @@ export type MongoNewsType = {
 };
 
 export type MongoPostSuccessType = {
-  acknowledged: boolean,
-  insertedId: ObjectId
-}
+  acknowledged: boolean;
+  insertedId: ObjectId;
+};
 
 export type MongoDeleteSuccessType = {
-  acknowledged: boolean,
-  deletedCount: number
-  
-}
+  acknowledged: boolean;
+  deletedCount: number;
+};
+
+export type ChatSqlType = {
+  user_id: number;
+  targetUser_id: number;
+  username: string;
+  targetUsername: string;
+};

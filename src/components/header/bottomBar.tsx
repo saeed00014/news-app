@@ -11,7 +11,7 @@ const BottomBar = () => {
       <IconLink
         text={persian.messenger}
         icon={<TiMessages className="text-[2rem]" />}
-        path="/messenger"
+        path="/messenger/inbox"
       />
       <IconLink
         text={persian.firstPage}

@@ -4,12 +4,12 @@ import { merge } from "@/lib/utils/merge";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 
-type DropDownBtnType = {
+type DropDownBtn = {
   text: string;
   classNames?: string;
 };
 
-const DropDownBtn = ({ text, classNames }: DropDownBtnType) => {
+const DropDownBtn = ({ text, classNames }: DropDownBtn) => {
   return (
     <button
       className={merge(

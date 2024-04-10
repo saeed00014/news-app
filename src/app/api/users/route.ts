@@ -61,7 +61,7 @@ export function POST(req: NextRequest) {
     });
     if (result && "insertId" in result && result.insertId) {
       const expireDate = GetCookieExpire();
-      const token = jwt.sign({ username: username }, process.env.JWT_SECTER, {
+      const token = jwt.sign({ id: result.insertId, username: username }, process.env.JWT_SECTER, {
         expiresIn: "1d",
       });
       cookies().set({
