@@ -1,16 +1,16 @@
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   try {
-    //take from cookies
-    const userCookieInfo = { username: "testuser", password: "aaaa1111" }
     const userResponse = await fetch(`http://localhost:3000/api/auth`, {
-      method: "POST",
-      body: JSON.stringify(userCookieInfo),
+      method: "GET",
+      headers: { Cookie: cookies().toString() },
     });
     if(userResponse.status !== 200 ) {
      throw new Error(`status: ${userResponse.status}`)
     }
+
     const data = await userResponse.json();
 
     if (data.login) {
@@ -25,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/messenger/:path", "/profile/:path"],
+  matcher: ["/messenger/:path*", "/profile/:path*"],
 };

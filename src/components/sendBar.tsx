@@ -1,23 +1,30 @@
 "use client";
-
-import React from "react";
 import { Input } from "./ui/inputs";
 import persian from "@/assets/data";
 import { useForm } from "react-hook-form";
 import { AiOutlineSend } from "react-icons/ai";
 import { Submit } from "./ui/inputs";
 
-const SendBar = () => {
-  const { register, getValues } = useForm({});
+type Props = {
+  onSubmit: Function;
+  value: string | null;
+};
 
+const SendBar = ({ onSubmit, value }: Props) => {
+  const { register, getValues, handleSubmit, watch } = useForm({});
   return (
-    <form className="sticky bottom-0 flex w-full lg:px-4 px-2 md:pb-4 pb-2">
+    <form
+      method="post"
+      onSubmit={handleSubmit(() => onSubmit(getValues))}
+      className="sticky bottom-0 flex w-full lg:px-4 px-2 md:pb-4 pb-2"
+    >
       <div className="relative w-full">
         <Input
           register={register}
           type="text"
           id="text"
           name="text"
+          value={watch("text") || value}
           placeholder={persian.sendBar}
           classNames="bg-ship rounded-full pr-[3.5rem] pt-[.3rem]"
         />

@@ -3,7 +3,7 @@ import { tryCatch } from "@/lib/utils/tryCatch";
 import { SqlErrorType, SqlSuccessType, UserSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import jwt from "jsonwebtoken";
 import GetCookieExpire from "@/hooks/getCookieExpire";
 import { cookies } from "next/headers";
@@ -12,7 +12,7 @@ export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const username = params.get("username");
-    const result = <[] | UserSqlType[]>await query({
+    const result = <[] | UserSqlType[] | SqlErrorType>await query({
       query: `SELECT id, username, image FROM users WHERE username LIKE '%${username}%'`,
       values: [username],
     });
@@ -31,6 +31,12 @@ export function GET(req: NextRequest) {
           sqlMessages: result,
         },
         { status: 200 }
+      );
+    }
+    if ("sqlState" in result && result.sqlState) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -55,7 +61,9 @@ export function POST(req: NextRequest) {
     });
     if (result && "insertId" in result && result.insertId) {
       const expireDate = GetCookieExpire();
-      const token = jwt.sign({username, iat: expireDate}, process.env.JWT_SECTER);
+      const token = jwt.sign({ id: result.insertId, username: username }, process.env.JWT_SECTER, {
+        expiresIn: "1d",
+      });
       cookies().set({
         name: "user",
         value: token,
@@ -68,15 +76,17 @@ export function POST(req: NextRequest) {
         { status: 200 }
       );
     }
-    if (
-      "sqlState" in result &&
-      result.sqlState &&
-      result.code === "ER_DUP_ENTRY"
-    ) {
-      const repeated = result.sqlMessage.split("key")[1];
+    if ("sqlState" in result && result.sqlState) {
+      if (result.code === "ER_DUP_ENTRY") {
+        const repeated = result.sqlMessage.split("key")[1];
+        return NextResponse.json(
+          { message: `repeated ${repeated}`, repeated: repeated },
+          { status: 200 }
+        );
+      }
       return NextResponse.json(
-        { message: `repeated ${repeated}`, repeated: repeated },
-        { status: 200 }
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
@@ -106,6 +116,12 @@ export function PUT(req: NextRequest) {
         { status: 200 }
       );
     }
+    if ("sqlState" in result && result.sqlState) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
+      );
+    }
     return NextResponse.json(
       {
         response: "there is a problem please try again later",
@@ -119,7 +135,7 @@ export function DELETE(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const username = params.get("username");
-    const result = <SqlSuccessType>await query({
+    const result = <SqlSuccessType | SqlErrorType>await query({
       query: "DELETE FROM `users` WHERE username = ?",
       values: [username],
     });
@@ -130,6 +146,12 @@ export function DELETE(req: NextRequest) {
           deleted: true,
         },
         { status: 200 }
+      );
+    }
+    if ("sqlState" in result && result.sqlState) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(

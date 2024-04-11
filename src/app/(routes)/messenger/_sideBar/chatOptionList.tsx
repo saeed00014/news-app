@@ -2,7 +2,7 @@
 import { FaRegUser } from "react-icons/fa";
 import { ReactNode, useState } from "react";
 import persian from "@/assets/data";
-import SideBarSearch from "./sideBarSearch";
+import UserSearch from "./userSearch";
 import UseOutClick from "@/hooks/useOutClick";
 
 type ChatOptionItem = {
@@ -52,7 +52,7 @@ const ChatOptionList = ({ isChatOptions, setIsChatOption }: Props) => {
           </ul>
         </UseOutClick>
       )}
-      <SideBarSearch
+      <UserSearch
         setIsSearchActive={setIsSearchActive}
         isSearchActive={isSearchActive}
       />

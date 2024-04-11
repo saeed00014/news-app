@@ -2,19 +2,60 @@ import { query } from "@/db/sqlDb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
+import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import jwt from "jsonwebtoken";
 import GetCookieExpire from "@/hooks/getCookieExpire";
 import { cookies } from "next/headers";
+import { SqlErrorType } from "@/types/types";
+
+export function GET() {
+  return tryCatch(async () => {
+    const userCookie = cookies().get("user");
+    if (userCookie) {
+      const token = userCookie.value;
+      return jwt.verify(
+        token,
+        process.env.JWT_SECTER,
+        function (error, decode) {
+          if (decode) {
+            return NextResponse.json(
+              {
+                response: "login successfull enjoy!",
+                login: true,
+              },
+              { status: 200 }
+            );
+          }
+          return NextResponse.json(
+            {
+              response: "login failed username or password is wrong",
+              login: false,
+            },
+            { status: 200 }
+          );
+        }
+      );
+    }
+    return NextResponse.json(
+      {
+        response: "login failed username or password is wrong",
+        login: false,
+      },
+      { status: 200 }
+    );
+  });
+}
 
 export function POST(req: Request) {
   return tryCatch(async () => {
     const { username, password }: { username: string; password: string } =
       await req.json();
-    const result = <{ password: string }[]>await query({
-      query: "SELECT `password` FROM `users` WHERE username = ?",
-      values: [username],
-    });
+    const result = <{ id: number; password: string }[] | SqlErrorType>(
+      await query({
+        query: "SELECT `id`, `password` FROM `users` WHERE username = ?",
+        values: [username],
+      })
+    );
     if (Array.isArray(result)) {
       if (!result[0]) {
         return NextResponse.json(
@@ -29,7 +70,13 @@ export function POST(req: Request) {
       const comparePasswords = await bcrypt.compare(password, hashedPassword);
       if (comparePasswords) {
         const expireDate = GetCookieExpire();
-        const token = jwt.sign({username, iat: expireDate}, process.env.JWT_SECTER);
+        const token = jwt.sign(
+          { id: result[0].id, username: username },
+          process.env.JWT_SECTER,
+          {
+            expiresIn: "1d",
+          }
+        );
         cookies().set({
           name: "user",
           value: token,
@@ -41,7 +88,6 @@ export function POST(req: Request) {
           {
             response: "login successfull enjoy!",
             login: true,
-            user: { username },
           },
           { status: 200 }
         );
@@ -52,6 +98,12 @@ export function POST(req: Request) {
           login: false,
         },
         { status: 200 }
+      );
+    }
+    if ("sqlState" in result && result.sqlState) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(

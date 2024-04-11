@@ -29,7 +29,7 @@ export const useSubmitLogin = () => {
         setNetworkError(false);
         if (response.data.login) {
           setLoginError(false);
-          // router.push("/")
+          router.push("/")
           return;
         }
         setLoginError(true);

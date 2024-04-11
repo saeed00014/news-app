@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "__test__/messagesGETRoute.test.js", "jest.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "__test__/messagesGETRoute.test.js", "jest.config.js", "src/lib/utils/binaryReader.tsx"],
   "exclude": ["node_modules"]
 }
