@@ -20,7 +20,7 @@ const SearchBar = ({ onChange, classNames }: Props) => {
       onChange={(e) => onChange(e)}
       className={merge("relative flex items-center", classNames)}
     >
-      <label htmlFor="search" className="absolute right-5 text-[1.4rem]">
+      <label htmlFor="search" className="absolute right-5 text-[1.4rem] pointer-events-none">
         <IoIosSearch className="text-ash" />
       </label>
       <Input

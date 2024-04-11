@@ -1,37 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import { ChatRoomContext } from "@/context/context";
-import { MessageSqlType, UserSqlType } from "@/types/types";
-import { useQuery } from "@tanstack/react-query";
-import { baseURL } from "@/axios/axios";
+import { ChatActionMessage, MessageSqlType, UserSqlType } from "@/types/types";
 
 const ContextRoom = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState({} as UserSqlType);
   const [messages, setMessages] = useState({} as MessageSqlType[]);
+  const [targetUser, setTargetUser] = useState({} as UserSqlType);
   const [choosedMessage, setChoosedMessage] = useState({} as MessageSqlType);
-
-  const userInfo = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const response = await baseURL.get("/users/userInfo");
-      setUser(response.data.result[0]);
-      return;
-    },
-  });
-
-  if(userInfo.isPending) {
-    return <></>
-  }
+  const [actionMessage, setActionMessage] = useState({} as ChatActionMessage);
 
   return (
     <ChatRoomContext.Provider
       value={{
         user,
         setUser,
+        targetUser,
+        setTargetUser,
         messages,
         setMessages,
         choosedMessage,
         setChoosedMessage,
+        actionMessage,
+        setActionMessage
       }}
     >
       {children}

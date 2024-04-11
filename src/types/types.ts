@@ -38,6 +38,8 @@ export type MessageSqlType = {
   text: string | null;
   news: string | null;
   image: string | null;
+  attached_id: number | null;
+  attached: string | null;
   created_at: string;
 };
 
@@ -47,6 +49,16 @@ export type MessageClientType = {
   text: string | null;
   news: string | null;
   image: string | null;
+  attached_id: number | null;
+  attached: string | null;
+};
+
+export type MessageSendType = {
+  text: string | null;
+  news: string | null;
+  image: string | null;
+  attached_id: number | null;
+  attached: string | null;
 };
 
 export type UserSqlType = {
@@ -90,4 +102,9 @@ export type ChatSqlType = {
   targetUser_id: number;
   username: string;
   targetUsername: string;
+};
+
+export type ChatActionMessage = {
+  action: string;
+  message: MessageSqlType;
 };

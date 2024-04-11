@@ -5,9 +5,13 @@ import { useForm } from "react-hook-form";
 import { AiOutlineSend } from "react-icons/ai";
 import { Submit } from "./ui/inputs";
 
-const SendBar = ({ onSubmit }: { onSubmit: Function }) => {
-  const { register, getValues, handleSubmit } = useForm({});
+type Props = {
+  onSubmit: Function;
+  value: string | null;
+};
 
+const SendBar = ({ onSubmit, value }: Props) => {
+  const { register, getValues, handleSubmit, watch } = useForm({});
   return (
     <form
       method="post"
@@ -20,6 +24,7 @@ const SendBar = ({ onSubmit }: { onSubmit: Function }) => {
           type="text"
           id="text"
           name="text"
+          value={watch("text") || value}
           placeholder={persian.sendBar}
           classNames="bg-ship rounded-full pr-[3.5rem] pt-[.3rem]"
         />

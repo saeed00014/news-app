@@ -72,4 +72,32 @@ const ResultUserList = ({ children, classNames }: ResultUserList) => {
   );
 };
 
-export { PreRenderResultUser, ResultUser, ResultUserList };
+type ResultUserCard = {
+  user: UserInfoType;
+  classNames?: string;
+};
+
+const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
+  return (
+    <li
+      className={merge(
+        "flex flex-col items-center py-2 px-3 gap-2 hover:brightness-90 rounded-[1rem] cursor-pointer text-ship",
+        classNames
+      )}
+    >
+      <span className="flex justify-center">
+        <Image
+          src={user.image || defaultImage}
+          width={80}
+          height={80}
+          alt="user picture"
+          className="object-cover rounded-full"
+        />
+      </span>
+      <span className="">{user.name}</span>
+      <span className="line-clamp-1">{user.username}</span>
+    </li>
+  );
+};
+
+export { PreRenderResultUser, ResultUser, ResultUserList, ResultUserCard };

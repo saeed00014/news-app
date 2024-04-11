@@ -26,10 +26,9 @@ export function GET(req: NextRequest) {
         { status: CLIENT_REQ_ERROR.code }
       );
     }
-    console.log(chat_id, userInfo.id)
     const result = <[] | MessageSqlType[] | SqlErrorType>await query({
       query:
-        "SELECT `id`, `user_id`, `text`, `news`, `image`, `created_at` FROM `messages` WHERE chat_id = ? LIMIT ? OFFSET ?",
+        "SELECT `id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached`, `edited`, `created_at` FROM `messages` WHERE chat_id = ? LIMIT ? OFFSET ?",
       values: [chat_id, group * 12, group * 12 - 12],
     });
     if (Array.isArray(result)) {
@@ -44,8 +43,8 @@ export function GET(req: NextRequest) {
       return NextResponse.json(
         {
           response: "messages is loaded successfully",
-          result: result, 
-          user_id: userInfo.id
+          result: result,
+          user_id: userInfo.id,
         },
         { status: 200 }
       );
@@ -70,13 +69,15 @@ export async function POST(req: NextRequest) {
     const userInfo = checkCookie();
     const params = req.nextUrl.searchParams;
     const chat_id = params.get("chat_id");
-    const { text, news, image } = <MessageClientType>await req.json();
+    const { text, news, image, attached_id, attached } = <MessageClientType>(
+      await req.json()
+    );
+    console.log(attached, attached_id)
     const result = <SqlSuccessType | SqlErrorType>await query({
       query:
-        "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`) VALUES (?, ?, ?, ?, ?)",
-      values: [chat_id, userInfo.id, text, news, image],
+        "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached` ) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      values: [chat_id, userInfo.id, text, news, image, attached_id, attached],
     });
-    console.log(result);
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(
         {
@@ -103,6 +104,7 @@ export async function POST(req: NextRequest) {
 
 export function PUT(req: NextRequest) {
   return tryCatch(async () => {
+    console.log('ghgh')
     const params = req.nextUrl.searchParams;
     const message_id = params.get("message_id");
     const { text } = <{ text: string }>await req.json();
@@ -142,13 +144,22 @@ export async function DELETE(req: NextRequest) {
       query: "DELETE FROM `messages` WHERE `id` = ?",
       values: [message_id],
     });
-    if (result && "affectedRows" in result && result.affectedRows) {
+    if (result && "affectedRows" in result) {
+      if (result.affectedRows) {
+        return NextResponse.json(
+          {
+            response: "message deleted successfully",
+            deleted: true,
+          },
+          { status: 200 }
+        );
+      }
       return NextResponse.json(
         {
-          response: "message deleted successfully",
+          response: "message was deleted before",
           deleted: true,
         },
-        { status: 200 }
+        { status: 404 }
       );
     }
     if ("sqlState" in result && result.sqlState) {

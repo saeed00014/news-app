@@ -8,8 +8,18 @@ import { useContext } from "react";
 import { ChatRoomContext } from "@/context/context";
 
 const RoomBody = () => {
-  const { setMessages } = useContext(ChatRoomContext);
+  const { setUser, setMessages } = useContext(ChatRoomContext);
   const chat_id = useParams().id;
+  
+  const userInfo = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await baseURL.get("/users/userInfo");
+      setUser(response.data.result[0]);
+      return;
+    },
+  });
+
   const messagesResult = useQuery({
     queryKey: [`messages${chat_id}`],
     queryFn: async () => {
@@ -21,7 +31,7 @@ const RoomBody = () => {
     },
   });
 
-  if (messagesResult.isPending) {
+  if (messagesResult.isPending || userInfo.isPending) {
     return (
       <div className="flex justify-center items-center w-full h-full">
         <LoadingSpin />

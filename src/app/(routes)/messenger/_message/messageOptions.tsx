@@ -1,18 +1,18 @@
-import { TbArrowForward } from "react-icons/tb";
-import { RiPencilFill } from "react-icons/ri";
-import { FaTrash } from "react-icons/fa";
+import MessageDelete from "./messageDelete";
+import MessageShare from "./messageShare";
+import MessagePut from "./messagePut";
 
 const MessageOptions = ({ isMyMessage }: { isMyMessage: boolean }) => {
-  
   return (
     <div
-      className={`flex items-center h-full rounded-[.8rem] gap-3 text-ship ${
-        isMyMessage ? "bg-darkwater" : "bg-darkgrass"
+      id="messagesOptions"
+      className={`flex items-center h-[40px] rounded-[.8rem] gap-4 text-ship ${
+        isMyMessage ? "bg-darkgrass" : "bg-darkwater"
       }`}
     >
-      <TbArrowForward className="text-[1.8rem] w-10" />
-      <RiPencilFill className="text-[1.4rem] w-10" />
-      <FaTrash className="text-[1.1rem] w-10" />
+      <MessageShare />
+      <MessagePut />
+      <MessageDelete />
     </div>
   );
 };

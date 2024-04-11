@@ -25,8 +25,8 @@ const Input = ({
   return (
     <input
       {...register(name)}
-      type={type}
       id={id}
+      type={type}
       name={name}
       value={value}
       placeholder={placeholder}

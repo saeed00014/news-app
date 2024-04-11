@@ -29,7 +29,9 @@ const RoomMessages = () => {
     );
   }
 
-  return <MessageList />;
+  return (
+      <MessageList />
+  );
 };
 
 export default RoomMessages;

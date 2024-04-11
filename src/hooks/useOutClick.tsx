@@ -10,6 +10,7 @@ const UseOutClick = ({ children, eventFunc, id }: Props) => {
   const handleClick = (e: any) => {
     if (e.target?.id != id) {
       eventFunc();
+      document.removeEventListener("click", handleClick, true);
     }
   };
 
