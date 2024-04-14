@@ -5,13 +5,13 @@ import NoResult from "@/components/ui/noResult";
 import { UserSqlType } from "@/types/types";
 
 type Props = {
-  searchResult: { id: number; targetUser_id: number }[];
-  user: UserSqlType;
+  searchResult: { id: number; targetUser_id: number }[] | undefined;
+  user: UserSqlType | undefined;
   classNames?: string;
 };
 
 const ChatList = ({ searchResult, user, classNames }: Props) => {
-  if (searchResult) {
+  if (searchResult && user) {
     return (
       <ResultUserList classNames={classNames}>
         {searchResult.map((chat: any) => {

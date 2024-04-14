@@ -8,7 +8,7 @@ const checkCookie = () => {
     if(error) {
       return NextResponse.rewrite(new URL("/login"))
     }
-    return decode
+    return {id: decode.id, username: decode.username}
   })
   
   return userInfo

@@ -29,6 +29,7 @@ const RoomBody = () => {
       setMessages(response.data.result);
       return response.data.result;
     },
+    retry: 1
   });
 
   if (messagesResult.isPending || userInfo.isPending) {

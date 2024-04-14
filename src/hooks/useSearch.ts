@@ -9,10 +9,9 @@ const UseSearch = (url: string) => {
       const response = await baseURL.get(
         `${url}=${searchValue}`
       );
-      return response.data.result;
+      return response.data;
     },
   });
-
   const getsearchValue = (e: any) => {
     setSearchValue(e.target.value);
     searchResult.mutate(e.target.value);

@@ -22,7 +22,7 @@ const ContextRoom = ({ children }: { children: React.ReactNode }) => {
         choosedMessage,
         setChoosedMessage,
         actionMessage,
-        setActionMessage
+        setActionMessage,
       }}
     >
       {children}

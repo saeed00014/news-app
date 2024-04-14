@@ -43,13 +43,11 @@ const MessageList = () => {
     );
   }
 
-  setTimeout(() => {
-    return (
-      <div className="flex items-center justify-center w-full h-full">
-        <ResultUserCard user={targetUser} />
-      </div>
-    );
-  }, 500);
+  return (
+    <div className="flex items-center justify-center w-full h-full">
+      <ResultUserCard user={targetUser} />
+    </div>
+  );
 };
 
 export default MessageList;

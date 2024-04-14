@@ -1,6 +1,6 @@
 const RoomInbox = () => {
   return (
-    <div>RoomInbox</div>
+    <div></div>
   )
 }
 

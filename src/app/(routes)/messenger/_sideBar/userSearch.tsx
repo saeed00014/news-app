@@ -1,8 +1,5 @@
 import BackBtn from "@/components/backBtn";
-import LoadingSpin from "@/components/loadingSpin";
 import SearchBar from "@/components/searchBar";
-import NoResult from "@/components/ui/noResult";
-import { ResultUser, ResultUserList } from "@/components/ui/resultUser";
 import UseSearch from "@/hooks/useSearch";
 import { merge } from "@/lib/utils/merge";
 import UserList from "./userList";
