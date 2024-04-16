@@ -9,7 +9,7 @@ import { ChatRoomContext } from "@/context/context";
 
 const RoomBody = () => {
   const { setUser, setMessages } = useContext(ChatRoomContext);
-  const chat_id = useParams().id;
+  const chat_id = useParams()?.id;
   
   const userInfo = useQuery({
     queryKey: ["user"],

@@ -28,8 +28,8 @@ export function GET(req: NextRequest) {
     }
     const result = <[] | MessageSqlType[] | SqlErrorType>await query({
       query:
-        "SELECT `id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached`, `edited`, `created_at` FROM `messages` WHERE chat_id = ? LIMIT ? OFFSET ?",
-      values: [chat_id, group * 12, group * 12 - 12],
+        "SELECT `id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached`, `edited`, `created_at` FROM `messages` WHERE chat_id = ?",
+      values: [chat_id],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -72,7 +72,6 @@ export async function POST(req: NextRequest) {
     const { text, news, image, attached_id, attached } = <MessageClientType>(
       await req.json()
     );
-    console.log(attached, attached_id)
     const result = <SqlSuccessType | SqlErrorType>await query({
       query:
         "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached` ) VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -104,7 +103,6 @@ export async function POST(req: NextRequest) {
 
 export function PUT(req: NextRequest) {
   return tryCatch(async () => {
-    console.log('ghgh')
     const params = req.nextUrl.searchParams;
     const message_id = params.get("message_id");
     const { text } = <{ text: string }>await req.json();

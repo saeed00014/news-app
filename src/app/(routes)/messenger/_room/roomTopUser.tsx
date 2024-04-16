@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 const RoomTopUser = () => {
   const { targetUser, setTargetUser } = useContext(ChatRoomContext);
-  const chat_id = useParams().id;
+  const chat_id = useParams()?.id;
   const targetUserResult = useQuery({
     queryKey: [`chat${chat_id}`],
     queryFn: async () => {

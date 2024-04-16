@@ -57,7 +57,7 @@ const UserList = ({ searchResult, searchValue }: Props) => {
     );
   }
 
-  if (searchResult.data.result) {
+  if (searchResult.data?.result) {
     return (
       <ResultUserList>
         {searchResult.data.result.map((user: UserInfoType) => {

@@ -1,14 +1,14 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest, res: any) {
   try {
     const userResponse = await fetch(`http://localhost:3000/api/auth`, {
       method: "GET",
       headers: { Cookie: cookies().toString() },
     });
-    if(userResponse.status !== 200 ) {
-     throw new Error(`status: ${userResponse.status}`)
+    if (userResponse.status !== 200) {
+      throw new Error(`status: ${userResponse.status}`);
     }
 
     const data = await userResponse.json();
@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
     }
 
     return NextResponse.rewrite(new URL("/login", request.url));
-  } catch(error) {
+  } catch (error) {
     //log error to loging system
     return NextResponse.rewrite(new URL("/login", request.url));
   }

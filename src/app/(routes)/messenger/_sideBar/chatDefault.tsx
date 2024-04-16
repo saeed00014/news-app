@@ -21,8 +21,8 @@ const ChatDefault = () => {
     );
   }
 
-  const resultChats = randomChats.data.result
-  const user = randomChats.data.user
+  const resultChats = randomChats.data?.result
+  const user = randomChats.data?.user
   if (resultChats) {
     return <ChatList searchResult={resultChats} user={user} />;
   }
