@@ -9,12 +9,25 @@ import AttachedMessageBar from "./attachedMessageBar";
 import { MessageSendType } from "@/types/types";
 
 const useSend = (url: string) => {
-  const { actionMessage } = useContext(ChatRoomContext);
+  const { actionMessage, setNewMessage, user } = useContext(ChatRoomContext);
 
   const sendResult = useMutation({
     mutationFn: async (data: MessageSendType) => {
       const response = await baseURL.post(url, data);
-      return response.data.result;
+      if (response.data?.insertId) {
+        const id = response.data.insertId;
+        const message = {
+          id: id,
+          user_id: user.id,
+          text: data?.text,
+          news: data?.news,
+          image: data?.image,
+          attached_id: data?.attached_id,
+          attached: data?.attached,
+        };
+        setNewMessage({ action: "post", message: message });
+      }
+      return response.data.insertId;
     },
   });
 
@@ -39,11 +52,21 @@ const useSend = (url: string) => {
 };
 
 const usePut = (url: string) => {
-  const { actionMessage } = useContext(ChatRoomContext);
+  const { actionMessage, setNewMessage } = useContext(ChatRoomContext);
 
   const putResult = useMutation({
     mutationFn: async (data: { text: string }) => {
       const response = await baseURL.put(url, data);
+      const message = {
+        id: actionMessage.message?.id,
+        user_id: actionMessage.message?.user_id,
+        text: data?.text,
+        news: actionMessage.message?.news,
+        image: actionMessage.message?.image,
+        attached_id: actionMessage.message?.attached_id,
+        attached: actionMessage.message?.attached,
+      };
+      setNewMessage({ action: "put", message: message });
       return response.data.result;
     },
   });
@@ -60,13 +83,11 @@ const usePut = (url: string) => {
 const MessageSend = () => {
   const { actionMessage } = useContext(ChatRoomContext);
 
-  const chat_id = useParams().id;
+  const chat_id = useParams()?.id;
 
-  const { onSend, sendResult } = useSend(
-    `/messages?chat_id=${chat_id}`
-  );
+  const { onSend } = useSend(`/messages?chat_id=${chat_id}`);
 
-  const { onPut, putResult } = usePut(
+  const { onPut } = usePut(
     `/messages?message_id=${actionMessage?.message?.id}`
   );
 

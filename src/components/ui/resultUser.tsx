@@ -81,7 +81,7 @@ const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
   return (
     <li
       className={merge(
-        "flex flex-col items-center py-2 px-3 gap-2 hover:brightness-90 rounded-[1rem] cursor-pointer text-ship",
+        "flex flex-col items-center py-2 px-3 gap-1 hover:brightness-90 rounded-[1rem] cursor-pointer text-ship",
         classNames
       )}
     >

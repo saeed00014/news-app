@@ -31,7 +31,7 @@ export function GET(req: NextRequest) {
         {
           response: "chat is loaded successfully",
           result: result,
-          user: userInfo
+          user: userInfo,
         },
         { status: 200 }
       );
@@ -53,10 +53,11 @@ export function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
   return tryCatch(async () => {
-    const { user_id, targetUser_id } = <ChatSqlType>await req.json();
+    const userinfo = checkCookie();
+    const targetUser_id = await req.json();
     const result = <SqlSuccessType | SqlErrorType>await query({
       query: "INSERT INTO `chats`(`user_id`, `targetUser_id`) VALUES (?, ?)",
-      values: [user_id, targetUser_id],
+      values: [userinfo.id, targetUser_id],
     });
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(

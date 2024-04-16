@@ -28,7 +28,7 @@ const Input = ({
       id={id}
       type={type}
       name={name}
-      value={value}
+      value={value || undefined}
       placeholder={placeholder}
       className={merge(
         `h-10 w-full px-2 bg-moon ${isIconError && "border border-blood"}`,

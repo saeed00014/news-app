@@ -40,7 +40,7 @@ export type MessageSqlType = {
   image: string | null;
   attached_id: number | null;
   attached: string | null;
-  created_at: string;
+  created_at?: string;
 };
 
 export type MessageClientType = {

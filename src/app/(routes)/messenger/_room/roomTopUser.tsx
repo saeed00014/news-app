@@ -8,23 +8,27 @@ import { ChatRoomContext } from "@/context/context";
 import { useContext } from "react";
 
 const RoomTopUser = () => {
-  const { setTargetUser } = useContext(ChatRoomContext);
-  const targetUser_id = useParams().id;
-
+  const { targetUser, setTargetUser } = useContext(ChatRoomContext);
+  const chat_id = useParams()?.id;
   const targetUserResult = useQuery({
-    queryKey: [`targetUser${targetUser_id}`],
+    queryKey: [`chat${chat_id}`],
     queryFn: async () => {
-      const response = await baseURL.get(`/users/userInfo/${targetUser_id}`);
-      return response.data.result;
+      const response = await baseURL.get(`/chats/chatUsers?chat_id=${chat_id}`);
+      const chatInfo = response.data.result[0];
+      const user = response.data.user;
+      const targetUser_id =
+        chatInfo.user_id === user.id
+          ? chatInfo.targetUser_id
+          : chatInfo.user_id;
+      const response2 = await baseURL.get(`/users/userInfo/${targetUser_id}`);
+      setTargetUser(response2.data.result[0]);
+      return response2.data.result;
     },
   });
 
   if (targetUserResult.isPending) {
     return <></>;
   }
-
-  const targetUser = targetUserResult.data[0];
-  setTargetUser(targetUser)
 
   return (
     <div className="flex items-center gap-2">

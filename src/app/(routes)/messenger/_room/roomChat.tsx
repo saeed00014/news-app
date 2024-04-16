@@ -1,4 +1,3 @@
-import React from "react";
 import ContextRoom from "../_context/contextRoom";
 import RoomTop from "./roomTop";
 import RoomBody from "./roomBody";

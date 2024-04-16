@@ -9,7 +9,7 @@ import { ChatRoomContext } from "@/context/context";
 
 const RoomBody = () => {
   const { setUser, setMessages } = useContext(ChatRoomContext);
-  const chat_id = useParams().id;
+  const chat_id = useParams()?.id;
   
   const userInfo = useQuery({
     queryKey: ["user"],
@@ -29,6 +29,7 @@ const RoomBody = () => {
       setMessages(response.data.result);
       return response.data.result;
     },
+    retry: 1
   });
 
   if (messagesResult.isPending || userInfo.isPending) {

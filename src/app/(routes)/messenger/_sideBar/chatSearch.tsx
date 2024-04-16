@@ -8,7 +8,6 @@ const ChatSearch = () => {
   const { getsearchValue, searchResult, searchValue } = UseSearch(
     "/chats/search?targetUsername"
   );
-
   return (
     <>
       <SearchBar onChange={getsearchValue} classNames="px-2" />
@@ -19,7 +18,10 @@ const ChatSearch = () => {
               <LoadingSpin />
             </div>
           ) : (
-            <ChatList searchResult={searchResult.data} />
+            <ChatList
+              user={searchResult?.data?.user}
+              searchResult={searchResult?.data?.result}
+            />
           )}
         </div>
       )}

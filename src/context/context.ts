@@ -1,4 +1,4 @@
-import { ChatActionMessage, MessageSqlType, UserSqlType } from "@/types/types";
+import { ChatActionMessage, MessageClientType, MessageSqlType, UserSqlType } from "@/types/types";
 import { createContext } from "react";
 
 export type MessengerContext = {};
@@ -29,6 +29,9 @@ export type ChatRoomContext = {
   setChoosedMessage: React.Dispatch<React.SetStateAction<MessageSqlType>>;
   actionMessage: ChatActionMessage;
   setActionMessage: React.Dispatch<React.SetStateAction<ChatActionMessage>>;
+  setNewMessage: React.Dispatch<
+    React.SetStateAction<{ action: string; message: MessageSqlType }>
+  >;
 };
 
 export const ChatRoomContext = createContext<ChatRoomContext>(
