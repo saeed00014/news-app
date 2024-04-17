@@ -7,10 +7,10 @@ const page = () => {
     <section className="flex w-full max-w-[1400px] p-4 bg-ship">
       <div className="flex flex-col w-full max-w-[1000px]">
         <News />
-        <RelatedNews />
-        <Adds />
+        {/* <RelatedNews />
+        <Adds /> */}
       </div>
-      <div className="lg:flex hidden w-full max-w-[400px]"></div>
+      {/* <div className="lg:flex hidden w-full max-w-[400px]"></div> */}
     </section>
   );
 };

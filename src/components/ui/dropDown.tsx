@@ -1,5 +1,5 @@
 "use client";
-import persian from "@/assets/data";
+import persian, { categories } from "@/assets/data";
 import { merge } from "@/lib/utils/merge";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
@@ -27,29 +27,25 @@ const DropDownBtn = ({ text, classNames }: DropDownBtn) => {
 
 type DropDownItem = {
   text: string;
-  path: string;
 };
 
-const DropDownItem = ({ text, path }: DropDownItem) => {
-  return (
-    <Link
-      href={`/category/${path}`}
-      className="py-2 h-full px-5 hover:bg-moon border-t border-t-dark cursor-pointer"
-    >
-      {text}
-    </Link>
-  );
+const DropDownItem = ({ text }: DropDownItem) => {
+  return <Link href={`/category/${text}`}>{text}</Link>;
 };
 
 const DropDownMenu = () => {
   return (
     <div className="flex flex-col absolute lg:w-[13rem] w-full lg:h-0 h-[16rem] group-hover:h-[16rem] duration-150 bg-ship overflow-hidden">
-      <DropDownItem text={persian.economy} path="economy" />
-      <DropDownItem text={persian.dolargold} path="dolargold" />
-      <DropDownItem text={persian.stockmarket} path="stockmarket" />
-      <DropDownItem text={persian.society} path="society" />
-      <DropDownItem text={persian.worldeconemy} path="worldeconemy" />
-      <DropDownItem text={persian.coin} path="coin" />
+      {categories.map((category) => {
+        return (
+          <div
+            className="py-2 h-full w-full px-5 hover:bg-moon border-t border-t-dark cursor-pointer"
+            key={category}
+          >
+            <DropDownItem text={category} />
+          </div>
+        );
+      })}
     </div>
   );
 };

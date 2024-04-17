@@ -4,6 +4,7 @@ import testsuggested from "@/assets/testsuggestedAdd.jpg";
 import { merge } from "@/lib/utils/merge";
 import addImage from "@/assets/testAdd.gif";
 import React from "react";
+import Link from "next/link";
 
 type AddCard = {
   classNames?: string;
@@ -31,11 +32,20 @@ const AddCard = ({ classNames }: AddCard) => {
   );
 };
 
-const AddBar = () => {
+type AddBar = {
+  link: string;
+  image: string;
+};
+
+const AddBar = ({ link, image }: AddBar) => {
+  console.log(image)
   return (
-    <div className="relative flex items-center justify-center w-full md:h-[4rem] h-[3rem] border-2 border-blood">
-      <Image alt={persian.adds} layout="fill" unoptimized src={addImage} />
-    </div>
+    <Link
+      href={`/${link}`}
+      className="relative flex items-center justify-center w-full md:h-[4rem] h-[3rem] border-2 border-blood"
+    >
+      <Image alt={persian.adds} layout="fill" unoptimized src={image} />
+    </Link>
   );
 };
 

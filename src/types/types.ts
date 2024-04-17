@@ -84,6 +84,7 @@ export type MongoNewsType = {
   title: string;
   image: string;
   description: string;
+  category: string;
   content: string[];
 };
 

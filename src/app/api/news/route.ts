@@ -27,7 +27,7 @@ export function GET(req: NextRequest) {
       return NextResponse.json(
         {
           response: "news is loaded successfully",
-          sqlMessages: result,
+          result: result,
         },
         { status: 200 }
       );
