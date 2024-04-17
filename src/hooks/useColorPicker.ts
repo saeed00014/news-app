@@ -11,11 +11,11 @@ function useColorPicker(text: string) {
     case "دلار و طلا":
       classNames = "bg-darkgrass";
       break;
-    case "ارز دیجیتال":
-      classNames = "bg-";
+    case  "مسکن":
+      classNames = "bg-lightblood";
       break;
     case "جامعه":
-      classNames = "bg-lightblood";
+      classNames = "bg-grass";
       break;
     case "اقتصاد کلان":
       classNames = "bg-water";

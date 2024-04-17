@@ -1,33 +1,38 @@
-import persian from "@/assets/data";
+"use client";
+import { baseURL } from "@/axios/axios";
 import { NewsBar } from "@/components/ui/news";
-import SectionSpliter from "@/components/ui/sectionSpliter";
-import ViewAll from "@/components/ui/viewAll";
+import { MongoNewsType } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
 
-const CategoryNews = () => {
-  const testNewsInfo = {
-    image: "",
-    category: "",
-    title: "",
-    descriptoin: "",
-  };
+const CategoryNews = ({ category }: { category: string }) => {
+
+  const categoryNewsResult = useQuery({
+    queryKey: [category],
+    queryFn: async () => {
+      const response = await baseURL.get(
+        `/news/category?category=${category}&limit=4`
+      );
+      return response.data.result;
+    },
+  });
+
+  if (categoryNewsResult.isPending) {
+    return <></>;
+  }
+
+  const categoryNews = categoryNewsResult.data;
+
   return (
-    <div className="flex flex-col gap-2">
-      <SectionSpliter text={persian.economy} />
-      <div className="grid lg:grid-cols-2 lg:grid-rows-2 md:grid-cols-1 grid-cols-2 md:gap-2 gap-1 md:-mt-[4.2rem] -mt-[4.6rem]">
-        <div>
-          <NewsBar newsInfo={testNewsInfo} />
-        </div>
-        <div>
-          <NewsBar newsInfo={testNewsInfo} />
-        </div>
-        <div className="lg:flex hidden">
-          <NewsBar newsInfo={testNewsInfo} />
-        </div>
-        <div className="lg:flex hidden">
-          <NewsBar newsInfo={testNewsInfo} />
-        </div>
-      </div>
-      <ViewAll path={`/${persian.economy}`} />
+    <div className="grid lg:grid-cols-2 lg:grid-rows-2 md:grid-cols-1 grid-cols-2 md:gap-2 gap-1">
+      {Array.isArray(categoryNews) &&
+        categoryNews[0] &&
+        categoryNews.map((news: MongoNewsType) => {
+          return (
+            <div key={news.id}>
+              <NewsBar newsInfo={news} />
+            </div>
+          );
+        })}
     </div>
   );
 };

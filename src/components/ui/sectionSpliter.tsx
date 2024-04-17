@@ -1,18 +1,17 @@
-import persian from "@/assets/data";
 import useColorPicker from "@/hooks/useColorPicker";
 import { merge } from "@/lib/utils/merge";
 
-const SectionSpliter = ({ text }: { text: string }) => {
-  const classNames = useColorPicker(text);
+const SectionSpliter = ({ category }: { category: string }) => {
+  const classNames = useColorPicker(category);
 
   return (
     <div
       className={merge(
-        "flex items-top w-full h-[6rem] md:px-3 px-2 md:pt-2 pt-1 md:text-[1.2rem] text-[1rem] text-ship bg-yellow-400",
+        "flex items-top w-full md:px-3 px-2 py-[.1rem] pt-[.4rem] md:text-[1.2rem] text-[1rem] text-ship bg-yellow-400",
         classNames
       )}
     >
-      {persian.newsCategory}
+      {category}
     </div>
   );
 };

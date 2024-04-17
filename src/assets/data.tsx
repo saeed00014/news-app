@@ -61,15 +61,22 @@ const persian = {
   messages: "پیام ها",
   enterMessage: "پیام خود را وارد کنید",
   search: "جستجوی",
-  sendBar: "ارسال پیام"
+  sendBar: "ارسال پیام",
 };
 
-export const selectOptionsMounths = [
-  1,2,3,4,5,6,7,8,9,10,11,12
+export const categories = [
+  "اقتصاد",
+  "بورس",
+  "مسکن",
+  "اقتصاد کلان",
+  "دلار و طلا",
+  "جامعه",
 ];
+
+export const selectOptionsMounths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 export const selectOptionsDays = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23,
-  24, 25, 26, 27, 28, 29, 30, 31
+  24, 25, 26, 27, 28, 29, 30, 31,
 ];
 export const selectOptionsYears = [
   1403, 1402, 1401, 1400, 1399, 1398, 1397, 1396, 1395, 1394, 1393, 1392, 1391,
