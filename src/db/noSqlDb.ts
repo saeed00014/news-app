@@ -28,9 +28,8 @@ async function dbCollection() {
       client = new MongoClient(uri, options);
       const clientConnection = await client.connect();
       const db = clientConnection.db("donyanews");
-      const collection = db.collection("news");
-      global.mongodbClient.conn = collection;
-      return collection;
+      global.mongodbClient.conn = db;
+      return db;
     }
   } catch (error) {
     return error;

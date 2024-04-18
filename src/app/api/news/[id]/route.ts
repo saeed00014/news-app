@@ -1,15 +1,16 @@
 import dbCollection from "@/db/noSqlDb";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { MongoNewsType } from "@/types/types";
-import { Collection } from "mongodb";
+import { MongoErrorType, MongoNewsType } from "@/types/types";
+import { Collection, Db } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
-    const collection: Collection = await dbCollection();
+    const db: Db = await dbCollection();
+    const collection = db.collection("news");
     const params = req.nextUrl.searchParams;
-    const result = <[] | MongoNewsType[]>await collection
+    const result = <[] | MongoNewsType[] | MongoErrorType>await collection
       .find({
         title: "پیش بینی قیمت دلار ۶ فرودین ۱۴۰۳/ قیمت دلار سر افزایش دارد؟",
       })

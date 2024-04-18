@@ -8,7 +8,7 @@ const Category = ({ text }: { text: string }) => {
   return (
     <span
       className={merge(
-        "pr-2 pl-[.4rem] pb-[.02rem] pt-[.2rem] w-fit text-[.90rem] text-ship rounded-[.2rem]",
+        "pr-2 pl-[.4rem] pb-[.02rem] pt-[.2rem] w-fit md:text-[.90rem] text-[.7rem] text-ship rounded-[.2rem]",
         classNames
       )}
     >

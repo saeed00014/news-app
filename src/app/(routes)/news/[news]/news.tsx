@@ -22,20 +22,25 @@ const News = () => {
   }
 
   const news = newsResult.data;
-  
+
   return (
-    <div className="flex flex-col gap-3">
-      <h2 className="lg:text-[1.3rem] text-[1.1rem]">{persian.newsH2Tag}</h2>
-      <p className="lg:text-2xl md:text-[1.3rem] text-[1.1rem] font-semibold">
+    <div className="flex flex-col gap-2 p-2">
+      <h2 className="lg:text-[1.3rem] text-[1rem]">{persian.newsH2Tag}</h2>
+      <p className="lg:text-2xl md:text-[1.3rem] text-[1rem] font-semibold">
         {news.title}
       </p>
-      <div className="flex justify-center w-full">
-        <div className="relative flex justify-center w-[700px] h-[400px]">
-          <Image alt="new image" layout="fill" src={news.image} />
-        </div>
+      <div className="relative flex justify-center w-full">
+        <Image
+          alt="new image"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="md:h-[400px] h-[250px] w-full max-w-[700px] object-cover"
+          src={news.image}
+        />
       </div>
       <div className="flex justify-start items-center w-full">
-        <p>{news.discription}</p>
+        <p>{news.description}</p>
       </div>
       {news.add && (
         <AddBar

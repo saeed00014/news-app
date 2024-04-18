@@ -38,13 +38,18 @@ type AddBar = {
 };
 
 const AddBar = ({ link, image }: AddBar) => {
-  console.log(image)
   return (
     <Link
       href={`/${link}`}
       className="relative flex items-center justify-center w-full md:h-[4rem] h-[3rem] border-2 border-blood"
     >
-      <Image alt={persian.adds} layout="fill" unoptimized src={image} />
+      <Image
+        alt={persian.adds}
+        layout="fill"
+        className="w-full h-full"
+        unoptimized
+        src={image}
+      />
     </Link>
   );
 };

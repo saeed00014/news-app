@@ -5,6 +5,7 @@ import { merge } from "@/lib/utils/merge";
 import testNews from "@/assets/testNews.webp";
 import persian from "@/assets/data";
 import { MongoNewsType, NewsInfo } from "@/types/types";
+import { smallNewsImageCard } from "@/lib/utils/styles";
 
 type NewsCardImage = {
   newsInfo: NewsInfo;
@@ -24,15 +25,15 @@ const NewsCardImage = ({ newsInfo, classNames }: NewsCard) => {
           alt="dolar news"
           layout="fill"
           className="group w-full h-full object-cover group-hover:scale-110 duration-200"
-          src={newsInfo.image}
+          src={newsInfo?.image}
         />
         <Link
           className="absolute bottom-0 flex flex-col justify-end w-full h-full px-3 pb-5 bg-ashImage gap-1"
-          href={`/news/1`}
+          href={`/news/${newsInfo._id}`}
         >
-          <Category text={newsInfo.category} />
+          <Category text={newsInfo?.category} />
           <h2 className="text-ship">{persian.newsH2Tag}</h2>
-          <p className="text-ship font-semibold">{newsInfo.title}</p>
+          <p className="text-ship font-semibold md:text-[1rem] text-[.9rem]">{newsInfo?.title}</p>
         </Link>
       </div>
     </article>
@@ -50,7 +51,7 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
       className={merge("flex items-center h-full w-full bg-ship", classNames)}
     >
       <Link
-        href={`/news/${newsInfo.title}`}
+        href={`/news/${newsInfo._id}`}
         className="md:flex md:flex-row flex-col items-center w-full"
       >
         <div className="relative md:w-[50%] w-full h-[10rem] object-cover">
@@ -61,17 +62,17 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
             src={newsInfo.image}
           />
         </div>
-        <div className="flex flex-col justify-end w-full h-full md:px-3 px-2 md:pb-0 pb-1 md:gap-1">
+        <div className="flex flex-col justify-end w-full h-full md:px-3 px-1 md:py-0 py-1 md:gap-1">
           <Category text={newsInfo.category} />
-          <h2 className="text-dark md:text-[1rem] text-[.8rem]">
+          <h2 className="md:flex hidden text-dark md:text-[1rem] text-[.8rem]">
             {persian.newsH2Tag}
           </h2>
-          <p className="text-dark md:text-[1rem] text-[.9rem] font-semibold">
+          <p className="text-dark md:text-[1rem] text-[.8rem] font-semibold">
             {newsInfo.title}
           </p>
-          <p className="line-clamp-1">
-            {newsInfo.description}
-          </p>
+          <span className="md:flex hidden">
+            <p className="line-clamp-1">{newsInfo.description}</p>
+          </span>
         </div>
       </Link>
     </article>
@@ -94,8 +95,7 @@ const NewsCard = ({ newsInfo, classNames }: NewsCard) => {
       <Link href={`/news/5`}>
         <Image alt={persian.adds} className="object-contain" src={testNews} />
         <span className="group group-hover:text-blood line-clamp-2 md:text-[1rem] text-[.8rem]">
-          6 هزار و 400 تومان شد. قیمت اسکناس یورو در مرکز مبادله هم با کاهش نسبت
-          به روز یکشنبه، له یورو نیز با کاهش نسبت به روز
+          {newsInfo.description}
         </span>
         <span className="absolute right-0 left-0 bottom-0 top-0"></span>
       </Link>
@@ -128,4 +128,78 @@ const PreRenderNewsPage = () => {
   );
 };
 
-export { NewsBar, NewsCardImage, NewsCard, SuggestedNews, PreRenderNewsPage };
+type TopNews = {
+  news: MongoNewsType[];
+  classNames?: string;
+};
+
+const TopNews = ({ news, classNames }: TopNews) => {
+  return (
+    <section
+      className={merge("grid md:grid-cols-2 md:gap-2 gap-1", classNames)}
+    >
+      <div className="flex md:h-[400px] md:max-h-[400px] h-[150px] max-h-[170px]">
+        {news[0] && <NewsCardImage newsInfo={news[0]} />}
+      </div>
+      <div className="flex flex-col md:max-h-[400px] max-h-[320px] min-h-[200px] md:gap-2 gap-1">
+        {(news[1] || news[2]) && (
+          <div className="flex md:gap-2 gap-1 w-full h-full">
+            {news[1] && (
+              <NewsCardImage
+                newsInfo={news[1]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+            {news[2] && (
+              <NewsCardImage
+                newsInfo={news[2]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+          </div>
+        )}
+        {(news[3] || news[4]) && (
+          <div className="flex md:gap-2 gap-1 w-full h-full">
+            {news[3] && (
+              <NewsCardImage
+                newsInfo={news[3]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+            {news[4] && (
+              <NewsCardImage
+                newsInfo={news[4]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+          </div>
+        )}
+        {(news[5] || news[6]) && (
+          <div className="md:flex hidden md:gap-2 gap-1 w-full h-full">
+            {news[5] && (
+              <NewsCardImage
+                newsInfo={news[5]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+            {news[6] && (
+              <NewsCardImage
+                newsInfo={news[6]}
+                classNames={smallNewsImageCard}
+              />
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export {
+  NewsBar,
+  NewsCardImage,
+  NewsCard,
+  SuggestedNews,
+  PreRenderNewsPage,
+  TopNews,
+};

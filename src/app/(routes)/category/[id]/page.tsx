@@ -1,20 +1,13 @@
 "use client";
-import { NewsBar, NewsCard, NewsCardImage } from "@/components/ui/news";
-import SectionSpliter from "@/components/ui/sectionSpliter";
-import TopNews from "../../home/topNews";
+import { NewsBar } from "@/components/ui/news";
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "@/axios/axios";
+import { NewsInfo } from "@/types/types";
+import TopNewsCategory from "./topNewsCategory";
 import { useParams } from "next/navigation";
-import { MongoNewsType, NewsInfo } from "@/types/types";
 
 const Category = () => {
-  const testNewsInfo = {
-    image: "",
-    category: "",
-    title: "",
-    descriptoin: "",
-  };
-  const category = useParams()?.id;
+  const id = useParams()?.id
   const categoryResult = useQuery({
     queryKey: [""],
     queryFn: async () => {
@@ -30,9 +23,9 @@ const Category = () => {
   const categoryNews = categoryResult.data;
 
   return (
-    <section className="flex flex-col justify-center w-full max-w-[1400px] lg:p-0 p-2 gap-4 bg-ship">
-      <TopNews />
-      <div className="flex flex-col gap-4 px-4">
+    <section className="flex flex-col w-full h-full max-w-[1400px] gap-4">
+      <TopNewsCategory />
+      {/* <div className="flex flex-col gap-4 px-4">
         {categoryNews.map((news: NewsInfo) => {
           return (
             <div key={news.title}>
@@ -40,7 +33,7 @@ const Category = () => {
             </div>
           )
         })}
-      </div>
+      </div> */}
     </section>
   );
 };
