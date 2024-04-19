@@ -1,4 +1,10 @@
-import { ChatActionMessage, MessageClientType, MessageSqlType, UserSqlType } from "@/types/types";
+"use client"
+import {
+  ChatActionMessage,
+  MessageClientType,
+  MessageSqlType,
+  UserSqlType,
+} from "@/types/types";
 import { createContext } from "react";
 
 export type MessengerContext = {};
@@ -37,3 +43,9 @@ export type ChatRoomContext = {
 export const ChatRoomContext = createContext<ChatRoomContext>(
   {} as ChatRoomContext
 );
+
+export type HeaderContext = {
+  user: UserSqlType;
+};
+
+export const HeaderContext = createContext<HeaderContext>({} as HeaderContext);

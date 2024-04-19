@@ -1,10 +1,11 @@
 import { ObjectId } from "mongodb";
 
 export type NewsInfo = {
+  _id: number;
   image: string;
   category: string;
   title: string;
-  descriptoin: string;
+  description: string;
 };
 
 export type UserInfoType = {
@@ -68,6 +69,14 @@ export type UserSqlType = {
   image: string;
 };
 
+export type UserFullSqlType = {
+  id: number;
+  email: string;
+  name: string;
+  username: string;
+  image: string;
+};
+
 export type NewUserType = {
   username: string;
   email: string;
@@ -80,12 +89,27 @@ export type NewUserType = {
 export type UserClientType = {};
 
 export type MongoNewsType = {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   description: string;
   category: string;
   content: string[];
+};
+
+export type MongoErrorType = {
+  errorResponse: {
+    code: number;
+  };
+};
+
+export type MongoAddType = {
+  id: string;
+  link: string;
+  image: string;
+  text: string;
+  place: string;
+  type: string;
 };
 
 export type MongoPostSuccessType = {

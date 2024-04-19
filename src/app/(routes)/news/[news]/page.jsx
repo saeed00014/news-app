@@ -1,10 +1,10 @@
 import News from "./news";
-import Adds from "./adds";
-import RelatedNews from "./relatedNews";
+import Adds from "../_adds/inDocAdds";
+import RelatedNews from "../_related/relatedNews";
 
 const page = () => {
   return (
-    <section className="flex w-full max-w-[1400px] p-4 bg-ship">
+    <section className="flex w-full max-w-[1400px] h-full bg-ship">
       <div className="flex flex-col w-full max-w-[1000px]">
         <News />
         {/* <RelatedNews />

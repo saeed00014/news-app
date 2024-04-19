@@ -17,8 +17,9 @@ export function GET(req: NextRequest) {
         return NextResponse.json(
           {
             response: "there is no more result for this request",
+            result: []
           },
-          { status: 404 }
+          { status: 200 }
         );
       }
       return NextResponse.json(

@@ -3,10 +3,11 @@ import persian from "@/assets/data";
 import ReadMore from "@/components/ui/readMore";
 import Image from "next/image";
 import React from "react";
-import { AddBar } from "@/components/ui/adds";
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "@/axios/axios";
 import { PreRenderNewsPage } from "@/components/ui/news";
+import InDocAdds from "../_adds/inDocAdds";
+import InDocReadMore from "../_readMore/inDocReadMore";
 
 const News = () => {
   const newsResult = useQuery({
@@ -22,28 +23,28 @@ const News = () => {
   }
 
   const news = newsResult.data;
-  
+
   return (
-    <div className="flex flex-col gap-3">
-      <h2 className="lg:text-[1.3rem] text-[1.1rem]">{persian.newsH2Tag}</h2>
-      <p className="lg:text-2xl md:text-[1.3rem] text-[1.1rem] font-semibold">
+    <div className="flex flex-col gap-2 p-2">
+      <h2 className="lg:text-[1.3rem] text-[1rem]">{persian.newsH2Tag}</h2>
+      <p className="lg:text-2xl md:text-[1.3rem] text-[1rem] font-semibold">
         {news.title}
       </p>
-      <div className="flex justify-center w-full">
-        <div className="relative flex justify-center w-[700px] h-[400px]">
-          <Image alt="new image" layout="fill" src={news.image} />
-        </div>
+      <div className="relative flex justify-center w-full">
+        <Image
+          alt="new image"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="md:h-[400px] h-[250px] w-full max-w-[700px] object-cover"
+          src={news.image}
+        />
       </div>
       <div className="flex justify-start items-center w-full">
-        <p>{news.discription}</p>
+        <p>{news.description}</p>
       </div>
-      {news.add && (
-        <AddBar
-          link={JSON.parse(news.add).link}
-          image={JSON.parse(news.add).image}
-        />
-      )}
-      {news.readMore && <ReadMore link={news.readMore} />}
+      {news.add && <InDocAdds adds={news.add} />}
+      {news.readMore && <InDocReadMore readMore={news.readMore} />}
     </div>
   );
 };

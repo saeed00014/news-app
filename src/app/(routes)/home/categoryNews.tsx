@@ -1,38 +1,24 @@
 "use client";
-import { baseURL } from "@/axios/axios";
 import { NewsBar } from "@/components/ui/news";
 import { MongoNewsType } from "@/types/types";
-import { useQuery } from "@tanstack/react-query";
 
-const CategoryNews = ({ category }: { category: string }) => {
+type Props = {
+  category: string;
+  categoryNews: MongoNewsType[];
+};
 
-  const categoryNewsResult = useQuery({
-    queryKey: [category],
-    queryFn: async () => {
-      const response = await baseURL.get(
-        `/news/category?category=${category}&limit=4`
-      );
-      return response.data.result;
-    },
-  });
-
-  if (categoryNewsResult.isPending) {
-    return <></>;
-  }
-
-  const categoryNews = categoryNewsResult.data;
-
+const CategoryNews = ({ category, categoryNews }: Props) => {
   return (
-    <div className="grid lg:grid-cols-2 lg:grid-rows-2 md:grid-cols-1 grid-cols-2 md:gap-2 gap-1">
-      {Array.isArray(categoryNews) &&
-        categoryNews[0] &&
-        categoryNews.map((news: MongoNewsType) => {
-          return (
-            <div key={news.id}>
-              <NewsBar newsInfo={news} />
-            </div>
-          );
-        })}
+    <div
+      className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 md:gap-2 gap-1 lg:[&>*:nth-child(4)]:flex lg:[&>*:nth-child(3)]:flex [&>*:nth-child(4)]:hidden [&>*:nth-child(3)]:hidden"
+    >
+      {categoryNews.map((news: MongoNewsType) => {
+        return (
+          <div key={news._id}>
+            <NewsBar newsInfo={news} />
+          </div>
+        );
+      })}
     </div>
   );
 };

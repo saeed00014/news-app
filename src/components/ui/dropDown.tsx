@@ -30,7 +30,7 @@ type DropDownItem = {
 };
 
 const DropDownItem = ({ text }: DropDownItem) => {
-  return <Link href={`/category/${text}`}>{text}</Link>;
+  return <Link className="w-full py-2 px-5" href={`/category/${text}`}>{text}</Link>;
 };
 
 const DropDownMenu = () => {
@@ -39,7 +39,7 @@ const DropDownMenu = () => {
       {categories.map((category) => {
         return (
           <div
-            className="py-2 h-full w-full px-5 hover:bg-moon border-t border-t-dark cursor-pointer"
+            className="flex h-full w-full hover:bg-moon border-t border-t-dark cursor-pointer"
             key={category}
           >
             <DropDownItem text={category} />

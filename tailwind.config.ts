@@ -39,6 +39,10 @@ const config: Config = {
           "50%": { opacity: ".7" },
           "100%": { opacity: "1" },
         },
+        loading: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.5' },
+        }
       },
     },
     screens: {

@@ -5,6 +5,7 @@ import { merge } from "@/lib/utils/merge";
 import addImage from "@/assets/testAdd.gif";
 import React from "react";
 import Link from "next/link";
+import { MongoAddType } from "@/types/types";
 
 type AddCard = {
   classNames?: string;
@@ -32,19 +33,19 @@ const AddCard = ({ classNames }: AddCard) => {
   );
 };
 
-type AddBar = {
-  link: string;
-  image: string;
-};
-
-const AddBar = ({ link, image }: AddBar) => {
-  console.log(image)
+const AddBar = ({ add }: {add: MongoAddType}) => {
   return (
     <Link
-      href={`/${link}`}
+      href={`/${add.link}`}
       className="relative flex items-center justify-center w-full md:h-[4rem] h-[3rem] border-2 border-blood"
     >
-      <Image alt={persian.adds} layout="fill" unoptimized src={image} />
+      <Image
+        alt={persian.adds}
+        layout="fill"
+        className="w-full h-full"
+        unoptimized
+        src={add.image}
+      />
     </Link>
   );
 };

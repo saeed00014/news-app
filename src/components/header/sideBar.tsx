@@ -1,10 +1,13 @@
+"use client";
 import persian from "@/assets/data";
 import { TextLink } from "../ui/link";
 import { DropDownBtn, DropDownMenu } from "../ui/dropDown";
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../ui/logo";
 import CloseBtn from "../closeBtn";
 import CloseBg from "../closeBg";
+import { User } from "../ui/user";
+import { HeaderContext } from "@/context/context";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +15,8 @@ type Props = {
 };
 
 const SideBar = ({ setIsOpen, isOpen }: Props) => {
+  const { user } = useContext(HeaderContext);
+
   return (
     <div
       className={`fixed ${
@@ -52,11 +57,18 @@ const SideBar = ({ setIsOpen, isOpen }: Props) => {
           </div>
         </div>
         <div onClick={() => setIsOpen(false)} className="flex justify-center ">
-          <TextLink
-            path="/login"
-            text={persian.signInsignUp}
-            classNames="absolute bottom-5 min-w-max text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
-          />
+          {user ? (
+            <User
+              user={user}
+              classNames="absolute bottom-5 bg-moon w-[200px] py-2 rounded-[1rem] hover:brightness-90 [&>*:nth-child(2)]:flex [&>*:nth-child(1)]:h-[55px] [&>*:nth-child(1)]:w-[55px]"
+            />
+          ) : (
+            <TextLink
+              path="/login"
+              text={persian.signInsignUp}
+              classNames="flex absolute bottom-5 min-w-max text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
+            />
+          )}
         </div>
       </div>
     </div>
