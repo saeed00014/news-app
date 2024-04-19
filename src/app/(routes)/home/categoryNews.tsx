@@ -14,7 +14,7 @@ const CategoryNews = ({ category, categoryNews }: Props) => {
     >
       {categoryNews.map((news: MongoNewsType) => {
         return (
-          <div key={news.id}>
+          <div key={news._id}>
             <NewsBar newsInfo={news} />
           </div>
         );

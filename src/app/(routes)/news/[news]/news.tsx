@@ -3,10 +3,11 @@ import persian from "@/assets/data";
 import ReadMore from "@/components/ui/readMore";
 import Image from "next/image";
 import React from "react";
-import { AddBar } from "@/components/ui/adds";
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "@/axios/axios";
 import { PreRenderNewsPage } from "@/components/ui/news";
+import InDocAdds from "../_adds/inDocAdds";
+import InDocReadMore from "../_readMore/inDocReadMore";
 
 const News = () => {
   const newsResult = useQuery({
@@ -42,13 +43,8 @@ const News = () => {
       <div className="flex justify-start items-center w-full">
         <p>{news.description}</p>
       </div>
-      {news.add && (
-        <AddBar
-          link={JSON.parse(news.add).link}
-          image={JSON.parse(news.add).image}
-        />
-      )}
-      {news.readMore && <ReadMore link={news.readMore} />}
+      {news.add && <InDocAdds adds={news.add} />}
+      {news.readMore && <InDocReadMore readMore={news.readMore} />}
     </div>
   );
 };

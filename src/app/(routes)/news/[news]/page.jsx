@@ -1,6 +1,6 @@
 import News from "./news";
-import Adds from "./adds";
-import RelatedNews from "./relatedNews";
+import Adds from "../_adds/inDocAdds";
+import RelatedNews from "../_related/relatedNews";
 
 const page = () => {
   return (

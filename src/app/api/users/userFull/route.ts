@@ -2,14 +2,14 @@ import { query } from "@/db/sqlDb";
 import checkCookie from "@/lib/utils/checkCookie";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { SqlErrorType, UserSqlType } from "@/types/types";
+import { SqlErrorType, UserFullSqlType } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const userInfo = checkCookie();
-    const result = <[] | UserSqlType[] | SqlErrorType>await query({
-      query: "SELECT `name`, `image`  FROM `users` WHERE id = ? ",
+    const result = <[] | UserFullSqlType[] | SqlErrorType>await query({
+      query: "SELECT `email`, `name`, `image`  FROM `users` WHERE id = ? ",
       values: [userInfo.id],
     });
     if (Array.isArray(result)) {
@@ -31,6 +31,7 @@ export function GET(req: NextRequest) {
               username: userInfo.username,
               name: result[0].name,
               image: result[0].image,
+              email: result[0].email
             },
           ],
         },

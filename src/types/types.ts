@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export type NewsInfo = {
-  _id: number
+  _id: number;
   image: string;
   category: string;
   title: string;
@@ -69,6 +69,14 @@ export type UserSqlType = {
   image: string;
 };
 
+export type UserFullSqlType = {
+  id: number;
+  email: string;
+  name: string;
+  username: string;
+  image: string;
+};
+
 export type NewUserType = {
   username: string;
   email: string;
@@ -91,9 +99,9 @@ export type MongoNewsType = {
 
 export type MongoErrorType = {
   errorResponse: {
-    code: number
-  }
-}
+    code: number;
+  };
+};
 
 export type MongoAddType = {
   id: string;
