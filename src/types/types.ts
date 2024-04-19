@@ -94,7 +94,9 @@ export type MongoNewsType = {
   image: string;
   description: string;
   category: string;
-  content: string[];
+  add: string;
+  readMore: string;
+  content: string;
 };
 
 export type MongoErrorType = {
