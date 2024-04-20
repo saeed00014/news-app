@@ -15,7 +15,10 @@ type Props = {
 const Message = ({ message, handleClick, isMyMessage }: Props) => {
   const { choosedMessage } = useContext(ChatRoomContext);
   return (
-    <li id={`message${message.id}`}>
+    <li
+      id={`message${message.id}`}
+      className={`flex gap-1 ${isMyMessage ? "flex-row-reverse" : ""}`}
+    >
       {message.text && (
         <MessageText
           message={message}
@@ -23,7 +26,9 @@ const Message = ({ message, handleClick, isMyMessage }: Props) => {
           isMyMessage={isMyMessage}
         />
       )}
-      {message.news && <MessageNews newsId={message.news} />}
+      {message.news && (
+        <MessageNews newsId={message.news} isMyMessage={isMyMessage} />
+      )}
       {choosedMessage?.id === message?.id && (
         <MessageIsChoosed
           message={message}

@@ -10,7 +10,7 @@ type Props = {
 const MessageText = ({ message, handleClick, isMyMessage }: Props) => {
   return (
     <div
-      className={`relative flex items-center w-full gap-1 ${
+      className={`relative flex items-center w-fit ${
         isMyMessage ? "flex-row-reverse [&>div>span]:bg-darkgrass" : ""
       }`}
     >

@@ -6,10 +6,12 @@ import InDocAdds from "../_adds/inDocAdds";
 import InDocReadMore from "../_readMore/inDocReadMore";
 import { MongoNewsType } from "@/types/types";
 import Content from "./content";
+import NewsOptions from "./newsOptions";
 
 const News = ({ news }: { news: MongoNewsType }) => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="relative flex flex-col gap-6">
+      <NewsOptions />
       <div className="flex flex-col gap-3">
         <h2 className="lg:text-[1.3rem] text-[1rem]">{persian.newsH2Tag}</h2>
         <p className="lg:text-2xl md:text-[1.3rem] text-[1rem] font-semibold">

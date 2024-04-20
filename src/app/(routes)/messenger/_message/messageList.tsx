@@ -32,7 +32,7 @@ const MessageList = ({ loginUser }: { loginUser: UserSqlType }) => {
                 <Message
                   message={message}
                   handleClick={handleClick}
-                  isMyMessage={(loginUser.id || user.id) === message.user_id}
+                  isMyMessage={(loginUser?.id || user?.id) === message.user_id}
                 />
               </div>
             );

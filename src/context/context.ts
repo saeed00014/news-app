@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   ChatActionMessage,
   MessageClientType,
@@ -49,3 +49,12 @@ export type HeaderContext = {
 };
 
 export const HeaderContext = createContext<HeaderContext>({} as HeaderContext);
+
+export type NewsShareContext = {
+  choosedUsers: UserSqlType[];
+  setChooseUsers: React.Dispatch<React.SetStateAction<UserSqlType[]>>;
+};
+
+export const NewsShareContext = createContext<NewsShareContext>(
+  {} as NewsShareContext
+);

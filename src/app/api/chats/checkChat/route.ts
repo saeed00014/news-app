@@ -10,6 +10,7 @@ export function GET(req: NextRequest) {
     const userinfo = checkCookie();
     const params = req.nextUrl.searchParams;
     const targetUser_id = params.get("targetUser_id");
+    console.log(targetUser_id)
     const result = <{ id: number }[] | SqlSuccessType | SqlErrorType>(
       await query({
         query:

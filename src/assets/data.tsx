@@ -62,6 +62,7 @@ const persian = {
   enterMessage: "پیام خود را وارد کنید",
   search: "جستجوی",
   sendBar: "ارسال پیام",
+  share: "اشتراک گذاری",
 };
 
 export const categories = [
