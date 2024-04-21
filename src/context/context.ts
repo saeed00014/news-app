@@ -3,6 +3,7 @@ import {
   ChatActionMessage,
   MessageClientType,
   MessageSqlType,
+  UserFullSqlType,
   UserSqlType,
 } from "@/types/types";
 import { createContext } from "react";
@@ -58,3 +59,11 @@ export type NewsShareContext = {
 export const NewsShareContext = createContext<NewsShareContext>(
   {} as NewsShareContext
 );
+
+type ProfileContext = {
+  user: UserFullSqlType
+  isEditActive: boolean,
+  setIsEditActive: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+export const ProfileContext = createContext({} as ProfileContext)

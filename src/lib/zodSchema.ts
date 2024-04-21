@@ -20,11 +20,9 @@ export const registerFormSchema = z.object({
 });
 
 export const editUserSchema = z.object({
-  firstname: z.string().regex(/^.{1,25}$/),
-  lastname: z.string().regex(/^.{1,25}$/),
+  name: z.string().regex(/^.{1,50}$/),
   username: z.string().regex(/^[A-Za-z0-9]{3,12}$/),
   email: z.string().regex(/^(?=.*[@])(?=.*[.])[a-zA-Z0-9!@#$%^&*.]{8,40}$/),
-  job: z.string().regex(/^.{1,25}$/),
   link: z.string().regex(/^.{1,40}$/),
   bio: z.string().regex(/^.{1,225}$/),
 });

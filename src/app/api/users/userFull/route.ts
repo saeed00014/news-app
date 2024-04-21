@@ -9,7 +9,7 @@ export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const userInfo = checkCookie();
     const result = <[] | UserFullSqlType[] | SqlErrorType>await query({
-      query: "SELECT `email`, `name`, `image`  FROM `users` WHERE id = ? ",
+      query: "SELECT `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
       values: [userInfo.id],
     });
     if (Array.isArray(result)) {
@@ -31,7 +31,9 @@ export function GET(req: NextRequest) {
               username: userInfo.username,
               name: result[0].name,
               image: result[0].image,
-              email: result[0].email
+              email: result[0].email,
+              bio: result[0].bio,
+              link: result[0].link
             },
           ],
         },

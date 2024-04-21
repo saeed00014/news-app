@@ -100,12 +100,12 @@ export function PUT(req: NextRequest) {
   return tryCatch(async () => {
     const params = req.nextUrl.searchParams;
     const user_id = params.get("user_id");
-    const { username, email, name, birthdate, gender, image } =
+    const { username, email, name, link, bio, image } =
       await req.json();
     const result = <SqlSuccessType>await query({
       query:
-        "UPDATE `users` SET `username` = ?, `email` = ?, `name` = ?, `birthdate` = ?, `gender` = ?, `image` = ? WHERE id = ? ",
-      values: [username, email, name, birthdate, gender, image, user_id],
+        "UPDATE `users` SET `username` = ?, `email` = ?, `name` = ?, `link` = ?, `bio` = ?, `image` = ? WHERE id = ? ",
+      values: [username, email, name, link, bio, image, user_id],
     });
     if (result && "affectedRows" in result && result.affectedRows) {
       return NextResponse.json(

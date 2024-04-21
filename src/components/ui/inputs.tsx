@@ -58,6 +58,19 @@ const Label = ({ id, text, classNames }: Label) => {
   );
 };
 
+type MaxChar = {
+  maxChar: number;
+  value: string;
+};
+
+const MaxChar = ({ maxChar, value }: MaxChar) => {
+  return (
+    <div>
+      {maxChar}/{value?.length}
+    </div>
+  );
+};
+
 type Radio = {
   register?: any;
   type: string;
@@ -119,7 +132,7 @@ const Submit = ({ value, classNames }: Submit) => {
       id="submit"
       value={value}
       className={merge(
-        "flex justify-center py-2 w-[10rem] rounded-[.2rem] bg-grass hover:brightness-110  cursor-pointer",
+        "flex justify-center py-2 w-[10rem] rounded-[.2rem] bg-grass text-ship hover:brightness-110 cursor-pointer",
         classNames
       )}
     />
@@ -147,4 +160,37 @@ const Checkbox = ({ register, id, name, value, classNames }: Checkbox) => {
   );
 };
 
-export { Input, Label, Radio, Select, Submit, Checkbox };
+type Textarea = {
+  register: any;
+  name: string;
+  id: string;
+  isIconError?: any;
+  placeholder?: string;
+  classNames?: string;
+};
+
+const Textarea = ({
+  register,
+  id,
+  name,
+  isIconError,
+  placeholder,
+  classNames,
+}: Textarea) => {
+  return (
+    <textarea
+      {...register(name)}
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      className={merge(
+        `flex items-start justify-start text-start align-top w-full min-h-[8rem] max-h-[8rem] py-1 px-1 bg-gray-200 dark:bg-gray-700 ${
+          isIconError && "border-[1px] border-text-error"
+        }`,
+        classNames
+      )}
+    />
+  );
+};
+
+export { Input, Label, MaxChar, Radio, Select, Submit, Checkbox, Textarea };
