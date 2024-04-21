@@ -62,6 +62,16 @@ const persian = {
   enterMessage: "پیام خود را وارد کنید",
   search: "جستجوی",
   sendBar: "ارسال پیام",
+  share: "اشتراک گذاری",
+  about: "درباره",
+  logOut: "خروج از حساب",
+  edit: "تغییر اطلاعات",
+  bio: "درباره",
+  job: "شغل",
+  link: "وب سایت",
+  avatar: "آپلود عکس پروفایل",
+  submitEdit: "ذخیره",
+  dragFile: "فایل خود را بکشید"
 };
 
 export const categories = [

@@ -75,6 +75,8 @@ export type UserFullSqlType = {
   name: string;
   username: string;
   image: string;
+  bio: string;
+  link: string;
 };
 
 export type NewUserType = {
@@ -86,7 +88,14 @@ export type NewUserType = {
   password: string;
 };
 
-export type UserClientType = {};
+export type UserEditType = {
+  username: string
+  email: string
+  name: string
+  link: string | null
+  bio: string | null
+  image: string | null
+};
 
 export type MongoNewsType = {
   _id: string;
@@ -94,7 +103,9 @@ export type MongoNewsType = {
   image: string;
   description: string;
   category: string;
-  content: string[];
+  add: string;
+  readMore: string;
+  content: string;
 };
 
 export type MongoErrorType = {

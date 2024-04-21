@@ -6,6 +6,7 @@ const config: Config = {
     extend: {
       colors: {
         moon: "#f1f5f9",
+        darkmoon: "#f3f4f6",
         grass: "rgb(12, 209, 127)",
         darkgrass: "#4d7c0f",
         ship: "rgb(255, 255, 255)",

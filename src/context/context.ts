@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import {
   ChatActionMessage,
   MessageClientType,
   MessageSqlType,
+  UserFullSqlType,
   UserSqlType,
 } from "@/types/types";
 import { createContext } from "react";
@@ -49,3 +50,20 @@ export type HeaderContext = {
 };
 
 export const HeaderContext = createContext<HeaderContext>({} as HeaderContext);
+
+export type NewsShareContext = {
+  choosedUsers: UserSqlType[];
+  setChooseUsers: React.Dispatch<React.SetStateAction<UserSqlType[]>>;
+};
+
+export const NewsShareContext = createContext<NewsShareContext>(
+  {} as NewsShareContext
+);
+
+type ProfileContext = {
+  user: UserFullSqlType
+  isEditActive: boolean,
+  setIsEditActive: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+export const ProfileContext = createContext({} as ProfileContext)

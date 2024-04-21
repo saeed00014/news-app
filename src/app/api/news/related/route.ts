@@ -1,51 +1,48 @@
-import { query } from "@/db/sqlDb";
-import checkCookie from "@/lib/utils/checkCookie";
+import dbCollection from "@/db/noSqlDb";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import { tryCatch } from "@/lib/utils/tryCatch";
-import { SqlErrorType, SqlSuccessType } from "@/types/types";
+import { MongoErrorType, MongoNewsType } from "@/types/types";
+import { Db } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
-    const userinfo = checkCookie();
+    const db: Db = await dbCollection();
+    const collection = db.collection("news");
     const params = req.nextUrl.searchParams;
-    const targetUser_id = params.get("targetUser_id");
-    console.log(targetUser_id)
-    const result = <{ id: number }[] | SqlSuccessType | SqlErrorType>(
-      await query({
-        query:
-          "SELECT `id` FROM `chats` WHERE user_id = ? AND targetUser_id = ? OR user_id = ? AND targetUser_id = ?",
-        values: [userinfo.id, targetUser_id, targetUser_id, userinfo.id],
+    const category = params.get("category");
+    const result = <[] | MongoNewsType[] | MongoErrorType>await collection
+      .find({
+        category: category,
       })
-    );
+      .limit(3)
+      .toArray();
     if (Array.isArray(result)) {
       if (!result.length) {
         return NextResponse.json(
           {
             response: "there is no more result for this request",
-            result: []
+            result: [],
           },
           { status: 200 }
         );
       }
       return NextResponse.json(
         {
-          response: "chat is loaded successfully",
+          response: "news is loaded successfully",
           result: result,
         },
         { status: 200 }
       );
     }
-    if ("sqlState" in result && result.sqlState) {
+    if ("errorResponse" in result && result.errorResponse.code) {
       return NextResponse.json(
         { response: "your request is not valid" },
         { status: DATABASE_ERROR.code }
       );
     }
     return NextResponse.json(
-      {
-        response: "there is a problem please try again later",
-      },
+      { response: "there is a problem please try again laterr" },
       { status: UNEXPECTED_ERROR.code }
     );
   });

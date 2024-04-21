@@ -39,8 +39,9 @@ const RoomBody = () => {
       </div>
     );
   }
+  const loginUser = userInfo.data
 
-  return <MessageList />;
+  return <MessageList loginUser={loginUser} />;
 };
 
 export default RoomBody;

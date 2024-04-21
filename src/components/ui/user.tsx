@@ -12,7 +12,7 @@ type Props = {
 const User = ({ user, classNames }: Props) => {
   return (
     <Link
-      href={`/profile`}
+      href={`/profile/${user.id}`}
       className={merge("flex items-center justify-center gap-2", classNames)}
     >
       <div className="relative flex justify-center items-center w-[50px] h-[50px]">
