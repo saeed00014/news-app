@@ -3,6 +3,7 @@ import Image from "next/image";
 import defaultImage from "@/assets/default.jpg";
 import { UserInfoType } from "@/types/types";
 import { merge } from "@/lib/utils/merge";
+import Link from "next/link";
 
 const PreRenderResultUser = () => {
   return (
@@ -79,7 +80,8 @@ type ResultUserCard = {
 
 const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
   return (
-    <li
+    <Link
+      href={`/profile/${user.id}`}
       className={merge(
         "flex flex-col items-center py-2 px-3 gap-1 hover:brightness-90 rounded-[1rem] cursor-pointer text-ship",
         classNames
@@ -96,7 +98,7 @@ const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
       </span>
       <span className="">{user.name}</span>
       <span className="line-clamp-1">{user.username}</span>
-    </li>
+    </Link>
   );
 };
 

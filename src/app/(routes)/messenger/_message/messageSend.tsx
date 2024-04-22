@@ -6,25 +6,32 @@ import SendBar from "@/components/sendBar";
 import { baseURL } from "@/axios/axios";
 import { ChatRoomContext } from "@/context/context";
 import AttachedMessageBar from "./attachedMessageBar";
-import { MessageSendType } from "@/types/types";
+import {
+  ChatActionMessage,
+  MessageSendType,
+} from "@/types/types";
 
 const useSend = (url: string) => {
-  const { actionMessage, setNewMessage, user } = useContext(ChatRoomContext);
+  const [sendValue, setSendValue] = useState("");
+  const { actionMessage, setNewMessage, setActionMessage } =
+    useContext(ChatRoomContext);
 
   const sendResult = useMutation({
     mutationFn: async (data: MessageSendType) => {
       const response = await baseURL.post(url, data);
       if (response.data?.insertId) {
         const id = response.data.insertId;
+        const user_id = response.data.user_id;
         const message = {
           id: id,
-          user_id: user.id,
+          user_id: user_id,
           text: data?.text,
           news: data?.news,
           image: data?.image,
           attached_id: data?.attached_id,
           attached: data?.attached,
         };
+        setActionMessage({} as ChatActionMessage);
         setNewMessage({ action: "post", message: message });
       }
       return response.data.insertId;
@@ -38,9 +45,10 @@ const useSend = (url: string) => {
     attached_id = actionMessage.message.id;
   }
 
-  const onSend = (getValues: Function) => {
+  const onSend = (e: any) => {
+    setSendValue("");
     sendResult.mutate({
-      text: getValues("text"),
+      text: e.target.text.value,
       news: null,
       image: null,
       attached_id: attached_id,
@@ -48,36 +56,7 @@ const useSend = (url: string) => {
     });
   };
 
-  return { onSend, sendResult };
-};
-
-const usePut = (url: string) => {
-  const { actionMessage, setNewMessage } = useContext(ChatRoomContext);
-
-  const putResult = useMutation({
-    mutationFn: async (data: { text: string }) => {
-      const response = await baseURL.put(url, data);
-      const message = {
-        id: actionMessage.message?.id,
-        user_id: actionMessage.message?.user_id,
-        text: data?.text,
-        news: actionMessage.message?.news,
-        image: actionMessage.message?.image,
-        attached_id: actionMessage.message?.attached_id,
-        attached: actionMessage.message?.attached,
-      };
-      setNewMessage({ action: "put", message: message });
-      return response.data.result;
-    },
-  });
-
-  const onPut = (getValues: Function) => {
-    putResult.mutate({
-      text: getValues("text"),
-    });
-  };
-
-  return { onPut, putResult };
+  return { onSend, sendValue, setSendValue };
 };
 
 const MessageSend = () => {
@@ -85,20 +64,18 @@ const MessageSend = () => {
 
   const chat_id = useParams()?.id;
 
-  const { onSend } = useSend(`/messages?chat_id=${chat_id}`);
-
-  const { onPut } = usePut(
-    `/messages?message_id=${actionMessage?.message?.id}`
+  const { onSend, sendValue, setSendValue } = useSend(
+    `/messages?chat_id=${chat_id}`
   );
-
-  if (actionMessage?.action === "put") {
-    return <SendBar onSubmit={onPut} value={actionMessage.message.text} />;
-  }
 
   return (
     <>
       {actionMessage?.action === "share" && <AttachedMessageBar />}
-      <SendBar onSubmit={onSend} value={null} />
+      <SendBar
+        onSubmit={onSend}
+        sendValue={sendValue}
+        setSendValue={setSendValue}
+      />
     </>
   );
 };

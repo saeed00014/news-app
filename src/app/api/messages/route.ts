@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
         {
           response: "your message is sent successfully",
           insertId: result.insertId,
+          user_id: userInfo.id
         },
         { status: 200 }
       );
@@ -136,11 +137,12 @@ export function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   return tryCatch(async () => {
+    const userInfo = checkCookie()
     const params = req.nextUrl.searchParams;
     const message_id = params.get("message_id");
     const result = <SqlSuccessType | SqlErrorType>await query({
-      query: "DELETE FROM `messages` WHERE `id` = ?",
-      values: [message_id],
+      query: "DELETE FROM `messages` WHERE `id` = ? && `user_id` = ?",
+      values: [message_id, userInfo.id],
     });
     if (result && "affectedRows" in result) {
       if (result.affectedRows) {

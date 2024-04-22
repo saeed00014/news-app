@@ -1,32 +1,41 @@
 "use client";
-import { Input } from "./ui/inputs";
+import { NormalInput } from "./ui/inputs";
 import persian from "@/assets/data";
-import { useForm } from "react-hook-form";
 import { AiOutlineSend } from "react-icons/ai";
 import { Submit } from "./ui/inputs";
+import React from "react";
 
 type Props = {
   onSubmit: Function;
-  value: string | null;
+  sendValue: string;
+  setSendValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SendBar = ({ onSubmit, value }: Props) => {
-  const { register, getValues, handleSubmit, watch } = useForm({});
+const SendBar = ({ onSubmit, sendValue, setSendValue }: Props) => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onSubmit(e);
+  };
+
+  const handleChange = (e: any) => {
+    setSendValue(e.target.value);
+  };
+
   return (
     <form
       method="post"
-      onSubmit={handleSubmit(() => onSubmit(getValues))}
+      onSubmit={(e) => handleSubmit(e)}
       className="sticky bottom-0 flex w-full lg:px-4 px-2 md:pb-4 pb-2"
     >
       <div className="relative w-full">
-        <Input
-          register={register}
+        <NormalInput
           type="text"
           id="text"
           name="text"
-          value={watch("text") || value}
+          value={sendValue}
           placeholder={persian.sendBar}
-          classNames="bg-ship rounded-full pr-[3.5rem] pt-[.3rem]"
+          onChange={handleChange}
+          classNames="bg-ship rounded-full pr-[3.5rem] pt-[.3rem] pl-24"
         />
         <label
           htmlFor="submit"

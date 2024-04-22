@@ -11,8 +11,8 @@ const MessageOptions = ({ isMyMessage }: { isMyMessage: boolean }) => {
       }`}
     >
       <MessageShare />
-      <MessagePut />
-      <MessageDelete />
+      {isMyMessage && <MessagePut />}
+      {isMyMessage && <MessageDelete />}
     </div>
   );
 };

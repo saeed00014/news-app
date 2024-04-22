@@ -1,11 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChatRoomContext } from "@/context/context";
-import {
-  ChatActionMessage,
-  MessageSqlType,
-  UserSqlType,
-} from "@/types/types";
+import { ChatActionMessage, MessageSqlType, UserSqlType } from "@/types/types";
 import { io } from "socket.io-client";
 import { useParams } from "next/navigation";
 
@@ -39,6 +35,11 @@ const ContextRoom = ({ children }: { children: React.ReactNode }) => {
           return;
         });
         newMessages[0] && setMessages(newMessages);
+      }
+      if (messageInfo?.action === "delete") {
+        setMessages((messages) =>
+          messages.filter((message) => message.id !== messageInfo.message.id)
+        );
       }
     });
     return () => {

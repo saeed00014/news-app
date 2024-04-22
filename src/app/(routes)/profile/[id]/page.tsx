@@ -7,7 +7,7 @@ const page = () => {
     <section className="flex w-full max-w-[1400px] h-full ">
       <div className="flex flex-col items-center w-full h-full">
         <Context>
-          <div className="flex flex-col p-3 bg-ship gap-4">
+          <div className="flex flex-col md:p-3 p-2 w-full max-w-[400px] bg-ship gap-4">
             <ProfileUser />
             <ProfileOptions />
           </div>

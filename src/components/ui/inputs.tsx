@@ -38,6 +38,43 @@ const Input = ({
   );
 };
 
+type NormalInput = {
+  onChange: Function;
+  type: string;
+  name: string;
+  id: string;
+  value: string;
+  placeholder?: string;
+  isIconError?: any;
+  classNames?: string;
+};
+
+const NormalInput = ({
+  onChange,
+  type,
+  id,
+  name,
+  value,
+  placeholder,
+  isIconError,
+  classNames,
+}: NormalInput) => {
+  return (
+    <input
+      id={id}
+      type={type}
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={(e) => onChange(e)}
+      className={merge(
+        `h-10 w-full px-2 bg-moon ${isIconError && "border border-blood"}`,
+        classNames
+      )}
+    />
+  );
+};
+
 type Label = {
   id?: string;
   text: string;
@@ -193,4 +230,14 @@ const Textarea = ({
   );
 };
 
-export { Input, Label, MaxChar, Radio, Select, Submit, Checkbox, Textarea };
+export {
+  Input,
+  NormalInput,
+  Label,
+  MaxChar,
+  Radio,
+  Select,
+  Submit,
+  Checkbox,
+  Textarea,
+};

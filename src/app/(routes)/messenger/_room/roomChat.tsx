@@ -1,14 +1,14 @@
 import ContextRoom from "../_context/contextRoom";
 import RoomTop from "./roomTop";
 import RoomBody from "./roomBody";
-import MessageSend from "../_message/messageSend";
+import MessageAction from "../_message/messageAction";
 
 const RoomChat = () => {
   return (
     <ContextRoom>
       <RoomTop />
       <RoomBody />
-      <MessageSend />
+      <MessageAction />
     </ContextRoom>
   );
 };

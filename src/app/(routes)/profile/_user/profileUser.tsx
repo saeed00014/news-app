@@ -9,8 +9,8 @@ const ProfileUser = () => {
   const { user } = useContext(ProfileContext);
 
   return (
-    <div className="flex flex-col w-[400px] gap-2">
-      <div className="flex items-center h-fit gap-3">
+    <div className="flex flex-col w-full gap-2">
+      <div className="flex items-center h-fit w-full gap-3">
         <Image
           alt="profile imege"
           width={70}
