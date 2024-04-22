@@ -4,15 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "@/axios/axios";
 import { ProfileContext } from "@/context/context";
 import LoadingSpin from "@/components/loadingSpin";
+import { notFound, useParams } from "next/navigation";
 
 const Context = ({ children }: { children: React.ReactNode }) => {
   const [isEditActive, setIsEditActive] = useState(false);
-
+  const user_id = useParams()?.id;
   const userResult = useQuery({
-    queryKey: ["userFull"],
+    queryKey: [`userFull${user_id}`],
     queryFn: async () => {
-      const response = await baseURL.get("/users/userFull");
-      return response.data?.result[0];
+      const response = await baseURL.get(`/users/userFull?user_id=${user_id}`);
+      return response.data;
     },
   });
 
@@ -24,14 +25,20 @@ const Context = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  const user = userResult.data;
+  const user = userResult.data.result[0];
+  const isLoginUser = userResult.data.loginUser;
 
+  if(!user) {
+    return notFound()
+  }
+           
   return (
     <ProfileContext.Provider
       value={{
         user: user,
         isEditActive: isEditActive,
         setIsEditActive: setIsEditActive,
+        isLoginUser: isLoginUser,
       }}
     >
       {children}

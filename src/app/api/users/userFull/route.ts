@@ -8,9 +8,11 @@ import { NextRequest, NextResponse } from "next/server";
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const userInfo = checkCookie();
+    const params = req.nextUrl.searchParams
+    const user_id = params.get("user_id")
     const result = <[] | UserFullSqlType[] | SqlErrorType>await query({
       query: "SELECT `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
-      values: [userInfo.id],
+      values: [user_id],
     });
     if (Array.isArray(result)) {
       if (!result.length) {
@@ -36,6 +38,7 @@ export function GET(req: NextRequest) {
               link: result[0].link
             },
           ],
+          loginUser: userInfo.id == user_id
         },
         { status: 200 }
       );

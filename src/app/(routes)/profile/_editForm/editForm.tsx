@@ -53,12 +53,12 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
       className="flex flex-col items-center w-fit h-fit overflow-y-auto rounded-[1rem] z-50"
     >
       <CloseBackground setEvent={setIsEditActive} />
-      <div className="flex flex-col pb-5 px-4 w-full max-w-[400px] min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-[1rem] bg-white z-50">
-        <CloseBtn
-          text={persian.edit}
-          setEvent={setIsEditActive}
-          classNames="sticky top-0 w-full justify-between p-0 pt-2 bg-ship z-[60]"
-        />
+      <CloseBtn
+        text={persian.edit}
+        setEvent={setIsEditActive}
+        classNames="sticky top-0 w-full justify-between py-1 px-4 bg-ship rounded-t-[1rem] z-50"
+      />
+      <div className="flex flex-col pb-5 px-4 w-full max-w-[400px] min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-b-[1rem] bg-white z-50">
         <FormItem>
           <Label id="name" text={persian.name} />
           <Input
@@ -70,7 +70,10 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
             classNames={editFormInputClassNames}
           />
           {errors?.name && (
-            <ErrorIcon text={persian.fillErorr} classNames="top-[.2rem] " />
+            <ErrorIcon
+              text={persian.fillErorr}
+              classNames="top-[.2rem] left-0 [&>span]:top-0 [&>span]:left-6"
+            />
           )}
         </FormItem>
         <FormItem>
@@ -84,7 +87,10 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
             classNames={editFormInputClassNames}
           />
           {errors?.username && (
-            <ErrorIcon text={persian.usernameErorr} classNames="top-[.2rem] " />
+            <ErrorIcon
+              text={persian.usernameErorr}
+              classNames="top-[.2rem] left-0 "
+            />
           )}
         </FormItem>
         <FormItem>
@@ -98,7 +104,10 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
             classNames={editFormInputClassNames}
           />
           {errors?.email && (
-            <ErrorIcon text={persian.emailErorr} classNames="top-[.2rem] " />
+            <ErrorIcon
+              text={persian.emailErorr}
+              classNames="top-[.2rem] left-0  "
+            />
           )}
         </FormItem>
         <FormItem>
@@ -112,13 +121,18 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
             classNames={editFormInputClassNames}
           />
           {errors?.link && (
-            <ErrorIcon text={persian.fillErorr} classNames="top-[.2rem] " />
+            <ErrorIcon
+              text={persian.fillErorr}
+              classNames="top-[.2rem] left-0  "
+            />
           )}
         </FormItem>
         <FormItem>
           <div className="flex w-full">
             <Label id="bio" text={persian.bio} />
-            <MaxChar maxChar={225} value={watch("bio")} />
+            <div className="pt-1">
+              <MaxChar maxChar={225} value={watch("bio")} />
+            </div>
           </div>
           <Textarea
             register={register}

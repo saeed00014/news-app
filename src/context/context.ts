@@ -64,6 +64,7 @@ type ProfileContext = {
   user: UserFullSqlType
   isEditActive: boolean,
   setIsEditActive: React.Dispatch<React.SetStateAction<boolean>>,
+  isLoginUser: boolean
 }
 
 export const ProfileContext = createContext({} as ProfileContext)
