@@ -13,7 +13,7 @@ const HeadNews = () => {
   });
 
   if (topNewsResult.isPending) {
-    return <></>;
+    return <div className="w-full md:h-[400px] h-[350px]"></div>
   }
 
   const news = topNewsResult.data;

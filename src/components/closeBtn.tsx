@@ -12,7 +12,7 @@ const CloseBtn = ({ setEvent, text, classNames }: Props) => {
     <div className={merge("flex w-fit h-fit", classNames)}>
       {text && <span className="flex items-center">{text}</span>}
       <span
-        className=" hover:bg-ash px-[.8rem] py-[.8rem] rounded-full cursor-pointer z-[60]"
+        className=" hover:bg-ash text-dark px-[.8rem] py-[.8rem] rounded-full cursor-pointer z-[60]"
         onClick={() => setEvent(false)}
       >
         <AiOutlineClose />

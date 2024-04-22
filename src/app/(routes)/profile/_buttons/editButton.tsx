@@ -10,7 +10,7 @@ const EditButton = () => {
 
   return (
     <>
-      <div onClick={() => setIsEditActive(true)}>
+      <div className="w-full" onClick={() => setIsEditActive(true)}>
         <Button text={persian.edit} />
       </div>
       {isEditActive && (
