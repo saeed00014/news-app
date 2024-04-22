@@ -6,6 +6,7 @@ import { baseURL } from "@/axios/axios";
 import { useParams } from "next/navigation";
 import { ChatRoomContext } from "@/context/context";
 import { useContext } from "react";
+import Link from "next/link";
 
 const RoomTopUser = () => {
   const { targetUser, setTargetUser } = useContext(ChatRoomContext);
@@ -31,7 +32,10 @@ const RoomTopUser = () => {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <Link
+      href={`/profile/${targetUser.id}`}
+      className="flex items-center min-w-max gap-2"
+    >
       <Image
         src={targetUser.image || defaultImage}
         width={50}
@@ -39,9 +43,11 @@ const RoomTopUser = () => {
         className="h-[3rem] w-[3rem] object-cover rounded-full"
         alt="user avatar"
       />
-      <span>{targetUser.username}</span>
-      <span>{targetUser.name}</span>
-    </div>
+      <div className="flex flex-col">
+        <span>{targetUser.username}</span>
+        <span>{targetUser.name}</span>
+      </div>
+    </Link>
   );
 };
 

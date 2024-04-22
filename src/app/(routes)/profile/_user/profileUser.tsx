@@ -9,8 +9,8 @@ const ProfileUser = () => {
   const { user } = useContext(ProfileContext);
 
   return (
-    <div className="flex flex-col w-[400px] gap-2">
-      <div className="flex items-center h-fit gap-3">
+    <div className="flex flex-col w-full gap-2">
+      <div className="flex items-center h-fit w-full gap-3">
         <Image
           alt="profile imege"
           width={70}
@@ -23,14 +23,16 @@ const ProfileUser = () => {
           <span>{user.username}</span>
         </div>
       </div>
-      <a
-        href={`https://${user.link}`}
-        target="_blank"
-        className="flex items-center gap-2 hover:text-water"
-      >
-        <FaLink />
-        {user.link}
-      </a>
+      {user.link && (
+        <a
+          href={`https://${user.link}`}
+          target="_blank"
+          className="flex items-center gap-2 hover:text-water"
+        >
+          <FaLink />
+          {user.link}
+        </a>
+      )}
       <div className="flex w-full items-center min-h-[2rem] border-b border-b-ash text-[.9rem] ">
         {user.bio}
       </div>

@@ -5,14 +5,17 @@ import { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 
 const useDeleteMessage = () => {
-  const { choosedMessage } = useContext(ChatRoomContext);
+  const { choosedMessage, setNewMessage } = useContext(ChatRoomContext);
 
   const deleteResult = useMutation({
     mutationFn: async (message_id: number) => {
       const response = await baseURL.delete(
         `/messages?message_id=${message_id}`
       );
-      return response.data.result;
+      if(response.data.deleted) {
+        setNewMessage({action: "delete", message: choosedMessage})
+      }
+      return response.data.deleted;
     },
   });
 

@@ -9,7 +9,7 @@ import { ChatRoomContext } from "@/context/context";
 
 const RoomMessages = () => {
   const { setMessages } = useContext(ChatRoomContext);
-  const chat_id = useParams().id;
+  const chat_id = useParams()?.id;
   const messagesResult = useQuery({
     queryKey: [`messages${chat_id}`],
     queryFn: async () => {

@@ -4,7 +4,7 @@ import { ChatRoomContext } from "@/context/context";
 import { MessageSqlType, UserSqlType } from "@/types/types";
 import { useContext } from "react";
 
-const MessageList = ({ loginUser }: { loginUser: UserSqlType }) => {
+const MessageList = ({ loginUser }: { loginUser?: UserSqlType }) => {
   const { user, targetUser, messages, choosedMessage, setChoosedMessage } =
     useContext(ChatRoomContext);
 
