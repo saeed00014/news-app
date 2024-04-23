@@ -16,7 +16,7 @@ const LogOut = () => {
   const { handleLogOut } = useLogOut();
 
   return (
-    <div onClick={handleLogOut}>
+    <div className="w-full" onClick={handleLogOut}>
       <Button text={persian.logOut} />
     </div>
   );

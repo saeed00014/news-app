@@ -18,7 +18,7 @@ const MessageNews = ({ newsId, isMyMessage }: Props) => {
   });
 
   if (newsResult.isPending) {
-    return <></>;
+    return <div className="flex w-[280px] h-[160px]"></div>;
   }
 
   const news = newsResult.data;

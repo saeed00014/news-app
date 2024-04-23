@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import SectionSpliter from "@/components/ui/sectionSpliter";
 import ViewAll from "@/components/ui/viewAll";
 import CategoryNews from "./categoryNews";
@@ -17,13 +17,13 @@ const CategoryBody = ({ category }: { category: string }) => {
   });
 
   if (categoryNewsResult.isPending) {
-    return <></>;
+    return <div className="flex flex-col gap-2 md:h-[424px] h-[290px] "></div>;
   }
 
   const categoryNews = categoryNewsResult.data;
 
-  if(!Array.isArray(categoryNews) || !categoryNews[0]) {
-    return <></>
+  if (!Array.isArray(categoryNews) || !categoryNews[0]) {
+    return <></>;
   }
 
   return (
@@ -32,7 +32,7 @@ const CategoryBody = ({ category }: { category: string }) => {
       <CategoryNews category={category} categoryNews={categoryNews} />
       <ViewAll path={`/${category}`} />
     </div>
-  )
+  );
 };
 
 export default CategoryBody;
