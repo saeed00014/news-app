@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest, res: any) {
   try {
-    const userResponse = await fetch(`http://localhost:3000/api/auth`, {
+    const userResponse = await fetch(`${process.env.AXIOS_URL}/auth`, {
       method: "GET",
       headers: { Cookie: cookies().toString() },
     });

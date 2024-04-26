@@ -23,7 +23,7 @@ const NewsPage = () => {
   const news = newsResult.data;
 
   return (
-    <div className="flex flex-col p-2 gap-6">
+    <div className="flex flex-col p-2 gap-6 pb-[70px]">
       <News news={news} />
       <RelatedNews category={news.category} />
     </div>

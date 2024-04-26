@@ -11,8 +11,13 @@ export function GET(req: NextRequest) {
     const params = req.nextUrl.searchParams;
     const targetUsername = params.get("targetUsername");
     const result = <[] | ChatSqlType[] | SqlErrorType>await query({
-      query: `SELECT id, user_id, targetUser_id FROM chats WHERE username Like '%${targetUsername}%' OR targetUsername Like '%${targetUsername}%'`,
-      values: [targetUsername, targetUsername],
+      query: `SELECT id, user_id, targetUser_id FROM chats WHERE username Like '%${targetUsername}%' OR targetUsername Like '%${targetUsername}%' AND username = ? OR targetUsername = ?`,
+      values: [
+        targetUsername,
+        targetUsername,
+        userInof.username,
+        userInof.username,
+      ],
     });
     if (Array.isArray(result)) {
       if (!result.length) {

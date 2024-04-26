@@ -25,7 +25,7 @@ const TopBar = () => {
         <TextLink
           path="/login"
           text={persian.signInsignUp}
-          classNames="lg:flex hidden absolute bottom-5 min-w-max text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
+          classNames="lg:flex hidden text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
         />
       )}
     </>

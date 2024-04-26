@@ -8,7 +8,7 @@ import { MongoNewsType, NewsInfo } from "@/types/types";
 import { smallNewsImageCard } from "@/lib/utils/styles";
 
 type NewsCardImage = {
-  newsInfo: NewsInfo;
+  newsInfo: MongoNewsType;
   classNames?: string;
 };
 
@@ -80,7 +80,7 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
 };
 
 type NewsCard = {
-  newsInfo: NewsInfo;
+  newsInfo: MongoNewsType;
   classNames?: string;
 };
 

@@ -43,8 +43,8 @@ const RoomTopUser = () => {
         className="h-[3rem] w-[3rem] object-cover rounded-full"
         alt="user avatar"
       />
-      <div className="flex flex-col">
         <span>{targetUser.username}</span>
+      <div className="flex flex-col">
         <span>{targetUser.name}</span>
       </div>
     </Link>

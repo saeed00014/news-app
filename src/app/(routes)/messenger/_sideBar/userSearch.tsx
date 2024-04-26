@@ -22,7 +22,7 @@ const UserSearch = ({
     <div
       className={merge(
         `absolute top-0 bottom-0 flex flex-col h-full px-1 py-3 min-w-[250px] gap-3 bg-ship duration-150 border-l  ${
-          isSearchActive ? "right-0" : " -right-[300px]"
+          isSearchActive ? "right-0" : " -right-[315px]"
         }`,
         classNames
       )}
