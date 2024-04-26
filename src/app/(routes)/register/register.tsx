@@ -36,8 +36,7 @@ export const useSubmitRegister = () => {
 
         setEmailRepeatedError(false);
         setUsernameRepeatedError(false);
-        router.push("/")
-
+        location.replace("/")
       } catch (error) {
         setLoading(false);
         setNetworkError(true);
