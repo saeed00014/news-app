@@ -38,15 +38,13 @@ const ResultUser = ({ user, classNames }: ResultUser) => {
         classNames
       )}
     >
-      <span className="flex justify-center">
-        <Image
-          src={user.image || defaultImage}
-          width={50}
-          height={50}
-          alt="user picture"
-          className="object-cover w-12 min-w-12 rounded-full"
-        />
-      </span>
+      <Image
+        alt="profile imege"
+        width={50}
+        height={50}
+        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px]"
+        src={user.image || defaultImage}
+      />
       <div className="flex flex-col justify-center items-start text-[.9rem]">
         <span>{user.name}</span>
         <span className="line-clamp-1">{user.username}</span>

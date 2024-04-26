@@ -17,14 +17,16 @@ const useChatInfo = () => {
   const router = useRouter();
 
   const checkChat = useMutation({
-    mutationFn: async (targetUser_id: number) => {
+    mutationFn: async (user: UserInfoType) => {
       try {
         const response = await baseURL.get(
-          `/chats/checkChat?targetUser_id=${targetUser_id}`
+          `/chats/checkChat?targetUser=${user.id}`
         );
         if (!response.data?.result[0]?.id) {
-          const response2 = await baseURL.post("/chats", targetUser_id);
-          router.push(`/messenger/${response2.data.insertId}`);
+          const response2 = await baseURL.post("/chats", user);
+          if (response2.data.insertId) {
+            router.push(`/messenger/${response2.data.insertId}`);
+          }
           return response2.data.insertId;
         }
         router.push(`/messenger/${response.data.result[0].id}`);
@@ -35,8 +37,8 @@ const useChatInfo = () => {
     },
   });
 
-  const handleClick = (targetUser_id: number) => {
-    checkChat.mutate(targetUser_id);
+  const handleClick = (user: UserInfoType) => {
+    checkChat.mutate(user);
   };
 
   return { handleClick };
@@ -62,7 +64,7 @@ const UserList = ({ searchResult, searchValue }: Props) => {
       <ResultUserList>
         {searchResult.data.result.map((user: UserInfoType) => {
           return (
-            <div onClick={() => handleClick(user.id)} key={user.id}>
+            <div onClick={() => handleClick(user)} key={user.id}>
               <ResultUser user={user} />
             </div>
           );
