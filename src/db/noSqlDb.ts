@@ -7,6 +7,8 @@ async function dbCollection() {
     }
 
     const uri = process.env.MONGODB_URI;
+    const dataName = process.env.MONGO_DATABASE_NAME;
+
     const options = {
       serverApi: {
         version: ServerApiVersion.v1,
@@ -27,7 +29,7 @@ async function dbCollection() {
     } else {
       client = new MongoClient(uri, options);
       const clientConnection = await client.connect();
-      const db = clientConnection.db("donyanews");
+      const db = clientConnection.db(process.env.MONGO_DATABASE_NAME);
       global.mongodbClient.conn = db;
       return db;
     }

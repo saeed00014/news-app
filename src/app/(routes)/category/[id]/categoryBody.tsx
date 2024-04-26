@@ -1,7 +1,7 @@
 "use client";
 import { baseURL } from "@/axios/axios";
 import { NewsBar } from "@/components/ui/news";
-import { NewsInfo } from "@/types/types";
+import { MongoNewsType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -22,8 +22,8 @@ const CategoryBody = () => {
 
   const categoryNews = categoryResult.data;
   return (
-    <div className="flex flex-col gap-4 lg:px-4 md:px-2 px-1">
-      {categoryNews.map((news: NewsInfo) => {
+    <div className="flex flex-col gap-4 lg:px-4 md:px-2 px-1 pb-[70px]">
+      {categoryNews.map((news: MongoNewsType) => {
         return (
           <div key={news.title}>
             <NewsBar newsInfo={news} />

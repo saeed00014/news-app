@@ -19,9 +19,9 @@ const SideBar = ({ setIsOpen, isOpen }: Props) => {
 
   return (
     <div
-      className={`fixed ${
+      className={`fixed top-0 bottom-0 ${
         isOpen ? "right-0" : "-right-[230px]"
-      } top-0 lg:hidden flex flex-col h-screen w-[220px] lg:gap-8 gap-2 transition-all duration-200 z-50`}
+      } top-0 lg:hidden flex flex-col w-[220px] lg:gap-8 gap-2 transition-all duration-200 z-50`}
     >
       {isOpen && <CloseBg setEvent={setIsOpen} />}
       <div className="h-full bg-ship z-50">

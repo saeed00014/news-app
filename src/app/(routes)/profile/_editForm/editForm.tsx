@@ -59,7 +59,7 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
         classNames="sticky top-0 w-full justify-between py-1 md:px-4 px-2 bg-ship rounded-t-[1rem] z-50"
       />
       <div
-        className="flex flex-col md:pb-5 pb-3 md:px-4 px-2 w-full max-w-[400px] md:min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-b-[1rem] bg-white z-50"
+        className="flex flex-col md:pb-5 pb-3 md:px-4 px-2 w-full max-w-[400px] md:min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-b-[1rem] bg-white z-50 no-scrollbar"
       >
         <FormItem>
           <Label id="name" text={persian.name} />
