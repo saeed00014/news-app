@@ -23,6 +23,6 @@ export const editUserSchema = z.object({
   name: z.string().regex(/^.{1,50}$/),
   username: z.string().regex(/^[A-Za-z0-9]{3,12}$/),
   email: z.string().regex(/^(?=.*[@])(?=.*[.])[a-zA-Z0-9!@#$%^&*.]{8,40}$/),
-  link: z.string().regex(/^.{1,40}$/),
+  link: z.string().regex(/^.{0,40}$/),
   bio: z.string().regex(/^.{1,225}$/),
 });

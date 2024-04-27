@@ -7,16 +7,16 @@ import checkCookie from "@/lib/utils/checkCookie";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
-    const userInof = checkCookie();
+    const userInfo = checkCookie();
     const params = req.nextUrl.searchParams;
     const targetUsername = params.get("targetUsername");
     const result = <[] | ChatSqlType[] | SqlErrorType>await query({
-      query: `SELECT id, user_id, targetUser_id FROM chats WHERE username Like '%${targetUsername}%' OR targetUsername Like '%${targetUsername}%' AND username = ? OR targetUsername = ?`,
+      query: `SELECT id, user_id, targetUser_id, username, targetUsername FROM chats WHERE (username Like '%${targetUsername}%' OR targetUsername Like '%${targetUsername}%') AND (username = '${userInfo.username}' OR targetUsername = '${userInfo.username}')`,
       values: [
         targetUsername,
         targetUsername,
-        userInof.username,
-        userInof.username,
+        userInfo.username,
+        userInfo.username,
       ],
     });
     if (Array.isArray(result)) {
@@ -32,7 +32,7 @@ export function GET(req: NextRequest) {
         {
           response: "chat is loaded successfully",
           result: result,
-          user: userInof,
+          user: userInfo,
         },
         { status: 200 }
       );

@@ -9,6 +9,7 @@ import {
 } from "@/types/types";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import checkCookie from "@/lib/utils/checkCookie";
+import { userInfo } from "os";
 
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
@@ -53,11 +54,17 @@ export function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
   return tryCatch(async () => {
-    const userinfo = checkCookie();
-    const targetUser_id = await req.json();
+    const userInfo = checkCookie();
+    const targetUser = await req.json();
     const result = <SqlSuccessType | SqlErrorType>await query({
-      query: "INSERT INTO `chats`(`user_id`, `targetUser_id`) VALUES (?, ?)",
-      values: [userinfo.id, targetUser_id],
+      query:
+        "INSERT INTO `chats`(`user_id`, `targetUser_id`, `username`, `targetUsername`) VALUES (?, ?, ?, ?)",
+      values: [
+        userInfo.id,
+        targetUser.id,
+        userInfo.username,
+        targetUser.username,
+      ],
     });
     if (result && "insertId" in result && result.insertId) {
       return NextResponse.json(

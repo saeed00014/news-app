@@ -40,6 +40,11 @@ const config: Config = {
           "50%": { opacity: ".7" },
           "100%": { opacity: "1" },
         },
+        completeFade: {
+          "0%": { opacity: "1" },
+          "30%": { opacity: "1" },
+          "100%": { opacity: ".1" }
+        },
         loading: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '.5' },

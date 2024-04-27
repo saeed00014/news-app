@@ -2,45 +2,43 @@ import dbCollection from "@/db/noSqlDb";
 import { DATABASE_ERROR, UNEXPECTED_ERROR } from "@/lib/utils/errorCodes";
 import { tryCatch } from "@/lib/utils/tryCatch";
 import { MongoErrorType, MongoNewsType } from "@/types/types";
-import { Collection, Db } from "mongodb";
+import { Collection, Db, ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-export function GET(req: NextRequest) {
+export function GET(req: NextRequest, route: any) {
   return tryCatch(async () => {
     const db: Db = await dbCollection();
     const collection = db.collection("news");
-    const params = req.nextUrl.searchParams;
-    const result = <[] | MongoNewsType[] | MongoErrorType>await collection
-      .find({
-        title: "پیش بینی قیمت دلار ۶ فرودین ۱۴۰۳/ قیمت دلار سر افزایش دارد؟",
-      })
-      .toArray();
-      if (Array.isArray(result)) {
-        if (!result.length) {
-          return NextResponse.json(
-            {
-              response: "there is no more result for this request",
-            },
-            { status: 404 }
-          );
-        }
+    const id = route.params.id;
+    const result = <[] | MongoNewsType[] | MongoErrorType>(
+      await collection.find({ _id: new ObjectId(id) }).toArray()
+    );
+    if (Array.isArray(result)) {
+      if (!result.length) {
         return NextResponse.json(
           {
-            response: "news is loaded successfully",
-            result: result,
+            response: "there is no more result for this request",
           },
-          { status: 200 }
-        );
-      }
-      if ("errorResponse" in result && result.errorResponse.code) {
-        return NextResponse.json(
-          { response: "your request is not valid" },
-          { status: DATABASE_ERROR.code }
+          { status: 404 }
         );
       }
       return NextResponse.json(
-        { response: "there is a problem please try again laterr" },
-        { status: UNEXPECTED_ERROR.code }
+        {
+          response: "news is loaded successfully",
+          result: result,
+        },
+        { status: 200 }
       );
+    }
+    if ("errorResponse" in result && result.errorResponse.code) {
+      return NextResponse.json(
+        { response: "your request is not valid" },
+        { status: DATABASE_ERROR.code }
+      );
+    }
+    return NextResponse.json(
+      { response: "there is a problem please try again laterr" },
+      { status: UNEXPECTED_ERROR.code }
+    );
   });
 }

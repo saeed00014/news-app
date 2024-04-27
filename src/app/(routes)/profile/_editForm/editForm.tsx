@@ -50,17 +50,15 @@ const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(() => onSubmit({ image, getValues }))}
-      className="flex flex-col items-center md:px-0 px-1 w-full max-w-[400px] h-fit rounded-[1rem] z-50"
+      className="flex flex-col items-center md:px-0 px-2 w-full max-w-[400px] h-fit rounded-[1rem] z-50"
     >
       <CloseBackground setEvent={setIsEditActive} />
-      <CloseBtn
-        text={persian.edit}
-        setEvent={setIsEditActive}
-        classNames="sticky top-0 w-full justify-between py-1 md:px-4 px-2 bg-ship rounded-t-[1rem] z-50"
-      />
-      <div
-        className="flex flex-col md:pb-5 pb-3 md:px-4 px-2 w-full max-w-[400px] md:min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-b-[1rem] bg-white z-50 no-scrollbar"
-      >
+      <div className="flex flex-col md:pb-5 pb-3 md:px-4 px-2 w-full max-w-[400px] md:min-w-[400px] h-[80vh] max-h-[630px] gap-3 overflow-y-auto rounded-[1rem] bg-white z-50 no-scrollbar">
+        <CloseBtn
+          text={persian.edit}
+          setEvent={setIsEditActive}
+          classNames="sticky top-0 -mb-3 w-full justify-between py-1 bg-ship z-50"
+        />
         <FormItem>
           <Label id="name" text={persian.name} />
           <Input
