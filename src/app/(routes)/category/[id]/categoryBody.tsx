@@ -22,7 +22,7 @@ const CategoryBody = () => {
 
   const categoryNews = categoryResult.data;
   return (
-    <div className="flex flex-col gap-4 lg:px-4 md:px-2 px-1 pb-[70px]">
+    <div className="md:flex md:flex-col grid grid-cols-2 md:gap-4 gap-1 lg:px-4 md:px-2 px-1 pb-[70px]">
       {categoryNews.map((news: MongoNewsType) => {
         return (
           <div key={news.title}>

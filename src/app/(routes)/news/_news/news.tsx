@@ -12,7 +12,7 @@ const News = ({ news }: { news: MongoNewsType }) => {
   return (
     <div className="relative flex flex-col gap-6">
       <NewsOptions />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 ">
         <h2 className="lg:text-[1.3rem] text-[1rem]">{persian.newsH2Tag}</h2>
         <p className="lg:text-2xl md:text-[1.3rem] text-[1rem] font-semibold">
           {news.title}
@@ -24,7 +24,7 @@ const News = ({ news }: { news: MongoNewsType }) => {
             height={0}
             sizes="100vw"
             className="md:h-[400px] h-[250px] w-full max-w-[700px] object-cover"
-            src={news.image}
+            src={`/news/${news._id}.webp`}
           />
         </div>
         <div className="flex justify-start items-center w-full">

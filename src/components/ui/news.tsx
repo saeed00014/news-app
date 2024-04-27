@@ -25,7 +25,7 @@ const NewsCardImage = ({ newsInfo, classNames }: NewsCard) => {
           alt="dolar news"
           layout="fill"
           className="group w-full h-full object-cover group-hover:scale-110 duration-200"
-          src={newsInfo?.image}
+          src={`/news/${newsInfo._id}.webp`}
         />
         <Link
           className="absolute bottom-0 flex flex-col justify-end w-full h-full px-3 pb-5 bg-ashImage gap-1"
@@ -33,7 +33,9 @@ const NewsCardImage = ({ newsInfo, classNames }: NewsCard) => {
         >
           <Category text={newsInfo?.category} />
           <h2 className="text-ship">{persian.newsH2Tag}</h2>
-          <p className="text-ship font-semibold md:text-[1rem] text-[.9rem]">{newsInfo?.title}</p>
+          <p className="text-ship font-semibold md:text-[1rem] text-[.9rem]">
+            {newsInfo?.title}
+          </p>
         </Link>
       </div>
     </article>
@@ -48,21 +50,21 @@ type NewsBar = {
 const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
   return (
     <article
-      className={merge("flex items-center h-full w-full bg-ship", classNames)}
+      className={merge("flex items-start h-full w-full bg-ship", classNames)}
     >
       <Link
         href={`/news/${newsInfo._id}`}
-        className="md:flex md:flex-row flex-col items-center w-full"
+        className="md:flex md:flex-row flex-col items-center w-full h-full"
       >
-        <div className="relative md:w-[50%] w-full h-[10rem] object-cover">
+        <div className="relative md:w-[40%] md:max-w-[300px] md:h-[10rem] md:min-h-[10rem] h-full min-h-[7rem] max-h-[7rem] object-cover">
           <Image
             alt="dolar news"
             layout="fill"
             className="w-full h-full object-cover"
-            src={newsInfo.image}
+            src={`/news/${newsInfo._id}.webp`}
           />
         </div>
-        <div className="flex flex-col justify-end w-full h-full md:px-3 px-1 md:py-0 py-1 md:gap-1">
+        <div className="flex flex-col justify-end w-full  md:px-3 px-1 md:py-0 py-1 md:gap-1">
           <Category text={newsInfo.category} />
           <h2 className="md:flex hidden text-dark md:text-[1rem] text-[.8rem]">
             {persian.newsH2Tag}
@@ -92,8 +94,14 @@ const NewsCard = ({ newsInfo, classNames }: NewsCard) => {
         classNames
       )}
     >
-      <Link href={`/news/5`}>
-        <Image alt={persian.adds} className="object-contain" src={testNews} />
+      <Link href={`/news/${newsInfo._id}`}>
+        <Image
+          alt={persian.adds}
+          width={150}
+          height={120}
+          className="object-cover w-full max-h-[120px] min-h-[120px]"
+          src={`/news/${newsInfo._id}.webp`}
+        />
         <span className="group group-hover:text-blood line-clamp-2 md:text-[1rem] text-[.8rem]">
           {newsInfo.description}
         </span>
