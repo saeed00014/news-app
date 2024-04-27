@@ -72,7 +72,8 @@ const persian = {
   avatar: "آپلود عکس پروفایل",
   submitEdit: "ذخیره",
   dragFile: "فایل خود را بکشید",
-  editMessage: "تغییر پیام"
+  editMessage: "تغییر پیام",
+  plsLogin: "لطفا وارد شوید"
 };
 
 export const categories = [

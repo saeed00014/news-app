@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header/header";
 import Providers from "@/components/providers";
+import PopUpStack from "@/components/ui/popUpStack";
 
 const myFont = localFont({ src: "../font/IRANSansXMedium.ttf" });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           <Providers>
             <Header />
             {children}
+            <PopUpStack />
           </Providers>
         </div>
       </body>
