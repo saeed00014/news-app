@@ -31,8 +31,8 @@ const News = ({ news }: { news: MongoNewsType }) => {
           <p>{news.description}</p>
         </div>
       </div>
-      {news.add && <InDocAdds adds={news.add} />}
-      {news.readMore && <InDocReadMore readMore={news.readMore} />}
+      {/* {news.add && <InDocAdds adds={news.add} />} */}
+      {/* {news.readMore && <InDocReadMore readMore={news.readMore} />} */}
       {news.content && <Content content={news.content} />}
     </div>
   );

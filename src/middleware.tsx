@@ -12,7 +12,6 @@ export async function middleware(request: NextRequest, res: any) {
     }
 
     const data = await userResponse.json();
-
     if (data.login) {
       return NextResponse.next();
     }
@@ -25,5 +24,11 @@ export async function middleware(request: NextRequest, res: any) {
 }
 
 export const config = {
-  matcher: ["/messenger/:path*", "/profile/:path*"],
+  matcher: [
+    "/messenger/:path*",
+    "/profile/:path*",
+    "/api/chats/:path*",
+    "/api/messages/:path*",
+    "/api/users/:path*",
+  ],
 };

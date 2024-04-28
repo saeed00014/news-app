@@ -43,7 +43,7 @@ const config: Config = {
         completeFade: {
           "0%": { opacity: "1" },
           "30%": { opacity: "1" },
-          "100%": { opacity: ".1" }
+          "100%": { opacity: "0" }
         },
         loading: {
           '0%, 100%': { opacity: '1' },

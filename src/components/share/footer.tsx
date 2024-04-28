@@ -40,7 +40,7 @@ const useSendNews = ({ setIsShareActive }: useSendNews) => {
   });
 
   const handleShare = () => {
-    setIsLoading(true);
+    choosedUsers[0] && setIsLoading(true);
     choosedUsers[0] && sendNews.mutate(choosedUsers);
   };
 

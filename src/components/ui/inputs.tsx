@@ -115,9 +115,18 @@ type Radio = {
   name: string;
   value: string;
   placeholder?: string;
+  classNames?: string;
 };
 
-const Radio = ({ register, type, id, name, value, placeholder }: Radio) => {
+const Radio = ({
+  register,
+  type,
+  id,
+  name,
+  value,
+  placeholder,
+  classNames,
+}: Radio) => {
   return (
     <input
       {...register(name)}
@@ -126,7 +135,10 @@ const Radio = ({ register, type, id, name, value, placeholder }: Radio) => {
       name={name}
       value={value}
       placeholder={placeholder}
-      className="appearance-none min-w-[14px] min-h-[14px] rounded-full border border-black checked:bg-ash"
+      className={merge(
+        "appearance-none min-w-[14px] min-h-[14px] rounded-full border border-black checked:bg-ash",
+        classNames
+      )}
     />
   );
 };
@@ -136,15 +148,19 @@ type Select = {
   id: string;
   name: string;
   options: number[];
+  classNames?: string;
 };
 
-const Select = ({ register, id, name, options }: Select) => {
+const Select = ({ register, id, name, options, classNames }: Select) => {
   return (
     <select
       {...register(name)}
       id={id}
       name={name}
-      className="h-10 w-full px-2 border border-dark bg-ship appearance-none"
+      className={merge(
+        "h-10 w-full px-2 border border-dark bg-ship appearance-none",
+        classNames
+      )}
     >
       {options.map((option, e) => {
         return (
