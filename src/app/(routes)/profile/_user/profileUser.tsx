@@ -15,7 +15,7 @@ const ProfileUser = () => {
           alt="profile imege"
           width={70}
           height={70}
-          className="rounded-full min-w-[70px] min-h-[70px] max-h-[70px] max-w-[70px]"
+          className="rounded-full min-w-[70px] min-h-[70px] max-h-[70px] max-w-[70px] object-cover"
           src={user.image || defaultImage}
         />
         <div className="flex flex-col">

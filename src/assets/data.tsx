@@ -73,7 +73,13 @@ const persian = {
   submitEdit: "ذخیره",
   dragFile: "فایل خود را بکشید",
   editMessage: "تغییر پیام",
-  plsLogin: "لطفا وارد شوید"
+  plsLogin: "لطفا وارد شوید",
+  loginFailed: "",
+  user: "کاربر",
+  chat: "چت",
+  noUserChosen: "هیچ یوزری انتخاب نشده",
+  noResult: "هیچ بتیجه ای وجود ندارد",
+  noChat: "هیچ چتی وجود ندارد",
 };
 
 export const categories = [

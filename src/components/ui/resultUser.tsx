@@ -42,7 +42,7 @@ const ResultUser = ({ user, classNames }: ResultUser) => {
         alt="profile imege"
         width={50}
         height={50}
-        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px]"
+        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px] object-cover"
         src={user.image || defaultImage}
       />
       <div className="flex flex-col justify-center items-start text-[.9rem]">
@@ -91,7 +91,7 @@ const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
           width={80}
           height={80}
           alt="user picture"
-          className="object-cover rounded-full"
+          className="object-cover w-[80px] min-w-[80px] max-w-[80px] h-[80px] min-h-[80px] max-h-[80px] rounded-full"
         />
       </span>
       <span className="">{user.name}</span>

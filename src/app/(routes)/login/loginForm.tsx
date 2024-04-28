@@ -21,7 +21,7 @@ const LoginForm = ({ onSubmit, networkError, loginError, loading }: Props) => {
   return (
     <form
       method="post"
-      className="flex flex-col gap-3 w-fit h-fit bg-ship shadow-2xl p-4 pt-2 rounded-[.5rem] max-w-[355px]"
+      className="flex flex-col md:gap-3 gap-2 md:w-fit w-full h-fit bg-ship shadow-2xl md:p-4 p-2 md:pt-2 pt-1 rounded-[.5rem] max-w-[355px]"
       onSubmit={handleSubmit(() =>
         onSubmit({
           username: getValues("username"),
@@ -37,7 +37,7 @@ const LoginForm = ({ onSubmit, networkError, loginError, loading }: Props) => {
         id="username"
         placeholder={persian.username}
         isIconError={false}
-        classNames="h-12 w-[20rem] bg-moon"
+        classNames="h-12 md:w-[20rem] w-full bg-moon"
       />
       <Input
         register={register}

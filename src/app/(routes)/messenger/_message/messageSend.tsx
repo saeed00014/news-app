@@ -6,10 +6,7 @@ import SendBar from "@/components/sendBar";
 import { baseURL } from "@/axios/axios";
 import { ChatRoomContext } from "@/context/context";
 import AttachedMessageBar from "./attachedMessageBar";
-import {
-  ChatActionMessage,
-  MessageSendType,
-} from "@/types/types";
+import { ChatActionMessage, MessageSendType } from "@/types/types";
 
 const useSend = (url: string) => {
   const [sendValue, setSendValue] = useState("");
@@ -41,19 +38,25 @@ const useSend = (url: string) => {
   let attached = null;
   let attached_id: any = null;
   if (actionMessage.action === "share") {
-    attached = actionMessage.message.text;
+    if (actionMessage.message.text) {
+      attached = actionMessage.message.text;
+    }
+    if (actionMessage.message.news) {
+      attached = `خبر`;
+    }
     attached_id = actionMessage.message.id;
   }
 
   const onSend = (e: any) => {
     setSendValue("");
-    sendResult.mutate({
-      text: e.target.text.value,
-      news: null,
-      image: null,
-      attached_id: attached_id,
-      attached: attached,
-    });
+    e.target.text.value &&
+      sendResult.mutate({
+        text: e.target.text.value,
+        news: null,
+        image: null,
+        attached_id: attached_id,
+        attached: attached,
+      });
   };
 
   return { onSend, sendValue, setSendValue };

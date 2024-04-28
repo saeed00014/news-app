@@ -20,42 +20,20 @@ export function POST(req: NextRequest) {
           headers: { Cookie: cookies().toString() },
         }
       );
-      const chat = chatResult.data.result[0]
-      console.log(chat.id);
+
+      const chat = chatResult.data.result[0];
+      
       const result = <SqlSuccessType | SqlErrorType>await query({
         query:
           "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached` ) VALUES (?, ?, ?, ?, ?, ?, ?)",
         values: [chat.id, userInfo.id, null, news_id, null, null, null],
       });
     });
-    // const { text, news, image, attached_id, attached } = <MessageClientType>(
-    //   await req.json()
-    // );
-    // const result = <SqlSuccessType | SqlErrorType>await query({
-    //   query:
-    //     "INSERT INTO `messages`(`chat_id`, `user_id`, `text`, `news`, `image`, `attached_id`, `attached` ) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    //   values: [chat_id, userInfo.id, text, news, image, attached_id, attached],
-    // });
-    // if (result && "insertId" in result && result.insertId) {
-    //   return NextResponse.json(
-    //     {
-    //       response: "your message is sent successfully",
-    //       insertId: result.insertId,
-    //     },
-    //     { status: 200 }
-    //   );
-    // }
-    // if ("sqlState" in result && result.sqlState) {
-    //   return NextResponse.json(
-    //     { response: "your request is not valid" },
-    //     { status: DATABASE_ERROR.code }
-    //   );
-    // }
     return NextResponse.json(
       {
-        response: "there is a problem please try again later",
+        response: "",
       },
-      { status: UNEXPECTED_ERROR.code }
+      { status: 200 }
     );
   });
 }

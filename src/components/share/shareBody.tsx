@@ -32,7 +32,7 @@ const ShareBody = ({ searchResult, searchValue }: Props) => {
   }
 
   const resultChats = userChats.data;
-
+  
   if (!searchValue) {
     return (
       <ChatList

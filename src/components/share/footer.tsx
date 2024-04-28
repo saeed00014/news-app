@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { NewsShareContext } from "@/context/context";
 import { useMutation } from "@tanstack/react-query";
@@ -7,10 +7,17 @@ import { baseURL } from "@/axios/axios";
 import { UserSqlType } from "@/types/types";
 import { useParams } from "next/navigation";
 import FooterUsers from "./footerUsers";
+import LoadingSpin from "../loadingSpin";
+import PopUpTimer from "../popUpTimer";
 
-const useSendNews = () => {
+type useSendNews = {
+  setIsShareActive: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const useSendNews = ({ setIsShareActive }: useSendNews) => {
   const news_id = useParams()?.id;
-  const { choosedUsers } = useContext(NewsShareContext);
+  const { choosedUsers, setChooseUsers } = useContext(NewsShareContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendNews = useMutation({
     mutationFn: async (choosedUsers: UserSqlType[]) => {
@@ -22,30 +29,48 @@ const useSendNews = () => {
           choosedUsers_id,
         }
       );
+      setIsLoading(false);
+      if (response.status == 200) {
+        setChooseUsers([]);
+        setIsShareActive(false)
+        return response;
+      }
       return response;
     },
   });
 
   const handleShare = () => {
+    choosedUsers[0] && setIsLoading(true);
     choosedUsers[0] && sendNews.mutate(choosedUsers);
   };
 
-  return { handleShare };
+  return { handleShare, isLoading };
 };
 
-const Footer = () => {
-  const { handleShare } = useSendNews();
+type Props = {
+  setIsShareActive: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Footer = ({ setIsShareActive }: Props) => {
+  const { handleShare, isLoading } = useSendNews({
+    setIsShareActive,
+  });
 
   return (
-    <div className="flex justify-between items-center w-full h-[4rem] px-4">
-      <button
-        onClick={handleShare}
-        className="px-4 py-2 rounded-[.2rem] bg-moon hover:brightness-90"
-      >
-        {persian.share}
-      </button>
-      <FooterUsers />
-    </div>
+    <>
+      <div className="flex justify-between items-center w-full h-[4rem] px-4">
+        <button
+          onClick={handleShare}
+          className="flex px-3 py-2 rounded-[.2rem] bg-grass text-ship hover:brightness-110 gap-1"
+        >
+          {isLoading && (
+            <LoadingSpin classNames="w-[1.4rem] min-w-[1.4rem] h-[1.4rem] border-ship border-l-transparent" />
+          )}
+          {persian.share}
+        </button>
+        <FooterUsers />
+      </div>
+    </>
   );
 };
 

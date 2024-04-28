@@ -33,7 +33,7 @@ const usePut = (url: string) => {
 
   const onPut = (e: any) => {
     setPutValue("");
-    putResult.mutate({
+    e.target.text.value && putResult.mutate({
       text: e.target.text.value,
     });
   };

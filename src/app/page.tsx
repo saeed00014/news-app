@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <section className="flex flex-col w-full max-w-[1400px] md:gap-4 gap-2">
       <HeadNews />
-      <DoubleAdd />
+      {/* <DoubleAdd /> */}
       <Category />
     </section>
   );

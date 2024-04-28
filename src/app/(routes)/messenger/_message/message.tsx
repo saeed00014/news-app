@@ -17,7 +17,9 @@ const Message = ({ message, handleClick, isMyMessage }: Props) => {
   return (
     <li
       id={`message${message.id}`}
-      className={`flex gap-1 ${isMyMessage ? "flex-row-reverse" : ""}`}
+      className={`flex md:flex-row flex-col gap-1 md:items-center  ${
+        isMyMessage ? "md:flex-row-reverse items-end" : "items-start"
+      }`}
     >
       {message.text && (
         <MessageText
@@ -27,7 +29,11 @@ const Message = ({ message, handleClick, isMyMessage }: Props) => {
         />
       )}
       {message.news && (
-        <MessageNews newsId={message.news} isMyMessage={isMyMessage} />
+        <MessageNews
+          message={message}
+          handleClick={handleClick}
+          isMyMessage={isMyMessage}
+        />
       )}
       {choosedMessage?.id === message?.id && (
         <MessageIsChoosed

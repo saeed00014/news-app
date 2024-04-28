@@ -7,10 +7,11 @@ import { merge } from "@/lib/utils/merge";
 
 type Props = {
   onChange: Function;
+  search?: string;
   classNames?: string;
 };
 
-const SearchBar = ({ onChange, classNames }: Props) => {
+const SearchBar = ({ onChange, search, classNames }: Props) => {
   const { register, watch } = useForm({
     mode: "all",
   });
@@ -20,7 +21,10 @@ const SearchBar = ({ onChange, classNames }: Props) => {
       onChange={(e) => onChange(e)}
       className={merge("relative flex items-center", classNames)}
     >
-      <label htmlFor="search" className="absolute right-5 text-[1.4rem] pointer-events-none">
+      <label
+        htmlFor="search"
+        className="absolute right-5 text-[1.4rem] pointer-events-none"
+      >
         <IoIosSearch className="text-ash" />
       </label>
       <Input
@@ -28,7 +32,7 @@ const SearchBar = ({ onChange, classNames }: Props) => {
         type="text"
         name="search"
         id="search"
-        placeholder={persian.search}
+        placeholder={`${persian.search} ${search}`}
         classNames="rounded-full pr-10 border border-ash"
       />
     </div>
