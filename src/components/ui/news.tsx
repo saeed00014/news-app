@@ -32,7 +32,7 @@ const NewsCardImage = ({ newsInfo, classNames }: NewsCard) => {
           href={`/news/${newsInfo._id}`}
         >
           <Category text={newsInfo?.category} />
-          <h2 className="text-ship">{persian.newsH2Tag}</h2>
+          <h2 className="md:flex hidden text-ship">{persian.newsH2Tag}</h2>
           <p className="text-ship font-semibold md:text-[1rem] text-[.9rem]">
             {newsInfo?.title}
           </p>

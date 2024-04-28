@@ -15,7 +15,7 @@ const MessageIsChoosed = ({ message, handleClick, isMyMessage }: Props) => {
       eventFunc={() => handleClick({ message: message, mutateble: true })}
       id="messagesOptions"
     >
-      <MessageOptions isMyMessage={isMyMessage} />
+      <MessageOptions message={message} isMyMessage={isMyMessage} />
     </UseOutClick>
   );
 };

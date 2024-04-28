@@ -11,7 +11,7 @@ const MessageText = ({ message, handleClick, isMyMessage }: Props) => {
   return (
     <div
       className={`relative flex items-center w-fit ${
-        isMyMessage ? "flex-row-reverse [&>div>span]:bg-darkgrass" : ""
+        isMyMessage ? " [&>div>span]:bg-darkgrass" : ""
       }`}
     >
       <div className="flex flex-col w-fit max-w-[20rem] text-ship gap-1">
@@ -26,7 +26,7 @@ const MessageText = ({ message, handleClick, isMyMessage }: Props) => {
         )}
         <span
           onClick={() => handleClick({ message: message, mutateble: false })}
-          className="flex py-2 px-3 gap-10 min-w-max  rounded-[.8rem] bg-darkwater"
+          className="flex py-2 px-3 gap-10 break-words rounded-[.8rem] bg-darkwater"
         >
           {message.text}
         </span>

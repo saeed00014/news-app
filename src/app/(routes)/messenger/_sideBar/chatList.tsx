@@ -3,6 +3,7 @@ import { ResultUserList } from "@/components/ui/resultUser";
 import Chat from "./chat";
 import NoResult from "@/components/ui/noResult";
 import { UserSqlType } from "@/types/types";
+import persian from "@/assets/data";
 
 type Props = {
   searchResult:
@@ -33,7 +34,7 @@ const ChatList = ({ searchResult, user, type, classNames }: Props) => {
       </ResultUserList>
     );
   }
-  return <NoResult classNames={`flex justify-center w-full ${classNames}`} />;
+  return <NoResult text={persian.noChat} classNames={`flex justify-center w-full ${classNames}`} />;
 };
 
 export default ChatList;

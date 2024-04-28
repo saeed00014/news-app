@@ -19,7 +19,7 @@ const User = ({ user, classNames }: Props) => {
         alt="profile imege"
         width={50}
         height={50}
-        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px]"
+        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px] object-cover"
         src={user.image || defaultImage}
       />
       <div className="hidden flex-col min-w-max text-[.85rem] font-semibold pt-1">

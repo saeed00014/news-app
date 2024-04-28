@@ -3,6 +3,7 @@ import SearchBar from "@/components/searchBar";
 import UseSearch from "@/hooks/useSearch";
 import { merge } from "@/lib/utils/merge";
 import UserList from "./userList";
+import persian from "@/assets/data";
 
 type Props = {
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,7 +30,11 @@ const UserSearch = ({
     >
       <div className="flex">
         <BackBtn setEvent={setIsSearchActive} classNames="scale-110 pr-1" />
-        <SearchBar onChange={getsearchValue} classNames="px-2" />
+        <SearchBar
+          onChange={getsearchValue}
+          search={persian.user}
+          classNames="px-2"
+        />
       </div>
       <UserList searchResult={searchResult} searchValue={searchValue} />
     </div>

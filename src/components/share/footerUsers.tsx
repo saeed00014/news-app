@@ -3,6 +3,7 @@ import { NewsShareContext } from "@/context/context";
 import Image from "next/image";
 import defaultImage from "@/assets/default.jpg";
 import { UserSqlType } from "@/types/types";
+import persian from "@/assets/data";
 
 const FooterUsers = () => {
   const { choosedUsers, setChooseUsers } = useContext(NewsShareContext);
@@ -39,7 +40,7 @@ const FooterUsers = () => {
     );
   }
 
-  return <div>no user choosen yet</div>;
+  return <div>{persian.noUserChosen}</div>;
 };
 
 export default FooterUsers;

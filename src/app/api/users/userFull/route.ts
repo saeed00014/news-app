@@ -8,10 +8,11 @@ import { NextRequest, NextResponse } from "next/server";
 export function GET(req: NextRequest) {
   return tryCatch(async () => {
     const userInfo = checkCookie();
-    const params = req.nextUrl.searchParams
-    const user_id = params.get("user_id")
+    const params = req.nextUrl.searchParams;
+    const user_id = params.get("user_id");
     const result = <[] | UserFullSqlType[] | SqlErrorType>await query({
-      query: "SELECT `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
+      query:
+        "SELECT `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
       values: [user_id],
     });
     if (Array.isArray(result)) {
@@ -19,7 +20,7 @@ export function GET(req: NextRequest) {
         return NextResponse.json(
           {
             response: "there is no more result for this request",
-            result: []
+            result: [],
           },
           { status: 200 }
         );
@@ -35,10 +36,10 @@ export function GET(req: NextRequest) {
               image: result[0].image,
               email: result[0].email,
               bio: result[0].bio,
-              link: result[0].link
+              link: result[0].link,
             },
           ],
-          loginUser: userInfo.id == user_id
+          loginUser: userInfo.id == user_id,
         },
         { status: 200 }
       );

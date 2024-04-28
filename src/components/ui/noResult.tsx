@@ -1,8 +1,15 @@
+import persian from "@/assets/data";
 import { merge } from "@/lib/utils/merge";
 import React from "react";
 
-const NoResult = ({ classNames }: { classNames?: string }) => {
-  return <div className={merge(classNames)}>هیچ نتیجه ای وجود ندارد</div>;
+type Props = {
+  text?: string;
+  classNames?: string;
+};
+
+const NoResult = ({ text, classNames }: Props) => {
+  const textt = text ? text : persian.noResult
+  return <div className={merge(classNames)}>{textt}</div>;
 };
 
 export default NoResult;

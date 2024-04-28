@@ -2,6 +2,7 @@ import UseSearch from "@/hooks/useSearch";
 import CloseBtn from "../closeBtn";
 import SearchBar from "../searchBar";
 import ShareBody from "./shareBody";
+import persian from "@/assets/data";
 
 type Props = {
   setIsShareActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +16,7 @@ const ShareHead = ({ setIsShareActive }: Props) => {
   return (
     <>
       <div className="flex justify-between px-3 py-2 w-full">
-        <SearchBar onChange={getsearchValue} classNames="[&>label]:right-3" />
+        <SearchBar onChange={getsearchValue} search={persian.user} classNames="[&>label]:right-3" />
         <CloseBtn setEvent={setIsShareActive} />
       </div>
       <div className="flex flex-col h-[50vh] max-h-[25rem] bg-ash gap-1">

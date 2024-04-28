@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import { NewUserType } from "@/types/types";
 import { AxiosResponse } from "axios";
 import { baseURL } from "@/axios/axios";
-import { useRouter } from "next/navigation";
 
 export const useSubmitRegister = () => {
   const [confPassError, setConfPassError] = useState(false);
@@ -13,7 +12,6 @@ export const useSubmitRegister = () => {
   const [usernameRepeatedError, setUsernameRepeatedError] = useState(false);
   const [networkError, setNetworkError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const postNewUser = useMutation({
     mutationFn: async (newUser: NewUserType) => {
