@@ -20,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body className={myFont.className}>
-        <div style={{scrollbarWidth: "none"}} className="dark flex flex-col items-center h-screen w-screen bg-moon text-dark overflow-y-auto lg:pb-0 lg:pt-[81px] py-[70px] lg:px-4 md:px-2 px-1">
+        <div
+          style={{ scrollbarWidth: "none" }}
+          className="dark bg-moon text-dark flex justify-center items-center h-[100vh] w-[100vw] lg:px-4 lg:pb-0 lg:pt-[81px] py-[65px]"
+        >
           <Providers>
             <Header />
             {children}
@@ -31,3 +34,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+// className="dark flex flex-col items-center justify-center h-[100vh] w-[100vw] bg-moon text-dark overflow-y-auto lg:pb-0 lg:pt-[81px] py-[70px] lg:px-4 md:px-2 px-1"

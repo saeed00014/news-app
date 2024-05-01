@@ -28,7 +28,7 @@ const FooterUsers = () => {
                 fill={true}
                 src={user.image || defaultImage}
                 alt="profile picture"
-                className="rounded-full"
+                className="object-cover rounded-full"
               />
               <span className="group invisible group-hover:visible absolute -top-[2rem] flex flex-col justify-center items-start px-[.3rem] py-[.2rem] min-w-fit max-w-[6rem] min-h-fit max-h-[3rem] rounded-[.2rem] text-[.7rem] bg-darkgrass text-ship overflow-hidden">
                 <span className="min-w-max">.{user.username}</span>

@@ -20,7 +20,7 @@ const useChatInfo = () => {
     mutationFn: async (user: UserInfoType) => {
       try {
         const response = await baseURL.get(
-          `/chats/checkChat?targetUser=${user.id}`
+          `/chats/checkChat?targetUser_id=${user.id}`
         );
         if (!response.data?.result[0]?.id) {
           const response2 = await baseURL.post("/chats", user);
