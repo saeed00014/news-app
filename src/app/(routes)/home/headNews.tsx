@@ -5,10 +5,18 @@ import { useQuery } from "@tanstack/react-query";
 
 const HeadNews = () => {
   const topNewsResult = useQuery({
-    queryKey: [],
+    queryKey: ["topnewshome"],
     queryFn: async () => {
-      const response = await baseURL.get("/news");
-      return response.data.result;
+      try{
+        const response = await baseURL.get("/news");
+        if(response.status !== 200) {
+          throw new Error(`status=${response.status}`)
+        }
+        return response.data.result;
+      } catch(err) {
+        //log err
+        return []
+      }
     },
   });
 

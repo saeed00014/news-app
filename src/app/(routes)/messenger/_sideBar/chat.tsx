@@ -20,6 +20,10 @@ const Chat = ({ chatInfo, type }: Props) => {
     },
   });
 
+  const handleClick = () => {
+    location.replace(`/messenger/${chatInfo.id}`)
+  }
+
   if (userInfo.isPending) {
     return <PreRenderResultUser />;
   }
@@ -29,9 +33,9 @@ const Chat = ({ chatInfo, type }: Props) => {
   }
 
   return (
-    <Link href={`/messenger/${chatInfo.id}`}>
+    <div onClick={handleClick} >
       <ResultUser user={userInfo.data[0]} />
-    </Link>
+    </div>
   );
 };
 

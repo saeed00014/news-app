@@ -15,7 +15,7 @@ type Props = {
 };
 
 const ChatList = ({ searchResult, user, type, classNames }: Props) => {
-  if (searchResult && user) {
+  if (Array.isArray(searchResult) && searchResult[0] && user) {
     return (
       <ResultUserList classNames={classNames}>
         {searchResult.map((chat: any) => {

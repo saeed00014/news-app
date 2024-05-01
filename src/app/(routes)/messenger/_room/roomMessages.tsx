@@ -30,7 +30,7 @@ const RoomMessages = () => {
   }
 
   return (
-      <MessageList />
+    <MessageList />
   );
 };
 

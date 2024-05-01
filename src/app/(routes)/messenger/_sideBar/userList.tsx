@@ -25,16 +25,18 @@ const useChatInfo = () => {
         if (!response.data?.result[0]?.id) {
           const response2 = await baseURL.post("/chats", user);
           if (response2.data.insertId) {
-            router.push(`/messenger/${response2.data.insertId}`);
+            location.replace(`/messenger/${response2.data.insertId}`);
           }
           return response2.data.insertId;
         }
-        router.push(`/messenger/${response.data.result[0].id}`);
+        location.replace(`/messenger/${response.data.result[0].id}`);
         return response.data.result[0].id;
       } catch (error) {
-        showBoundary(error);
+        //log
+        return;
       }
     },
+    retry: 0
   });
 
   const handleClick = (user: UserInfoType) => {
@@ -59,7 +61,7 @@ const UserList = ({ searchResult, searchValue }: Props) => {
     );
   }
 
-  if (searchResult.data?.result) {
+  if (searchResult.data?.result[0]) {
     return (
       <ResultUserList>
         {searchResult.data.result.map((user: UserInfoType) => {

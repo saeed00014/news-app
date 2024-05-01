@@ -20,14 +20,6 @@ export function GET(req: NextRequest) {
       ],
     });
     if (Array.isArray(result)) {
-      if (!result.length) {
-        return NextResponse.json(
-          {
-            response: "there is no more result for this request",
-          },
-          { status: 404 }
-        );
-      }
       return NextResponse.json(
         {
           response: "chat is loaded successfully",

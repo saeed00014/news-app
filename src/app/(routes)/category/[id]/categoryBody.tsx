@@ -3,7 +3,7 @@ import { baseURL } from "@/axios/axios";
 import { NewsBar } from "@/components/ui/news";
 import { MongoNewsType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import React from "react";
 
 const CategoryBody = () => {
@@ -11,8 +11,16 @@ const CategoryBody = () => {
   const categoryResult = useQuery({
     queryKey: [`categoryNews${id}`],
     queryFn: async () => {
-      const response = await baseURL.get(`/news/category?category=${id}`);
-      return response.data.result;
+      try {
+        const response = await baseURL.get(`/news/category?category=${id}`);
+        if(response.status !== 200) {
+          throw new Error(`status=${response.status}`)
+        }
+        return response.data.result;
+      } catch (err) {
+        //log error
+        return []
+      }
     },
   });
 
@@ -21,8 +29,13 @@ const CategoryBody = () => {
   }
 
   const categoryNews = categoryResult.data;
+
+  if(!categoryNews[0]) {
+    return notFound()
+  }
+
   return (
-    <div className="md:flex md:flex-col grid grid-cols-2 md:gap-4 gap-1 lg:px-4 md:px-2 px-1 pb-[70px]">
+    <div className="md:flex md:flex-col grid grid-cols-2 md:gap-4 gap-1 lg:px-4 md:px-2 px-1">
       {categoryNews.map((news: MongoNewsType) => {
         return (
           <div key={news.title}>
