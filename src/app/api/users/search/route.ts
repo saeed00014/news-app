@@ -15,14 +15,6 @@ export function GET(req: NextRequest) {
       values: [username, userInfo.username],
     });
     if (Array.isArray(result)) {
-      if (!result.length) {
-        return NextResponse.json(
-          {
-            response: "there is no more result for this request",
-          },
-          { status: 404 }
-        );
-      }
       return NextResponse.json(
         {
           response: "user is loaded successfully",

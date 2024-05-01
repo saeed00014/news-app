@@ -28,14 +28,6 @@ export function GET(req: NextRequest) {
       );
       Array.isArray(response) && response[0] && result.push(response[0]);
       if(i === 5 ){
-        if (!result.length) {
-          return NextResponse.json(
-            {
-              response: "there is no more result for this request",
-            },
-            { status: 404 }
-          );
-        }
         return NextResponse.json(
           {
             response: "news is loaded successfully",

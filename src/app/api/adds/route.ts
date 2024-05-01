@@ -17,14 +17,6 @@ export function GET(req: NextRequest) {
       await collection.find({ place: place, type: type }).limit(limit).toArray()
     );
     if (Array.isArray(result)) {
-      if (!result.length) {
-        return NextResponse.json(
-          {
-            response: "there is no more result for this request",
-          },
-          { status: 404 }
-        );
-      }
       return NextResponse.json(
         {
           response: "news is loaded successfully",

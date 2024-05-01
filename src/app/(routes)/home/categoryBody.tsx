@@ -9,10 +9,18 @@ const CategoryBody = ({ category }: { category: string }) => {
   const categoryNewsResult = useQuery({
     queryKey: [category],
     queryFn: async () => {
-      const response = await baseURL.get(
-        `/news/category?category=${category}&limit=4`
-      );
-      return response.data.result;
+      try {
+        const response = await baseURL.get(
+          `/news/category?category=${category}&limit=4`
+        );
+        if (response.status !== 200) {
+          throw new Error(`status=${response.status}`);
+        }
+        return response.data.result;
+      } catch(err) {
+        //log error
+        return []
+      }
     },
   });
 

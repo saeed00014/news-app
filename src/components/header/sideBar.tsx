@@ -18,60 +18,65 @@ const SideBar = ({ setIsOpen, isOpen }: Props) => {
   const { user } = useContext(HeaderContext);
 
   return (
-    <div
-      className={`fixed top-0 bottom-0 ${
-        isOpen ? "right-0" : "-right-[230px]"
-      } top-0 lg:hidden flex flex-col w-[220px] lg:gap-8 gap-2 transition-all duration-200 z-50`}
-    >
-      {isOpen && <CloseBg setEvent={setIsOpen} />}
-      <div className="h-full bg-ship z-50">
-        <div>
-          <div className="flex justify-between items-center h-[65px] px-3">
+    <>
+      <div
+        className={`fixed top-0 bottom-0 ${
+          isOpen ? "right-0" : "-right-[230px]"
+        } top-0 lg:hidden flex flex-col w-[220px] lg:gap-8 gap-2 transition-all duration-200 z-50 overflow-y-auto no-scrollbar bg-ship`}
+      >
+        <div className="flex flex-col justify-between pb-3 h-full z-50">
+          <div>
+            <div className="sticky top-0 flex justify-between items-center h-[65px] px-3 bg-ship">
+              <span onClick={() => setIsOpen(false)}>
+                <Logo />
+              </span>
+              <CloseBtn setEvent={setIsOpen} />
+            </div>
             <span onClick={() => setIsOpen(false)}>
-              <Logo />
+              <TextLink
+                path="/"
+                text={persian.firstPage}
+                classNames="flex items-center h-[65px] pr-6 text-blood"
+              />
             </span>
-            <CloseBtn setEvent={setIsOpen} />
-          </div>
-          <span onClick={() => setIsOpen(false)}>
-            <TextLink
-              path="/"
-              text={persian.firstPage}
-              classNames="flex items-center h-[65px] pr-6 text-blood"
-            />
-          </span>
-          <span onClick={() => setIsOpen(false)}>
-            <TextLink
-              path="/messenger/inbox"
-              text={persian.messenger}
-              classNames="flex items-center h-[65px] pr-6"
-            />
-          </span>
-          <div className="group relative">
-            <DropDownBtn
-              text={persian.news}
-              classNames="flex items-center h-[65px] w-full pr-6 "
-            />
             <span onClick={() => setIsOpen(false)}>
-              <DropDownMenu />
+              <TextLink
+                path="/messenger/inbox"
+                text={persian.messenger}
+                classNames="flex items-center h-[65px] pr-6"
+              />
             </span>
+            <div className="group relative">
+              <DropDownBtn
+                text={persian.news}
+                classNames="flex items-center h-[65px] w-full pr-6 "
+              />
+              <span onClick={() => setIsOpen(false)}>
+                <DropDownMenu />
+              </span>
+            </div>
           </div>
-        </div>
-        <div onClick={() => setIsOpen(false)} className="flex justify-center ">
-          {user ? (
-            <User
-              user={user}
-              classNames="absolute bottom-5 bg-moon w-[200px] py-2 rounded-[1rem] hover:brightness-90 [&>*:nth-child(2)]:flex [&>*:nth-child(1)]:h-[55px] [&>*:nth-child(1)]:w-[55px]"
-            />
-          ) : (
-            <TextLink
-              path="/login"
-              text={persian.signInsignUp}
-              classNames="flex absolute bottom-5 min-w-max text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
-            />
-          )}
+          <div
+            onClick={() => setIsOpen(false)}
+            className="flex justify-center "
+          >
+            {user ? (
+              <User
+                user={user}
+                classNames="flex bg-moon w-[200px] py-2 rounded-[1rem] hover:brightness-90 [&>*:nth-child(2)]:flex [&>*:nth-child(1)]:h-[55px] [&>*:nth-child(1)]:w-[55px]"
+              />
+            ) : (
+              <TextLink
+                path="/login"
+                text={persian.signInsignUp}
+                classNames="flex min-w-max text-ship bg-grass rounded-[.3rem] cursor-pointer hover:brightness-110"
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      {isOpen && <CloseBg setEvent={setIsOpen} />}
+    </>
   );
 };
 

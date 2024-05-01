@@ -32,14 +32,6 @@ export function GET(req: NextRequest) {
       values: [chat_id],
     });
     if (Array.isArray(result)) {
-      if (!result.length) {
-        return NextResponse.json(
-          {
-            response: "there is no more result for this request",
-          },
-          { status: 404 }
-        );
-      }
       return NextResponse.json(
         {
           response: "messages is loaded successfully",
@@ -159,7 +151,7 @@ export async function DELETE(req: NextRequest) {
           response: "message was deleted before",
           deleted: true,
         },
-        { status: 404 }
+        { status: 200 }
       );
     }
     if ("sqlState" in result && result.sqlState) {

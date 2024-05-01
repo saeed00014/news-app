@@ -17,7 +17,7 @@ const DropDownBtn = ({ text, classNames }: DropDownBtn) => {
         classNames
       )}
     >
-      <span className="group lg:group-hover:rotate-180 duration-100">
+      <span className="group group-hover:rotate-180 duration-100">
         <IoIosArrowDown />
       </span>
       <span>{text}</span>
@@ -35,7 +35,7 @@ const DropDownItem = ({ text }: DropDownItem) => {
 
 const DropDownMenu = () => {
   return (
-    <div className="flex flex-col absolute lg:w-[13rem] w-full lg:h-0 h-[16rem] group-hover:h-[16rem] duration-150 bg-ship overflow-hidden">
+    <div className="flex flex-col absolute lg:w-[13rem] w-full h-0 group-hover:h-[16rem] duration-150 bg-ship overflow-hidden">
       {categories.map((category) => {
         return (
           <div

@@ -12,11 +12,11 @@ const RoomBody = () => {
   const chat_id = useParams()?.id;
   
   const userInfo = useQuery({
-    queryKey: ["user"],
+    queryKey: ["userroomchat"],
     queryFn: async () => {
       const response = await baseURL.get("/users/userInfo");
       setUser(response.data.result[0]);
-      return;
+      return [];
     },
   });
 
