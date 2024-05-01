@@ -57,7 +57,7 @@ const RegisterForm = ({
   return (
     <form
       onSubmit={handleSubmit(() => onSubmit({ getValues }))}
-      className="flex flex-col items-center bg-ship md:gap-4 gap-2 shadow-xl md:p-4 p-2 md:pt-4 md:w-[400px] w-[320px] h-fit rounded-[.5rem]"
+      className="flex flex-col items-center md:mx-0 mx-2 bg-ship md:gap-4 gap-2 shadow-xl md:p-4 p-2 md:pt-4 md:w-[400px] md:max-w-[initial] max-w-[350px] h-fit rounded-[.5rem]"
     >
       <div className="flex justify-start w-full text-2xl">
         {persian.register}
