@@ -2,9 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Category from "../category";
 import { merge } from "@/lib/utils/merge";
-import testNews from "@/assets/testNews.webp";
 import persian from "@/assets/data";
-import { MongoNewsType, NewsInfo } from "@/types/types";
+import { MongoNewsType } from "@/types/types";
 import { smallNewsImageCard } from "@/lib/utils/styles";
 
 type NewsCardImage = {

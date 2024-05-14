@@ -16,10 +16,10 @@ export async function middleware(request: NextRequest, res: any) {
       return NextResponse.next();
     }
 
-    return NextResponse.rewrite(new URL("/login", request.url));
+    return NextResponse.rewrite(new URL("/login", process.env.AXIOS_URL));
   } catch (error) {
     //log error to loging system
-    return NextResponse.rewrite(new URL("/login", request.url));
+    return NextResponse.rewrite(new URL("/login", process.env.AXIOS_URL));
   }
 }
 

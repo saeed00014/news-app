@@ -39,6 +39,7 @@ export type ChatRoomContext = {
   setNewMessage: React.Dispatch<
     React.SetStateAction<{ action: string; message: MessageSqlType }>
   >;
+  setIsNotFound: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export const ChatRoomContext = createContext<ChatRoomContext>(

@@ -11,6 +11,7 @@ const ContextRoom = ({ children }: { children: React.ReactNode }) => {
   const [targetUser, setTargetUser] = useState({} as UserSqlType);
   const [choosedMessage, setChoosedMessage] = useState({} as MessageSqlType);
   const [actionMessage, setActionMessage] = useState({} as ChatActionMessage);
+  const [isNotFound, setIsNotFound] = useState(false)
   const [newMessage, setNewMessage] = useState(
     {} as { action: string; message: MessageSqlType }
   );
@@ -47,6 +48,10 @@ const ContextRoom = ({ children }: { children: React.ReactNode }) => {
     };
   }, [newMessage]);
 
+  if (isNotFound) {
+    return <></>;
+  }
+
   return (
     <ChatRoomContext.Provider
       value={{
@@ -61,6 +66,7 @@ const ContextRoom = ({ children }: { children: React.ReactNode }) => {
         actionMessage,
         setActionMessage,
         setNewMessage,
+        setIsNotFound
       }}
     >
       {children}

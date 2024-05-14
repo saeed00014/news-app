@@ -2,12 +2,11 @@
   "name": "newnext",
   "version": "0.1.0",
   "private": true,
+  "main":"app.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server.js",
-    "test": "jest",
-    "lint": "next lint"
+    "start": "node app.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

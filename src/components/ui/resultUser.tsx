@@ -85,14 +85,16 @@ const ResultUserCard = ({ user, classNames }: ResultUserCard) => {
         classNames
       )}
     >
-      <span className="flex justify-center">
-        <Image
-          src={user.image || defaultImage}
-          width={80}
-          height={80}
-          alt="user picture"
-          className="object-cover w-[80px] min-w-[80px] max-w-[80px] h-[80px] min-h-[80px] max-h-[80px] rounded-full"
-        />
+      <span className="flex justify-center w-[80px] min-w-[80px] max-w-[80px] h-[80px] min-h-[80px] max-h-[80px] rounded-full">
+        {user.image && (
+          <Image
+            src={user.image === "default" ? defaultImage : user.image}
+            width={80}
+            height={80}
+            alt="user picture"
+            className="object-cover w-[80px] min-w-[80px] max-w-[80px] h-[80px] min-h-[80px] max-h-[80px] rounded-full"
+          />
+        )}
       </span>
       <span className="">{user.name}</span>
       <span className="line-clamp-1">{user.username}</span>
