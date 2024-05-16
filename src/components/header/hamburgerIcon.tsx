@@ -10,7 +10,7 @@ const HamburgerIcon = ({ setIsOpen }: Props) => {
       onClick={() => setIsOpen(true)}
       className="lg:hidden flex flex-col items-center justify-center gap-[.4rem] min-h-max cursor-pointer"
     >
-      <HiOutlineMenuAlt4 className="text-5xl " />
+      <HiOutlineMenuAlt4 className="text-5xl" />
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { loginFormSchema } from "@/lib/zodSchema";
 import { AxiosResponse } from "axios";
 import { baseURL } from "@/axios/axios";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 type UserLoginInfo = {
   username: string;
@@ -15,7 +14,6 @@ export const useSubmitLogin = () => {
   const [networkError, setNetworkError] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const postLoginInfo = useMutation({
     mutationFn: async (userLoginInfo: UserLoginInfo) => {

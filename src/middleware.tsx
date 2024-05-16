@@ -29,6 +29,5 @@ export const config = {
     "/profile/:path*",
     "/api/chats/:path*",
     "/api/messages/:path*",
-    "/api/users/:path*",
   ],
 };

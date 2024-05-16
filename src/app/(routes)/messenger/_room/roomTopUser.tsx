@@ -66,9 +66,13 @@ const RoomTopUser = () => {
       className="flex items-center min-w-max gap-2"
     >
       <Image
-        src={targetUser1[0].image || defaultImage}
         width={50}
         height={50}
+        src={
+          targetUser1[0].image === "default"
+            ? defaultImage
+            : targetUser1[0].image
+        }
         className="h-[3rem] w-[3rem] object-cover rounded-full"
         alt="user avatar"
       />

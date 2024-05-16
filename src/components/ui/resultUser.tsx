@@ -42,8 +42,8 @@ const ResultUser = ({ user, classNames }: ResultUser) => {
         alt="profile imege"
         width={50}
         height={50}
+        src={user.image === "default" ? defaultImage : user.image}
         className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px] object-cover"
-        src={user.image || defaultImage}
       />
       <div className="flex flex-col justify-center items-start text-[.9rem]">
         <span>{user.name}</span>

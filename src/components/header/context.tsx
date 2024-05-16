@@ -14,10 +14,6 @@ const Context = ({ children }: { children: React.ReactNode }) => {
     retry: 0
   });
 
-  if(userResult.isPending) {
-    return <></>
-  }
-
   const user = userResult.data
 
   return (

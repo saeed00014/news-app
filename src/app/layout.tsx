@@ -34,5 +34,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// className="dark flex flex-col items-center justify-center h-[100vh] w-[100vw] bg-moon text-dark overflow-y-auto lg:pb-0 lg:pt-[81px] py-[70px] lg:px-4 md:px-2 px-1"

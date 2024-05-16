@@ -9,7 +9,8 @@ import { ChatRoomContext } from "@/context/context";
 import { ResultUserCard } from "@/components/ui/resultUser";
 
 const RoomBody = () => {
-  const { setUser, setMessages, targetUser } = useContext(ChatRoomContext);
+  const { setUser, setMessages, targetUser, messages } =
+    useContext(ChatRoomContext);
   const chat_id = useParams()?.id;
 
   const userInfo = useQuery({
@@ -43,7 +44,10 @@ const RoomBody = () => {
   const loginUser = userInfo.data;
   const messages1 = messagesResult.data;
 
-  if (Array.isArray(messages1) && messages1[0]) {
+  if (
+    (Array.isArray(messages1) && messages1[0]) ||
+    (Array.isArray(messages) && messages[0])
+  ) {
     return <MessageList loginUser={loginUser} />;
   }
 

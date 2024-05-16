@@ -78,15 +78,23 @@ const persian = {
   user: "کاربر",
   chat: "چت",
   noUserChosen: "هیچ یوزری انتخاب نشده",
-  noResult: "هیچ بتیجه ای وجود ندارد",
+  noResult: "هیچ نتیجه ای وجود ندارد",
   noChat: "هیچ چتی وجود ندارد",
+  volume: "حجم معاملات",
+  volumeHomeMounth: "حجم معاملات مسکن بر ماه",
+  volumeHomePrice: "حجم معاملات بر رده قیمتی",
+  volumeHomePriceTitle: "کدام رده قیمتی بیشترین معامله را داشته است",
+  volumeHomeMetter: "حجم معاملات بر متراژ",
+  chooseYear: "انتخاب سال",
+  enterGuest: "ورود مهمان",
+
+
 };
 
 export const categories = [
   "اقتصاد",
   "بورس",
   "مسکن",
-  "اقتصاد کلان",
   "دلار و طلا",
   "جامعه",
 ];

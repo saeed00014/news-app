@@ -8,7 +8,9 @@ import { notFound, useParams } from "next/navigation";
 
 const Context = ({ children }: { children: React.ReactNode }) => {
   const [isEditActive, setIsEditActive] = useState(false);
+  
   const user_id = useParams()?.id;
+
   const userResult = useQuery({
     queryKey: [`userFull${user_id}`],
     queryFn: async () => {
