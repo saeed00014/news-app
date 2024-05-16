@@ -15,13 +15,15 @@ const User = ({ user, classNames }: Props) => {
       href={`/profile/${user.id}`}
       className={merge("flex items-center justify-center gap-2", classNames)}
     >
-      <Image
-        alt="profile imege"
-        width={50}
-        height={50}
-        className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px] object-cover"
-        src={user.image || defaultImage}
-      />
+      {user.image && (
+        <Image
+          alt="profile imege"
+          width={50}
+          height={50}
+          src={user.image === "default" ? defaultImage : user.image}
+          className="rounded-full min-w-[50px] min-h-[50px] max-h-[50px] max-w-[50px] object-cover"
+        />
+      )}
       <div className="hidden flex-col min-w-max text-[.85rem] font-semibold pt-1">
         <span>{user.username}</span>
         <span>{user.name}</span>

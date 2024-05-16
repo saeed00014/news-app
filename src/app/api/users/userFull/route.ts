@@ -12,7 +12,7 @@ export function GET(req: NextRequest) {
     const user_id = params.get("user_id");
     const result = <[] | UserFullSqlType[] | SqlErrorType>await query({
       query:
-        "SELECT `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
+        "SELECT `id`, `username`, `email`, `name`, `bio`, `link`, `image`  FROM `users` WHERE id = ? ",
       values: [user_id],
     });
     if (Array.isArray(result)) {
@@ -30,8 +30,8 @@ export function GET(req: NextRequest) {
           response: "user is loaded successfully",
           result: [
             {
-              id: userInfo.id,
-              username: userInfo.username,
+              id: result[0].id,
+              username: result[0].username,
               name: result[0].name,
               image: result[0].image,
               email: result[0].email,

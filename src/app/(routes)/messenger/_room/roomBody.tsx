@@ -6,11 +6,13 @@ import MessageList from "../_message/messageList";
 import LoadingSpin from "@/components/loadingSpin";
 import { useContext } from "react";
 import { ChatRoomContext } from "@/context/context";
+import { ResultUserCard } from "@/components/ui/resultUser";
 
 const RoomBody = () => {
-  const { setUser, setMessages } = useContext(ChatRoomContext);
+  const { setUser, setMessages, targetUser, messages } =
+    useContext(ChatRoomContext);
   const chat_id = useParams()?.id;
-  
+
   const userInfo = useQuery({
     queryKey: ["userroomchat"],
     queryFn: async () => {
@@ -29,7 +31,7 @@ const RoomBody = () => {
       setMessages(response.data.result);
       return response.data.result;
     },
-    retry: 1
+    retry: 1,
   });
 
   if (messagesResult.isPending || userInfo.isPending) {
@@ -39,9 +41,29 @@ const RoomBody = () => {
       </div>
     );
   }
-  const loginUser = userInfo.data
+  const loginUser = userInfo.data;
+  const messages1 = messagesResult.data;
 
-  return <MessageList loginUser={loginUser} />;
+  if (
+    (Array.isArray(messages1) && messages1[0]) ||
+    (Array.isArray(messages) && messages[0])
+  ) {
+    return <MessageList loginUser={loginUser} />;
+  }
+
+  if (!targetUser) {
+    return (
+      <div className="flex h-full w-full items-center justify-center text-[1.2rem] text-ship ">
+        چت یافت نشد
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center justify-center w-full h-full">
+      <ResultUserCard user={targetUser} />
+    </div>
+  );
 };
 
 export default RoomBody;

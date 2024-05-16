@@ -2,9 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Category from "../category";
 import { merge } from "@/lib/utils/merge";
-import testNews from "@/assets/testNews.webp";
 import persian from "@/assets/data";
-import { MongoNewsType, NewsInfo } from "@/types/types";
+import { MongoNewsType } from "@/types/types";
 import { smallNewsImageCard } from "@/lib/utils/styles";
 
 type NewsCardImage = {
@@ -24,15 +23,14 @@ const NewsCardImage = ({ newsInfo, classNames }: NewsCard) => {
         <Image
           alt="dolar news"
           layout="fill"
-          className="group w-full h-full object-cover group-hover:scale-110 duration-200"
           src={`/news/${newsInfo._id}.webp`}
+          className="group w-full h-full object-cover group-hover:scale-110 duration-200"
         />
         <Link
           className="absolute bottom-0 flex flex-col justify-end w-full h-full px-3 pb-5 bg-ashImage gap-1"
           href={`/news/${newsInfo._id}`}
         >
           <Category text={newsInfo?.category} />
-          <h2 className="md:flex hidden text-ship">{persian.newsH2Tag}</h2>
           <p className="text-ship font-semibold md:text-[1rem] text-[.8rem]">
             {newsInfo?.title}
           </p>
@@ -60,15 +58,12 @@ const NewsBar = ({ newsInfo, classNames }: NewsBar) => {
           <Image
             alt="dolar news"
             layout="fill"
-            className="w-full h-full object-cover"
             src={`/news/${newsInfo._id}.webp`}
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="flex flex-col justify-end w-full  md:px-3 px-1 md:py-0 py-1 md:gap-1">
           <Category text={newsInfo.category} />
-          <h2 className="md:flex hidden text-dark md:text-[1rem] text-[.8rem]">
-            {persian.newsH2Tag}
-          </h2>
           <p className="text-dark md:text-[1rem] text-[.8rem] font-semibold">
             {newsInfo.title}
           </p>
@@ -99,8 +94,8 @@ const NewsCard = ({ newsInfo, classNames }: NewsCard) => {
           alt={persian.adds}
           width={150}
           height={120}
-          className="object-cover w-full max-h-[120px] min-h-[120px]"
           src={`/news/${newsInfo._id}.webp`}
+          className="object-cover w-full max-h-[120px] min-h-[120px]"
         />
         <span className="group group-hover:text-blood line-clamp-2 md:text-[1rem] text-[.8rem]">
           {newsInfo.description}

@@ -25,11 +25,11 @@ const useChatInfo = () => {
         if (!response.data?.result[0]?.id) {
           const response2 = await baseURL.post("/chats", user);
           if (response2.data.insertId) {
-            location.replace(`/messenger/${response2.data.insertId}`);
+            router.push(`/messenger/${response2.data.insertId}`);
           }
           return response2.data.insertId;
         }
-        location.replace(`/messenger/${response.data.result[0].id}`);
+        router.push(`/messenger/${response.data.result[0].id}`);
         return response.data.result[0].id;
       } catch (error) {
         //log

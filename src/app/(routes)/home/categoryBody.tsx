@@ -35,7 +35,7 @@ const CategoryBody = ({ category }: { category: string }) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-moon">
+    <div className="flex flex-col pb-2 gap-2 bg-ship">
       <SectionSpliter category={category} />
       <CategoryNews category={category} categoryNews={categoryNews} />
       <ViewAll path={`/${category}`} />

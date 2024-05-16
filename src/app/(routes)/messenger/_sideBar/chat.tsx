@@ -2,7 +2,7 @@ import { baseURL } from "@/axios/axios";
 import ResultUserChoose from "@/components/share/resultUserChoose";
 import { PreRenderResultUser, ResultUser } from "@/components/ui/resultUser";
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   chatInfo: { id: number; targetUser_id: number };
@@ -10,6 +10,7 @@ type Props = {
 };
 
 const Chat = ({ chatInfo, type }: Props) => {
+  const router = useRouter();
   const userInfo = useQuery({
     queryKey: [chatInfo.id],
     queryFn: async () => {
@@ -18,14 +19,15 @@ const Chat = ({ chatInfo, type }: Props) => {
       );
       return response.data.result;
     },
+    retry: 1,
   });
 
   const handleClick = () => {
-    location.replace(`/messenger/${chatInfo.id}`)
-  }
+    router.push(`/messenger/${chatInfo.id}`);
+  };
 
   if (userInfo.isPending) {
-    return <PreRenderResultUser />;
+    return <PreRenderResultUser />
   }
 
   if (type === "choose") {
@@ -33,7 +35,7 @@ const Chat = ({ chatInfo, type }: Props) => {
   }
 
   return (
-    <div onClick={handleClick} >
+    <div onClick={handleClick}>
       <ResultUser user={userInfo.data[0]} />
     </div>
   );

@@ -2,15 +2,18 @@
   "name": "newnext",
   "version": "0.1.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server.js",
-    "test": "jest",
-    "lint": "next lint"
+    "start": "node app.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@hookform/resolvers": "^3.3.4",
+    "@mui/material": "^5.15.17",
+    "@mui/x-charts": "^7.4.0",
     "@tanstack/react-query": "^5.28.14",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
@@ -28,6 +31,7 @@
     "react-icons": "^5.0.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.22.3",
+    "recharts": "^2.12.7",
     "sharp": "^0.33.3",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",

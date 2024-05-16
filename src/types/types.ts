@@ -12,7 +12,7 @@ export type UserInfoType = {
   id: number;
   name: string;
   username: string;
-  image: string | null;
+  image: string;
 };
 
 export type SqlErrorType = {

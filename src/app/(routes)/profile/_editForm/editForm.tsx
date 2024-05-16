@@ -27,7 +27,9 @@ type Props = {
 
 const EditForm = ({ onSubmit, isEditLoading, networkError }: Props) => {
   const { user, setIsEditActive } = useContext(ProfileContext);
-  const [image, setImage] = useState(user?.image || "");
+  const [image, setImage] = useState(
+    user.image === "default" ? "" : user.image
+  );
   const {
     handleSubmit,
     watch,

@@ -63,7 +63,7 @@ const SideBar = ({ setIsOpen, isOpen }: Props) => {
             {user ? (
               <User
                 user={user}
-                classNames="flex bg-moon w-[200px] py-2 rounded-[1rem] hover:brightness-90 [&>*:nth-child(2)]:flex [&>*:nth-child(1)]:h-[55px] [&>*:nth-child(1)]:w-[55px]"
+                classNames="flex justify-start bg-moon w-[200px] py-2 px-2 rounded-[1rem] hover:brightness-90 [&>*:nth-child(2)]:flex [&>*:nth-child(1)]:h-[55px] [&>*:nth-child(1)]:w-[55px]"
               />
             ) : (
               <TextLink

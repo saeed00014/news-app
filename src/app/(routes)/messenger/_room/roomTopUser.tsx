@@ -3,14 +3,16 @@ import Image from "next/image";
 import defaultImage from "@/assets/default.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "@/axios/axios";
-import { notFound, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ChatRoomContext } from "@/context/context";
 import { useContext } from "react";
 import Link from "next/link";
 
 const RoomTopUser = () => {
-  const { targetUser, setTargetUser } = useContext(ChatRoomContext);
+  const { setTargetUser, setIsNotFound } = useContext(ChatRoomContext);
+
   const chat_id = useParams()?.id;
+
   const targetUserResult = useQuery({
     queryKey: [`chat${chat_id}`],
     queryFn: async () => {
@@ -44,32 +46,39 @@ const RoomTopUser = () => {
         return [];
       }
     },
-    retry: 1
+    retry: 1,
   });
 
   if (targetUserResult.isPending) {
     return <></>;
   }
 
-  if (!Array.isArray(targetUserResult.data) || !targetUserResult.data[0]) {
-    return notFound();
+  const targetUser1 = targetUserResult?.data;
+
+  if (!Array.isArray(targetUser1) || !targetUser1[0]) {
+    setIsNotFound(true);
+    return <></>;
   }
 
   return (
     <Link
-      href={`/profile/${targetUser.id}`}
+      href={`/profile/${targetUser1[0].id}`}
       className="flex items-center min-w-max gap-2"
     >
       <Image
-        src={targetUser.image || defaultImage}
         width={50}
         height={50}
+        src={
+          targetUser1[0].image === "default"
+            ? defaultImage
+            : targetUser1[0].image
+        }
         className="h-[3rem] w-[3rem] object-cover rounded-full"
         alt="user avatar"
       />
       <div className="flex flex-col text-[.9rem]">
-        <span className="-mb-1">{targetUser.username}</span>
-        <span>{targetUser.name}</span>
+        <span className="-mb-1">{targetUser1[0].username}</span>
+        <span>{targetUser1[0].name}</span>
       </div>
     </Link>
   );
